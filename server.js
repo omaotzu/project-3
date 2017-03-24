@@ -6,8 +6,8 @@ const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 const { port, env, dbURI } = require('./config/environment');
 const routes = require('./config/routes');
-// const customResponses = require('./lib/customResponses');
-// const errorHandler = require('./lib/errorHandler');
+const customResponses = require('./lib/customResponses');
+const errorHandler = require('./lib/errorHandler');
 
 const app = express();
 
@@ -18,12 +18,12 @@ if(env !== 'test') app.use(morgan('dev'));
 app.use(express.static(`${__dirname}/public`));
 app.use(bodyParser.json({limit: '5mb'}));
 
-// app.use(customResponses);
+app.use(customResponses);
 
 app.use('/', routes);
 
 app.get('/*', (req, res) => res.sendFile(`${__dirname}/public/index.html`));
 
-// app.use(errorHandler);
+app.use(errorHandler);
 
 app.listen(port, () => console.log(`Express is listening on port ${port}`));
