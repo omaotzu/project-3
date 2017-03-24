@@ -27,7 +27,7 @@ const propertySchema = new mongoose.Schema({
 
 
 const userImageSchema = new mongoose.Schema({
-  image: {type: File},
+  image: {type: String},
   createdBy: {type: mongoose.Schema.ObjectId, ref: 'User', required: true}
 });
 
