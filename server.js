@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-// mongoose.plugin(require('./lib/globalToJSON'));
+mongoose.plugin(require('./lib/globalToJSON'));
 mongoose.Promise = require('bluebird');
 const { port, env, dbURI } = require('./config/environment');
 const routes = require('./config/routes');
