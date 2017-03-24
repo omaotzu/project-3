@@ -20,7 +20,7 @@ app.use(bodyParser.json({limit: '5mb'}));
 
 app.use(customResponses);
 
-app.use('/', routes);
+app.use('/api', routes);
 
 app.get('/*', (req, res) => res.sendFile(`${__dirname}/public/index.html`));
 

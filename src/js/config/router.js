@@ -1,6 +1,6 @@
 angular
   .module('pncApp')
-  .controller(Router);
+  .config(Router);
 
 Router.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider'];
 function Router($locationProvider, $stateProvider, $urlRouterProvider) {
@@ -9,15 +9,15 @@ function Router($locationProvider, $stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('register', {
       url: '/register',
-      template: 'js/views/auth/register.html',
+      templateUrl: 'js/views/auth/register.html',
       controller: 'RegisterCtrl as register'
     })
     .state('login', {
       url: '/login',
-      template: 'js/views/auth/login.html',
+      templateUrl: 'js/views/auth/login.html',
       controller: 'LoginCtrl as login'
     });
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/login');
 
 }
