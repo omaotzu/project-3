@@ -9,4 +9,4 @@ router.route('/register')
 
 router.all('/*', (req, res) => res.notFound());
 
-module .exports = router;
+module.exports = router;

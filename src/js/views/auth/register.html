@@ -1,0 +1,18 @@
+<h2>Register</h2>
+<form name="register.registerForm" ng-submit="register.submit()">
+  <label for="username">Username</label>
+  <input type="text" name="username" id="username" ng-model="register.user.username">
+  <label for="firstname">First Name</label>
+  <input type="text" name="firstname" id="firstname" ng-model="register.user.firstname">
+  <label for="surname">Surname</label>
+  <input type="text" name="surname" id="surname" ng-model="register.user.surname">
+  <label for="email">Email</label>
+  <input type="email" name="email" id="email" ng-model="register.user.email">
+  <label for="password">Password</label>
+  <input type="password" name="password" id="password" ng-model="register.user.password">
+  <label for="passwordConfirmation">Password Confirmation</label>
+  <input type="password" name="passwordConfirmation" id="passwordConfirmation" ng-model="register.user.passwordConfirmation">
+  <label for="profileImage"></label>
+  <input type="file" name="profileImage" id="profileImage" ng-model="register.user.profileImage">
+  <button class="button">Register</button>
+</form>
