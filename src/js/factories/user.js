@@ -1,0 +1,11 @@
+angular
+  .module('pncApp')
+  .factory('User', User);
+
+User.$inject = ['$resource'];
+function User($resource) {
+  return new $resource('/api/users/:id', { id: '@id' }, {
+    update: { method: 'PUT' }
+    // query: {method: 'GET', isArray: false }
+  });
+}

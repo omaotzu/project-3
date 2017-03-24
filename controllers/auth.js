@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const { secret } = require('../config/environment');
 
 function register(req, res, next) {
+  if(req.file) req.body.profileImage = req.file.filename;
+
   User
     .create(req.body)
     .then(() => res.json({ message: 'Registration Successful' }))
@@ -15,7 +17,7 @@ function login(req, res, next) {
     .then((user) => {
       if(!user || !user.validatePassword(req.body.password)) return res.unauthorized();
 
-      const token = jwt.sign({ userd: user.id }, secret, { expiresIn: '1hr' });
+      const token = jwt.sign({ userId: user.id }, secret, { expiresIn: '1hr' });
       res.json({ token, message: `Welcome back ${user.username}` });
     })
     .catch(next);

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const s3 = require('../lib/s3');
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
@@ -8,6 +9,32 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   profileImage: { type: String, required: true }
+});
+
+userSchema
+  .path('profileImage')
+  .set(function getPreviousImage(profileImage) {
+    this._profileImage = this.profileImage;
+    return profileImage;
+  });
+
+userSchema
+  .virtual('profileImageSRC')
+  .get(function getprofileImageSRC() {
+    if(!this.profileImage) return null;
+    return `https://s3-eu-west-1.amazonaws.com/wdi-25-full-stack-app/${this.profileImage}`;
+  });
+
+userSchema.pre('save', function checkPreviousProfileImage(next) {
+  if(this.isModified('profileImage') && this._profileImage) {
+    return s3.deleteObject({ Key: this._profileImage }, next);
+  }
+  next();
+});
+
+userSchema.pre('remove', function deleteImage(next) {
+  if(this.profileImage) return s3.deleteObject({ Key: this.profileImage}, next);
+  next();
 });
 
 userSchema

@@ -7,6 +7,11 @@ function Router($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true);
 
   $stateProvider
+    .state('profile', {
+      url: '/users/:id',
+      templateUrl: 'js/views/users/show.html',
+      controller: 'UsersShowCtrl as usersShow'
+    })
     .state('register', {
       url: '/register',
       templateUrl: 'js/views/auth/register.html',
