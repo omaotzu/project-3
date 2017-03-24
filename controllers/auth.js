@@ -11,7 +11,7 @@ function register(req, res, next) {
 
 function login(req, res, next) {
   User
-    .findById({ email: req.body.email })
+    .findOne({ email: req.body.email })
     .then((user) => {
       if(!user || !user.validatePassword(req.body.password)) return res.unauthorized();
 
