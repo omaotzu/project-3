@@ -17,6 +17,11 @@ function Router($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: 'js/views/users/edit.html',
       controller: 'UsersEditCtrl as usersEdit'
     })
+    .state('propsIndex', {
+      url: '/properties',
+      templateUrl: 'js/views/props/index.html',
+      controller: 'PropsIndexCtrl as propsIndex'
+    })
     .state('register', {
       url: '/register',
       templateUrl: 'js/views/auth/register.html',
