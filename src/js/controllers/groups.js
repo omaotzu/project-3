@@ -10,13 +10,15 @@ function GroupsIndexCtrl(Group) {
   vm.all = Group.query();
 }
 
-GroupsNewCtrl.$inject = ['Group', '$state'];
-function GroupsNewCtrl(Group, $state) {
+GroupsNewCtrl.$inject = ['Group', '$state', '$auth'];
+function GroupsNewCtrl(Group, $state, $auth) {
   const vm = this;
   vm.group = {};
 
   function groupsCreate() {
     if(vm.groupsNewForm.$valid) {
+      vm.group.users = $auth.getPayload().userId;
+
       Group
         .save(vm.group)
         .$promise

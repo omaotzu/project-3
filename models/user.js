@@ -9,9 +9,8 @@ const userSchema = new mongoose.Schema({
   email: { type: String },
   password: { type: String },
   profileImage: { type: String },
-  githubId: { type: Number }
-  // memberOf: { type: mongoose.Schema.ObjectId, ref: 'Group' }
-
+  githubId: { type: Number },
+  group: { type: mongoose.Schema.ObjectId, ref: 'Group' }
 });
 
 userSchema

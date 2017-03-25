@@ -3,7 +3,7 @@ const Group = require('../models/group');
 function indexGroup(req, res, next) {
   Group
     .find()
-    // .populate('user')
+    .populate('users')
     .exec()
     .then((groups) => res.json(groups))
     .catch(next);
@@ -20,7 +20,7 @@ function createGroup(req, res, next) {
 function showGroup(req, res, next) {
   Group
     .findById(req.params.id)
-    // .populate('user')
+    .populate('user')
     .exec()
     .then((group) => {
       if(!group) return res.notFound();
