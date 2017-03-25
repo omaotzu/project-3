@@ -10,6 +10,8 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   profileImage: { type: String, required: true },
   githubId: { type: Number }
+  // memberOf: { type: mongoose.Schema.ObjectId, ref: 'Group' }
+
 });
 
 userSchema
