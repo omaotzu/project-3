@@ -4,6 +4,14 @@ const users = require('../controllers/users');
 const imageUpload = require('../lib/imageUpload');
 const oauth = require('../controllers/oauth');
 // const secureRoute = require('../lib/secureRoute');
+const zoopla = require('../controllers/zooplas');
+
+router.route('/properties')
+  .get(zoopla.properties);
+
+
+
+
 
 router.route('/users')
   .get(users.index);
