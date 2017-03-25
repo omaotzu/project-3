@@ -2,6 +2,7 @@ const router = require('express').Router();
 const auth = require('../controllers/auth');
 const users = require('../controllers/users');
 const imageUpload = require('../lib/imageUpload');
+const oauth = require('../controllers/oauth');
 // const secureRoute = require('../lib/secureRoute');
 
 router.route('/users')
@@ -17,6 +18,9 @@ router.route('/login')
 
 router.route('/register')
   .post(imageUpload, auth.register);
+
+router.route('/oauth/github')
+  .post(oauth.github);
 
 router.all('/*', (req, res) => res.notFound());
 

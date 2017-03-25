@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
   surname: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  profileImage: { type: String, required: true }
+  profileImage: { type: String, required: true },
+  githubId: { type: Number }
 });
 
 userSchema
@@ -22,7 +23,7 @@ userSchema
   .virtual('profileImageSRC')
   .get(function getprofileImageSRC() {
     if(!this.profileImage) return null;
-    return `https://s3-eu-west-1.amazonaws.com/wdi-london-express-project2/${this.profileImage}`;
+    return `https://s3-eu-west-1.amazonaws.com/wdi-ldn/${this.profileImage}`;
   });
 
 userSchema.pre('save', function checkPreviousProfileImage(next) {
