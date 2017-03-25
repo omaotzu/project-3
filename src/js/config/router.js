@@ -12,6 +12,11 @@ function Router($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: 'js/views/groups/index.html',
       controller: 'GroupsIndexCtrl as groupsIndex'
     })
+    .state('groupsNew', {
+      url: '/groups/new',
+      templateUrl: 'js/views/groups/new.html',
+      controller: 'GroupsNewCtrl as groupsNew'
+    })
     .state('groupsShow', {
       url: '/groups/:id',
       templateUrl: 'js/views/groups/show.html',

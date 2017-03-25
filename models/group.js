@@ -31,7 +31,7 @@ const groupSchema = new mongoose.Schema({
   users: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
   properties: [ propertySchema ],
   groupName: { type: String, required: true },
-  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User' }
 });
 
 module.exports = mongoose.model('Group', groupSchema);

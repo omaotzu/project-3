@@ -7,7 +7,6 @@ angular
 GroupsIndexCtrl.$inject = ['Group'];
 function GroupsIndexCtrl(Group) {
   const vm = this;
-
   vm.all = Group.query();
 }
 
@@ -24,7 +23,6 @@ function GroupsNewCtrl(Group, $state) {
         .then(() => $state.go('groupsIndex'));
     }
   }
-
   vm.create = groupsCreate;
 }
 
