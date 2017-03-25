@@ -25,18 +25,14 @@ const propertySchema = new mongoose.Schema({
   rating: {type: Number}
 });
 
-
 const userImageSchema = new mongoose.Schema({
   image: {type: String},
   createdBy: {type: mongoose.Schema.ObjectId, ref: 'User', required: true}
 });
 
-
 const userNoteSchema = new mongoose.Schema({
   text: {type: String},
   createdBy: {type: mongoose.Schema.ObjectId, ref: 'User', required: true}
 });
-
-
 
 module.exports = mongoose.model('Group', groupSchema);
