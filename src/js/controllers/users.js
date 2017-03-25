@@ -24,7 +24,7 @@ function UsersEditCtrl(User, $stateParams, $state) {
   function usersUpdate() {
     vm.user
       .$update()
-      .then(() => $state.go('profile', $stateParams));
+      .then(() => $state.go('usersShow', $stateParams));
   }
   vm.update = usersUpdate;
 }

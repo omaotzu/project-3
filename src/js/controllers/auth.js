@@ -25,7 +25,7 @@ function LoginCtrl($auth, $state) {
   function submit() {
     if(vm.loginForm.$valid) {
       $auth.login(vm.credentials)
-        .then(() => $state.go('profile', { id: $auth.getPayload().userId }));
+        .then(() => $state.go('usersShow', { id: $auth.getPayload().userId }));
     }
   }
   vm.submit = submit;
