@@ -7,6 +7,8 @@ function MainCtrl($rootScope, $state, $auth){
   const vm = this;
   vm.isAuthenticated = $auth.isAuthenticated;
 
+  vm.userId = $auth.getPayload().userId;
+
   $rootScope.$on('error', (e, err) => {
     vm.message = err.data.message;
     if(err.status === 401) $state.go('login');

@@ -15,6 +15,8 @@
       <li ng-if="main.isAuthenticated()"><a ui-sref="usersShow">Profile</a></li>
       <li><a ui-sref="groupsIndex">Groups</a></li>
       <li><a ui-sref="groupsNew">Add a Group</a></li>
+      <li ng-if="main.isAuthenticated()"><a ui-sref="usersShow({ id:
+      main.userId })">Profile</a></li>
       <li ng-if="main.isAuthenticated()"><a ng-click="main.logout()" href="#">Logout</a></li>
       <li ng-if="!main.isAuthenticated()"><a ui-sref="login">Login</a></li>
       <li ng-if="!main.isAuthenticated()"><a ui-sref="register">Register</a></li>

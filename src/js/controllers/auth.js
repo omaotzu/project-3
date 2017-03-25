@@ -32,8 +32,8 @@ function LoginCtrl($auth, $state) {
 
   function authenticate(provider) {
     $auth.authenticate(provider)
-      .then(() => $state.go('usersShow'));
-      // .then(() => $state.go('usersShow', { id: $auth.getPayload().userId }));
+      // .then(() => $state.go('usersShow'));
+      .then(() => $state.go('usersShow', { id: $auth.getPayload().userId }));
   }
 
   vm.authenticate = authenticate;

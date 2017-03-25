@@ -4,16 +4,18 @@ angular
 
 
 
+
 PropsIndexCtrl.$inject = ['$http'];
 function PropsIndexCtrl($http) {
   const vm = this;
-
+  vm.results = [];
   getProps();
 
   function getProps(){
     $http.get('/api/properties')
       .then((response) => {
-        console.log(response);
+        vm.results = response.data;
+        console.log(vm.results);
       });
   }
 }

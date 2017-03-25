@@ -3,12 +3,12 @@ const bcrypt = require('bcrypt');
 const s3 = require('../lib/s3');
 
 const userSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true },
-  firstname: { type: String, required: true },
-  surname: { type: String, required: true },
-  email: { type: String, required: true },
-  password: { type: String, required: true },
-  profileImage: { type: String, required: true },
+  username: { type: String, unique: true },
+  firstname: { type: String },
+  surname: { type: String },
+  email: { type: String },
+  password: { type: String },
+  profileImage: { type: String },
   githubId: { type: Number }
   // memberOf: { type: mongoose.Schema.ObjectId, ref: 'Group' }
 
@@ -25,7 +25,8 @@ userSchema
   .virtual('profileImageSRC')
   .get(function getprofileImageSRC() {
     if(!this.profileImage) return null;
-    return `https://s3-eu-west-1.amazonaws.com/wdi-ldn/${this.profileImage}`;
+    if(this.profileImage.match(/^http/)) return (this.profileImage);
+    return `https://s3-eu-west-1.amazonaws.com/wdi-london-express-project2/${this.profileImage}`;
   });
 
 userSchema.pre('save', function checkPreviousProfileImage(next) {
@@ -47,7 +48,10 @@ userSchema
 });
 
 userSchema.pre('validate', function checkPassword(next) {
-  if(!this._passwordConfirmation || this._passwordConfirmation !== this.password) {
+  if(!this.password && !this.githubId) {
+    this.invalidate('password', 'required');
+  }
+  if(this.isModified('password') && this._passwordConfirmation !== this.password){
     this.invalidate('passwordConfirmation', 'does not match');
   }
   next();
