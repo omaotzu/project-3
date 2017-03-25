@@ -22,7 +22,7 @@ userSchema
   .virtual('profileImageSRC')
   .get(function getprofileImageSRC() {
     if(!this.profileImage) return null;
-    return `https://s3-eu-west-1.amazonaws.com/wdi-25-full-stack-app/${this.profileImage}`;
+    return `https://s3-eu-west-1.amazonaws.com/wdi-london-express-project2/${this.profileImage}`;
   });
 
 userSchema.pre('save', function checkPreviousProfileImage(next) {
