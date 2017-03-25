@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
 
-const groupSchema = new mongoose.Schema({
-  users: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
-  properties: [propertySchema],
-  groupName: {type: String, required: true},
+const userImageSchema = new mongoose.Schema({
+  image: {type: String},
   createdBy: {type: mongoose.Schema.ObjectId, ref: 'User', required: true}
 });
 
+const userNoteSchema = new mongoose.Schema({
+  text: {type: String},
+  createdBy: {type: mongoose.Schema.ObjectId, ref: 'User', required: true}
+});
 
 const propertySchema = new mongoose.Schema({
   address: {type: String, required: true},
@@ -25,13 +27,10 @@ const propertySchema = new mongoose.Schema({
   rating: {type: Number}
 });
 
-const userImageSchema = new mongoose.Schema({
-  image: {type: String},
-  createdBy: {type: mongoose.Schema.ObjectId, ref: 'User', required: true}
-});
-
-const userNoteSchema = new mongoose.Schema({
-  text: {type: String},
+const groupSchema = new mongoose.Schema({
+  users: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
+  properties: [propertySchema],
+  groupName: {type: String, required: true},
   createdBy: {type: mongoose.Schema.ObjectId, ref: 'User', required: true}
 });
 
