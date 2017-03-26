@@ -20,7 +20,7 @@ function createGroup(req, res, next) {
 function showGroup(req, res, next) {
   Group
     .findById(req.params.id)
-    .populate('user')
+    .populate('users')
     .exec()
     .then((group) => {
       if(!group) return res.notFound();
