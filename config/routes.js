@@ -13,7 +13,7 @@ router.route('/properties')
 router.route('/properties/:listing_id')
   .get(zooplas.selectedProp);
 
-router.route('/users')
+router.route('/users/')
   .get(users.index);
 
 router.route('/users/:id')

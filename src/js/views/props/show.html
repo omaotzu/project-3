@@ -1,16 +1,23 @@
-<section>
+<section class="container">
   <div>
     <h2> Props Show Page</h2>
+    <hr>
     <ul ng-repeat="selected in propsShow.selected.listing ">
-      <li>{{selected.displayable_address}}</li>
       <li><img ng-src="{{selected.image_645_430_url}}"></li>
-      <li>Bedrooms: {{selected.num_bedrooms}}</li>
-      <li>Bathrooms: {{selected.num_bathrooms}}</li>
-      <li>Price: £{{selected.rental_prices.per_month}} ppm</li>
-      <li>{{selected.property_type}}</li>
-      <li>{{selected.description}}</li>
-      <li>{{selected.agent_name}}</li>
-      <li>{{selected.agent_phone}}</li>
+      <hr>
+      <h3>Property Info</h3>
+      <li class="address"><strong>Address: </strong>{{selected.displayable_address}}</li>
+      <li><strong>Bedrooms: </strong>{{selected.num_bedrooms}}</li>
+      <li><strong>Bathrooms: </strong>{{selected.num_bathrooms}}</li>
+      <li><strong>Price: </strong>£{{selected.rental_prices.per_month}} ppm</li>
+      <li><strong>Property Type: </strong>{{selected.property_type}}</li>
+      <hr>
+      <li class="description">{{selected.description}}</li>
+      <hr>
+      <h3>Agency Info</h3>
+      <li><strong>Company: </strong>{{selected.agent_name}}</li>
+      <li><strong>Contact: </strong>{{selected.agent_phone}}</li>
+      <hr>
       <button ng-click="propsShow.store()">Store Property</button>
     </ul>
   </div>

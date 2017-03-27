@@ -3,9 +3,6 @@ angular
   .controller('PropsIndexCtrl', PropsIndexCtrl)
   .controller('PropsShowCtrl', PropsShowCtrl);
 
-
-
-
 PropsIndexCtrl.$inject = ['$http'];
 function PropsIndexCtrl($http) {
   const vm = this;
@@ -22,7 +19,6 @@ function PropsIndexCtrl($http) {
   }
   vm.getProps = getProps;
 }
-
 
 PropsShowCtrl.$inject = ['User', 'GroupProperty', '$http', '$stateParams'];
 function PropsShowCtrl(User, GroupProperty, $http, $stateParams){

@@ -16,7 +16,6 @@ function GroupsNewCtrl(Group, User, $state, $auth) {
   const vm = this;
   vm.group = {};
 
-
   function groupsCreate() {
     if(vm.groupsNewForm.$valid) {
       vm.group.users = $auth.getPayload().userId;

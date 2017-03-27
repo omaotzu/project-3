@@ -4,14 +4,40 @@
   box-sizing: border-box;
 }
 
+a {
+  color: black;
+  text-decoration: none;
+}
+
 body {
   font-family: 'Raleway', serif;
+}
+
+body {
+  &.login {
+    background-color: red;
+  }
+  &.register {
+    background-color: black;
+  }
+  &.usersShow {
+    background-color: green;
+  }
+  &.propsIndex {
+    background-color: yellow;
+  }
+  &.groupsIndex {
+    background-color: pink;
+  }
+  &.groupsNew {
+    background-color: dodgerblue;
+  }
 }
 
 .heading-styles {
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-weight: bold;
+  // font-weight: bold;
 }
 
 h1 {
@@ -19,50 +45,57 @@ h1 {
 }
 
 nav {
-  ul {
-    text-align: center;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    padding-top: 30px;
-    text-decoration: none;
-    li {
-      font-size: 15px;
-      display: inline-block;
-      margin-left: 20px;
-      line-height: 40px;
-      &:last-of-type {
-      }
-      &.menu {
-        color: black;
-        cursor: pointer;
-        display: none;
-        font-size: 20px;
-      }
-      a {
-        color: black;
-        @extend .heading-styles;
-        font-weight: 600;
-        position: relative;
-        text-decoration: none;
-        &:after {
-          content: "";
-          height: 2px;
-          width: 100%;
-          background-color: black;
-          position: absolute;
-          bottom: -5px;
-          left: 0;
-          opacity: 0;
-          transition: opacity 0.6s ease;
-          text-decoration: none;
+  div {
+    ul {
+      text-align: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      padding-top: 30px;
+      text-decoration: none;
+      li {
+        font-size: 17px;
+        display: inline-block;
+        margin-left: 20px;
+        line-height: 40px;
+        &:last-of-type {
         }
-        &:hover {
-          margin-top: 10px;
+        &.menu {
           text-decoration: none;
           color: black;
+          cursor: pointer;
+          display: none;
+          font-size: 20px;
+        }
+        a {
+          color: black;
+          @extend .heading-styles;
+          font-weight: 600;
+          position: relative;
+          text-decoration: none;
           &:after {
-            opacity: 1;
+            content: "";
+            height: 2px;
+            width: 100%;
+            background-color: black;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            text-decoration: none;
+          }
+          &:hover {
+            margin-top: 10px;
+            text-decoration: none;
+            color: black;
+            &:after {
+              text-decoration: none;
+              opacity: 1;
+            }
+            &:active {
+              text-decoration: none;
+            }
           }
         }
       }
@@ -83,11 +116,25 @@ section {
     margin-bottom: 30px;
     text-transform: uppercase;
   }
+  h3 {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+  }
   margin-top: 80px;
   text-align: center;
   div {
+    .results {
+      margin-top: 15px;
+    }
+    img {
+      max-width: 60%;
+      margin: 10px;
+    }
     form {
       label {
+        text-transform: uppercase;
         padding-top: 10px;
         font-weight: bold;
         font-size: 15px;
@@ -96,8 +143,9 @@ section {
         display: block;
         margin: 0 auto;
         margin-top: 5px;
-        padding: 3px 80px;
+        padding: 3px 240px;
         text-align: center;
+        text-transform: capitalize;
       }
     }
     button {
@@ -106,13 +154,54 @@ section {
       text-transform: uppercase;
       margin-top: 15px;
       font-weight: 600;
+      outline: none;
+      &:hover {
+        background-color: lightgreen;
+        transition: all 1.5s ease;
+        outline: none;
+      }
+      &:active {
+        outline: none;
+      }
+      &.edit {
+        padding: 10px 25px;
+      }
+      &.search {
+        padding: 7px 290px;
+      }
+    }
+    ul {
+      li {
+        padding: 10px;
+        &.address {
+          text-transform: uppercase;
+        }
+        &.description {
+          text-align: justify;
+          margin: 0 100px;
+          font-size: 12px;
+        }
+        strong {
+          font-weight: 900;
+          text-transform: uppercase;
+        }
+      }
+    }
+    .image {
+      max-width: 80%;
+    }
+    a {
+      font-size: 23px;
+    }
+    .listings {
+      text-transform: uppercase;
     }
   }
 }
 
 .container {
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 50px;
+  padding-left: 50px;
   margin-right: auto;
   margin-left: auto;
 }

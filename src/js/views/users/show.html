@@ -1,9 +1,11 @@
-<section>
+<section class="container">
   <div>
     <h1>{{ usersShow.user.username }}</h1>
+    <hr>
     <img ng-src="{{ usersShow.user.profileImageSRC }}">
     <h3>{{usersShow.user.firstname}} {{usersShow.user.surname}}</h3>
-    <button ui-sref="usersEdit({ id: usersShow.user.id })">Edit</button>
+    <hr>
+    <button ui-sref="usersEdit({ id: usersShow.user.id })" class="edit">Edit</button>
     <button ng-click="usersShow.delete()">Delete</button>
   </div>
 </section>

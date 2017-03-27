@@ -1,23 +1,27 @@
-<section>
+<section class="container">
   <div>
     <h1>Props Index</h1>
-
+    <hr>
     <form>
-      <label for="area">Area: </label>
-      <input type="text" ng-model="propsIndex.area">
-
-      <label for="beds">Number of beds: </label>
-      <input type="number" ng-model="propsIndex.beds">
-        <button ng-click="propsIndex.getProps()">Search by area</button>
+      <div>
+        <label for="area">Area: </label>
+        <input type="text" ng-model="propsIndex.area">
+      </div>
+      <div>
+        <label for="beds">Number of Beds: </label>
+        <input type="number" ng-model="propsIndex.beds">
+      </div>
+        <button ng-click="propsIndex.getProps()" class="search">Search</button>
     </form>
-    <h4>Found {{propsIndex.results.result_count}} listings</h4>
-    <div ng-repeat="props in propsIndex.results.listing">
+    <h4 class="listings">Found {{propsIndex.results.result_count}} Listings</h4>
+    <div ng-repeat="props in propsIndex.results.listing" class="results">
       <ul>
-        <li><img ng-src="{{props.image_645_430_url}}"></li>
+        <li><img ng-src="{{props.image_645_430_url}}" class="image"></li>
         <li><a ui-sref="propsShow({ listing_id: props.listing_id })">{{props.displayable_address}}</a></li>
-        <li>Price per month: £{{props.rental_prices.per_month}}</li>
-        <li>Bedrooms: {{props.num_bedrooms}}</li>
-        <li>{{props.property_type}}</li>
+        <li><strong>Price Per Month: </strong>£{{props.rental_prices.per_month}}</li>
+        <li><strong>Bedrooms: </strong>{{props.num_bedrooms}}</li>
+        <li><strong>Property Type: </strong>{{props.property_type}}</li>
+        <hr>
       </ul>
     </div>
   </div>

@@ -1,6 +1,7 @@
-<section>
+<section class="container">
 
   <h1>{{ groupsShow.group.groupName }}</h1>
+  <hr>
   <div>
     <div ng-repeat="group in groupsShow.group">
       {{ group }}
@@ -11,7 +12,7 @@
       </div>
     </div>
     <div>
-      <button ui-sref="groupsEdit({ id: groupsShow.group.id })">Edit</button>
+      <button ui-sref="groupsEdit({ id: groupsShow.group.id })" class="edit">Edit</button>
       <button ng-click="groupsShow.delete()">Delete</button>
     </div>
   </div>
