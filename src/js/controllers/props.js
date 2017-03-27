@@ -10,20 +10,22 @@ PropsIndexCtrl.$inject = ['$http'];
 function PropsIndexCtrl($http) {
   const vm = this;
   vm.results = [];
-  getProps();
+  vm.area = null;
+  vm.beds = null;
 
   function getProps(){
-    $http.get('/api/properties')
+    $http.get('/api/properties', { params: {area: vm.area, minimum_beds: vm.beds, maximum_beds: vm.beds}})
       .then((response) => {
         vm.results = response.data;
-        console.log(vm.results);
+        // console.log(vm.results);
       });
   }
+  vm.getProps = getProps;
 }
 
 
-PropsShowCtrl.$inject = ['User', 'GroupProperty', '$http', '$stateParams', '$auth'];
-function PropsShowCtrl(User, GroupProperty, $http, $stateParams, $auth){
+PropsShowCtrl.$inject = ['User', 'GroupProperty', '$http', '$stateParams'];
+function PropsShowCtrl(User, GroupProperty, $http, $stateParams){
   const vm = this;
   vm.listingId = $stateParams.listing_id;
   showProp();
@@ -44,11 +46,8 @@ function PropsShowCtrl(User, GroupProperty, $http, $stateParams, $auth){
     GroupProperty
       .save(newProperty)
       .$promise
-      // in our config/routes/post(addCommentRoute) we passed the comment through from our API so we can grab that and use it here
       .then((property) => {
         console.log(property);
-        // vm.post.properties.push(property);
-        // and now just empty out the property area so that it looks like it's vanished and looks fresh for another property
         vm.newProperty = {};
       });
 

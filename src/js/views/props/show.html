@@ -1,16 +1,17 @@
-<h2> Props Show Page</h2>
-
-<ul ng-repeat="selected in propsShow.selected.listing ">
-  <li>{{selected.displayable_address}}</li>
-  <li><img ng-src="{{selected.image_645_430_url}}"></li>
-  <li>Bedrooms: {{selected.num_bedrooms}}</li>
-  <li>Bathrooms: {{selected.num_bathrooms}}</li>
-  <li>Price: £{{selected.rental_prices.per_month}} ppm</li>
-  <li>{{selected.property_type}}</li>
-  <li>{{selected.description}}</li>
-  <li>{{selected.agent_name}}</li>
-  <li>{{selected.agent_phone}}</li>
-
-  <button ng-click="propsShow.store()">Store Property</button>
-
-</ul>
+<section>
+  <div>
+    <h2> Props Show Page</h2>
+    <ul ng-repeat="selected in propsShow.selected.listing ">
+      <li>{{selected.displayable_address}}</li>
+      <li><img ng-src="{{selected.image_645_430_url}}"></li>
+      <li>Bedrooms: {{selected.num_bedrooms}}</li>
+      <li>Bathrooms: {{selected.num_bathrooms}}</li>
+      <li>Price: £{{selected.rental_prices.per_month}} ppm</li>
+      <li>{{selected.property_type}}</li>
+      <li>{{selected.description}}</li>
+      <li>{{selected.agent_name}}</li>
+      <li>{{selected.agent_phone}}</li>
+      <button ng-click="propsShow.store()">Store Property</button>
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,118 @@
+@import 'vendor/reset';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Raleway', serif;
+}
+
+.heading-styles {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+h1 {
+  @extend .heading-styles;
+}
+
+nav {
+  ul {
+    text-align: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding-top: 30px;
+    text-decoration: none;
+    li {
+      font-size: 15px;
+      display: inline-block;
+      margin-left: 20px;
+      line-height: 40px;
+      &:last-of-type {
+      }
+      &.menu {
+        color: black;
+        cursor: pointer;
+        display: none;
+        font-size: 20px;
+      }
+      a {
+        color: black;
+        @extend .heading-styles;
+        font-weight: 600;
+        position: relative;
+        text-decoration: none;
+        &:after {
+          content: "";
+          height: 2px;
+          width: 100%;
+          background-color: black;
+          position: absolute;
+          bottom: -5px;
+          left: 0;
+          opacity: 0;
+          transition: opacity 0.6s ease;
+          text-decoration: none;
+        }
+        &:hover {
+          margin-top: 10px;
+          text-decoration: none;
+          color: black;
+          &:after {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+section {
+  h1 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+  }
+  h2 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+  }
+  margin-top: 80px;
+  text-align: center;
+  div {
+    form {
+      label {
+        padding-top: 10px;
+        font-weight: bold;
+        font-size: 15px;
+      }
+      input {
+        display: block;
+        margin: 0 auto;
+        margin-top: 5px;
+        padding: 3px 80px;
+        text-align: center;
+      }
+    }
+    button {
+      padding: 10px;
+      margin: 10px 0;
+      text-transform: uppercase;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+  }
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}

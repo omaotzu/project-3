@@ -25,7 +25,7 @@ userSchema
   .get(function getprofileImageSRC() {
     if(!this.profileImage) return null;
     if(this.profileImage.match(/^http/)) return (this.profileImage);
-    return `https://s3-eu-west-1.amazonaws.com/wdi-london-express-project2/${this.profileImage}`;
+    return `https://s3-eu-west-1.amazonaws.com/wdi-ldn/${this.profileImage}`;
   });
 
 userSchema.pre('save', function checkPreviousProfileImage(next) {
