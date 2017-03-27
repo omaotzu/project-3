@@ -3,11 +3,11 @@ const rp = require('request-promise');
 function properties(req, res){
   const baseUrl ='http://api.zoopla.co.uk/api/v1/property_listings.json\?';
   const apiKey = process.env.ZOOPLA_API_KEY;
-  const area = 'wapping';
-
+  // const area = 'wapping';
+  console.log(req.query.area);
   rp({
     method: 'GET',
-    url: `${baseUrl}area=${area}&listing_status=rent&keywords=residential&api_key=${apiKey}`,
+    url: `${baseUrl}area=${req.query.area}&listing_status=rent&minimum_beds=${req.query.minimum_beds}&maximum_beds=${req.query.maximum_beds}&keywords=residential&api_key=${apiKey}`,
     json: true
   })
   .then((response) => {
