@@ -34,16 +34,31 @@ function GroupsNewCtrl(Group, User, $state, $auth) {
   vm.create = groupsCreate;
 }
 
-GroupsShowCtrl.$inject = ['Group', '$stateParams', '$state', '$http', '$scope'];
-function GroupsShowCtrl(Group, $stateParams, $state, $http, $scope) {
+GroupsShowCtrl.$inject = ['Group', '$stateParams', '$state', '$http'];
+function GroupsShowCtrl(Group, $stateParams, $state, $http) {
   const vm = this;
   vm.group = {};
+  vm.listingIds = [];
 
   Group.get($stateParams)
     .$promise
     .then((data) => {
-      console.log(data.properties);
+      // console.log(data.properties);
       vm.group = data;
+      let ids = [];
+
+      vm.group.properties.forEach((property) => {
+        ids.push(property.listingId);
+      });
+
+      ids = ids.join(',');
+
+      $http.get('/api/groups/properties', { params: { listing_id: ids } })
+        .then((response) => {
+          vm.selected = response.data;
+          console.log(vm.selected);
+        });
+
     });
 
   function groupsDelete() {
@@ -54,15 +69,6 @@ function GroupsShowCtrl(Group, $stateParams, $state, $http, $scope) {
   }
   vm.delete = groupsDelete;
 
-  function groupsPropIndex(listingId){
-    // console.log(listingId);
-    // $http.get('/api/groups/properties', {params: { listingId}})
-    // .then((response) => {
-    //   vm.selected = response.data;
-    //   console.log(vm.selected);
-    // });
-  }
-  vm.propIndex = groupsPropIndex;
 }
 
 GroupsEditCtrl.$inject = ['Group', '$stateParams', '$state'];

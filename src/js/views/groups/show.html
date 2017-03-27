@@ -1,5 +1,5 @@
 <section>
-  
+
   <h1>{{ groupsShow.group.groupName }}</h1>
   <div>
     <div ng-repeat="group in groupsShow.group">
@@ -16,13 +16,18 @@
     </div>
   </div>
   <hr>
-
   <div> Listing Ids:
-    <div ng-repeat="prop in groupsShow.group.properties">
-      {{ prop }}
-      {{ prop.listingId }}
-      {{ groupsShow.propIndex(prop.listingId) }}
-    </div>
+    <ul ng-repeat="selected in groupsShow.selected.listing ">
+      <li>{{selected.displayable_address}}</li>
+      <li><img ng-src="{{selected.image_645_430_url}}"></li>
+      <li>Bedrooms: {{selected.num_bedrooms}}</li>
+      <li>Bathrooms: {{selected.num_bathrooms}}</li>
+      <li>Price: £{{selected.rental_prices.per_month}} ppm</li>
+      <li>{{selected.property_type}}</li>
+      <li>{{selected.description}}</li>
+      <li>{{selected.agent_name}}</li>
+      <li>{{selected.agent_phone}}</li>
+      <hr>
+    </ul>
   </div>
-
 </section>
