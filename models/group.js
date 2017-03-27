@@ -11,7 +11,7 @@ const userNoteSchema = new mongoose.Schema({
 });
 
 const propertySchema = new mongoose.Schema({
-  listingId: {type: String},
+  listingId: { type: String },
   userImages: [ userImageSchema ],
   userNotes: [ userNoteSchema ],
   rating: { type: Number }

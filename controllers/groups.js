@@ -78,6 +78,21 @@ function addUsers(req, res, next) {
     .catch(next);
 }
 
+function addPropertyRoute(req, res, next) {
+  Group
+    .findOne({ users: req.user.id })
+    .exec()
+    .then((group) => {
+      if(!group) return res.notFound();
+
+      const property = group.properties.create(req.body);
+      group.properties.push(property);
+      return group.save()
+        .then(() => res.json(property));
+    })
+    .catch(next);
+}
+
 
 module.exports = {
   index: indexGroup,
@@ -85,5 +100,6 @@ module.exports = {
   show: showGroup,
   update: updateGroup,
   delete: deleteGroup,
-  addUsers: addUsers
+  addUsers: addUsers,
+  addProperty: addPropertyRoute
 };

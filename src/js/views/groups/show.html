@@ -3,6 +3,7 @@
 <div ng-repeat="group in groupsShow.group">
   {{ group }}
 </div>
+<hr>
 <div ng-repeat="user in groupsShow.group.users">
   {{ user }}
   <div>
@@ -10,11 +11,20 @@
     {{ user.email }}
   </div>
 </div>
+<hr>
 
-<form class=""method="post">
+<!-- <form class=""method="post">
   <label for="username">Search by username</label>
     <input type="text" ng-model="groupsShow.group.users">
-</form>
+</form> -->
+
+<div> Listing Ids:
+  <div ng-repeat="prop in groupsShow.group.properties">
+    {{ prop }}
+    {{ prop.listingId }}
+    {{ groupsShow.propIndex(prop.listingId) }}
+  </div>
+</div>
 
 <button ui-sref="groupsEdit({ id: groupsShow.group.id })">Edit</button>
 <button ng-click="groupsShow.delete()">Delete</button>

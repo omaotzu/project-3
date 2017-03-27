@@ -1,13 +1,15 @@
 const rp = require('request-promise');
 
 function properties(req, res){
-  const baseUrl ='http://api.zoopla.co.uk/api/v1/property_listings.json\?';
-  const apiKey = process.env.ZOOPLA_API_KEY;
-  const area = 'wapping';
-
   rp({
     method: 'GET',
-    url: `${baseUrl}area=${area}&listing_status=rent&keywords=residential&api_key=${apiKey}`,
+    url: 'http://api.zoopla.co.uk/api/v1/property_listings.json',
+    qs: {
+      area: 'wapping',
+      listing_status: 'rent',
+      keywords: 'residential',
+      api_key: process.env.ZOOPLA_API_KEY
+    },
     json: true
   })
   .then((response) => {
@@ -19,13 +21,14 @@ function properties(req, res){
 }
 
 function selectedProp(req, res) {
-  const baseUrl ='http://api.zoopla.co.uk/api/v1/property_listings.json\?';
-  const apiKey = process.env.ZOOPLA_API_KEY;
-  console.log(req.query.listing_id);
-  //listing_id=42734646
   rp({
     method: 'GET',
-    url: `${baseUrl}listing_id=${req.query.listing_id}&api_key=${apiKey}`,
+    url: 'http://api.zoopla.co.uk/api/v1/property_listings.json',
+    qs: {
+      listing_id: req.query.listing_id.split(','),
+      api_key: process.env.ZOOPLA_API_KEY
+    },
+    qsStringifyOptions: { arrayFormat: 'repeat' }, // talk about this in your presentation! :D
     json: true
   })
   .then((response) => {

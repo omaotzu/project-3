@@ -4,7 +4,7 @@ const users = require('../controllers/users');
 const imageUpload = require('../lib/imageUpload');
 const oauth = require('../controllers/oauth');
 const groups = require('../controllers/groups');
-// const secureRoute = require('../lib/secureRoute');
+const secureRoute = require('../lib/secureRoute');
 const zooplas = require('../controllers/zooplas');
 
 router.route('/properties')
@@ -24,6 +24,11 @@ router.route('/users/:id')
 router.route('/groups')
   .get(groups.index)
   .post(groups.create);
+
+router.route('/groups/properties')
+  .get(zooplas.selectedProp)
+  .post(secureRoute, groups.addProperty);
+
 
 router.route('/groups/:id')
   .get(groups.show)

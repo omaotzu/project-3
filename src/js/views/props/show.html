@@ -1,5 +1,5 @@
 <h2> Props Show Page</h2>
- 
+
 <ul ng-repeat="selected in propsShow.selected.listing ">
   <li>{{selected.displayable_address}}</li>
   <li><img ng-src="{{selected.image_645_430_url}}"></li>
@@ -10,5 +10,7 @@
   <li>{{selected.description}}</li>
   <li>{{selected.agent_name}}</li>
   <li>{{selected.agent_phone}}</li>
+
+  <button ng-click="propsShow.store()">Store Property</button>
 
 </ul>
