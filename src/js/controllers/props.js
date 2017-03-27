@@ -1,6 +1,7 @@
 angular
   .module('pncApp')
-  .controller('PropsIndexCtrl', PropsIndexCtrl);
+  .controller('PropsIndexCtrl', PropsIndexCtrl)
+  .controller('PropsShowCtrl', PropsShowCtrl);
 
 
 
@@ -18,4 +19,15 @@ function PropsIndexCtrl($http) {
         console.log(vm.results);
       });
   }
+}
+
+
+PropsShowCtrl.$inject = ['$http', '$resource', '$stateParams'];
+function PropsShowCtrl($http, $resource, $stateParams){
+  const vm = this;
+  const Property = $resource('/api/properties/:id', { id: '@id' });
+
+  vm.selected = Property.get($stateParams);
+  console.log(vm.selected);
+
 }
