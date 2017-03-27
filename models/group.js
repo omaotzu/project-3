@@ -11,17 +11,7 @@ const userNoteSchema = new mongoose.Schema({
 });
 
 const propertySchema = new mongoose.Schema({
-  address: { type: String, required: true },
-  latitude: { type: Number },
-  longitude: { type: Number },
-  bedrooms: { type: Number },
-  bathrooms: { type: Number },
-  coverPhoto: { type: String },
-  ppm: { type: Number },
-  type: { type: String },
-  description: { type: String },
-  agentName: { type: String },
-  agentContact: { type: String },
+  listingId: {type: String},
   userImages: [ userImageSchema ],
   userNotes: [ userNoteSchema ],
   rating: { type: Number }

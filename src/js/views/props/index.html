@@ -3,7 +3,7 @@
 <div ng-repeat="props in propsIndex.results.listing">
     <ul>
       <li><img ng-src="{{props.image_645_430_url}}"></li>
-      <li><a ui-sref="propsShow({ id: props.id })">{{props.displayable_address}}</a></li>
+      <li><a ui-sref="propsShow({ listing_id: props.listing_id })">{{props.displayable_address}}</a></li>
       <li>Price per month: £{{props.rental_prices.per_month}}</li>
       <li>Bedrooms: {{props.num_bedrooms}}</li>
       <li>{{props.property_type}}</li>

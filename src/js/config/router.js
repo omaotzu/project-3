@@ -43,7 +43,7 @@ function Router($locationProvider, $stateProvider, $urlRouterProvider) {
       controller: 'PropsIndexCtrl as propsIndex'
     })
     .state('propsShow', {
-      url: '/properties/:id',
+      url: '/properties/:listing_id',
       templateUrl: 'js/views/props/show.html',
       controller: 'PropsShowCtrl as propsShow'
     })

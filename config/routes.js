@@ -10,6 +10,9 @@ const zooplas = require('../controllers/zooplas');
 router.route('/properties')
   .get(zooplas.properties);
 
+router.route('/properties/:listing_id')
+  .get(zooplas.selectedProp);
+
 router.route('/users')
   .get(users.index);
 

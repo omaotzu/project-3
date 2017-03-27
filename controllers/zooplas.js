@@ -2,7 +2,8 @@ const rp = require('request-promise');
 
 function properties(req, res){
   const baseUrl ='http://api.zoopla.co.uk/api/v1/property_listings.json\?';
-  const apiKey = process.env.ZOOPLA_API_KEY;
+  // const apiKey = process.env.ZOOPLA_API_KEY;
+  const apiKey = 'ab4fkjwbgsfy7j2d2tkag6e4';
   const area = 'wapping';
 
   rp({
@@ -18,7 +19,25 @@ function properties(req, res){
   });
 }
 
+function selectedProp(req, res) {
+  const baseUrl ='http://api.zoopla.co.uk/api/v1/property_listings.json\?';
+  const apiKey = process.env.ZOOPLA_API_KEY;
+
+  rp({
+    method: 'GET',
+    url: `${baseUrl}listing_id=42734646&api_key=${apiKey}`,
+    json: true
+  })
+  .then((response) => {
+    res.status(200).json(response);
+  })
+  .catch((err) => {
+    res.status(500).json(err);
+  });
+}
+
 
 module.exports = {
-  properties
+  properties,
+  selectedProp
 };
