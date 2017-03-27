@@ -21,10 +21,11 @@ function properties(req, res){
 function selectedProp(req, res) {
   const baseUrl ='http://api.zoopla.co.uk/api/v1/property_listings.json\?';
   const apiKey = process.env.ZOOPLA_API_KEY;
-
+  console.log(req.query.listing_id);
+  //listing_id=42734646
   rp({
     method: 'GET',
-    url: `${baseUrl}listing_id=42734646&api_key=${apiKey}`,
+    url: `${baseUrl}listing_id=${req.query.listing_id}&api_key=${apiKey}`,
     json: true
   })
   .then((response) => {

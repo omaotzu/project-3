@@ -11,6 +11,10 @@
   </div>
 </div>
 
+<form class=""method="post">
+  <label for="username">Search by username</label>
+    <input type="text" ng-model="groupsShow.group.users">
+</form>
 
 <button ui-sref="groupsEdit({ id: groupsShow.group.id })">Edit</button>
 <button ng-click="groupsShow.delete()">Delete</button>

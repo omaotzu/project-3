@@ -22,15 +22,19 @@ function PropsIndexCtrl($http) {
 }
 
 
-PropsShowCtrl.$inject = ['$http'];
-function PropsShowCtrl($http){
+PropsShowCtrl.$inject = ['$http', '$stateParams'];
+function PropsShowCtrl($http, $stateParams){
   const vm = this;
-  // const listing_id = null;
 
-  $http.get('/api/properties/:listing_id')
-    .then((response) => {
-      console.log('SEARCHING');
-      vm.selected = response.data;
-      console.log(vm.selected);
-    });
+
+  vm.listingId = $stateParams.listing_id;
+  showProp();
+  function showProp(){
+    $http.get('/api/properties/:listing_id', { params: { listing_id: vm.listingId } })
+      .then((response) => {
+        console.log('SEARCHING');
+        vm.selected = response.data;
+        console.log(vm.selected);
+      });
+  }
 }
