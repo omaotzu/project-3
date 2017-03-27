@@ -1,10 +1,15 @@
-<form name="login.loginForm" ng-submit="login.submit()">
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" ng-model="login.credentials.email">
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" ng-model="login.credentials.password">
-  <button class="button">Login</button>
-</form>
-<div>
-  <button ng-click="login.authenticate('github')">Sign in with GitHub</button>
-</div>
+<section class="container">
+  <h2>Login</h2>
+  <div>
+    <form name="login.loginForm" ng-submit="login.submit()">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" ng-model="login.credentials.email">
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" ng-model="login.credentials.password">
+      <button class="button">Login</button>
+    </form>
+  </div>
+  <div>
+    <button ng-click="login.authenticate('github')">Sign in with GitHub</button>
+  </div>
+</section>

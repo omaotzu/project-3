@@ -1,8 +1,9 @@
-<h1>{{ usersShow.user.username }}</h1>
-
-<img ng-src="{{ usersShow.user.profileImageSRC }}">
-<h3>{{usersShow.user.firstname}} {{usersShow.user.surname}}</h3>
-
-
-<button ui-sref="usersEdit({ id: usersShow.user.id })">Edit</button>
-<button ng-click="usersShow.delete()">Delete</button>
+<section>
+  <div>
+    <h1>{{ usersShow.user.username }}</h1>
+    <img ng-src="{{ usersShow.user.profileImageSRC }}">
+    <h3>{{usersShow.user.firstname}} {{usersShow.user.surname}}</h3>
+    <button ui-sref="usersEdit({ id: usersShow.user.id })">Edit</button>
+    <button ng-click="usersShow.delete()">Delete</button>
+  </div>
+</section>

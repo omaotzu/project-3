@@ -1,18 +1,22 @@
-<h2>Register</h2>
-<form name="register.registerForm" ng-submit="register.submit()">
-  <label for="username">Username</label>
-  <input type="text" name="username" id="username" ng-model="register.user.username"><br>
-  <label for="firstname">First Name</label>
-  <input type="text" name="firstname" id="firstname" ng-model="register.user.firstname"><br>
-  <label for="surname">Surname</label>
-  <input type="text" name="surname" id="surname" ng-model="register.user.surname"><br>
-  <label for="email">Email</label>
-  <input type="email" name="email" id="email" ng-model="register.user.email"><br>
-  <label for="password">Password</label>
-  <input type="password" name="password" id="password" ng-model="register.user.password"><br>
-  <label for="passwordConfirmation">Password Confirmation</label>
-  <input type="password" name="passwordConfirmation" id="passwordConfirmation" ng-model="register.user.passwordConfirmation"><br>
-  <label for="base64"></label>
-  <input type="file" base64 name="base64" id="base64" ng-model="register.user.base64">
-  <button class="button">Register</button>
-</form>
+<section class="container">
+  <h2>Register</h2>
+  <div>
+    <form name="register.registerForm" ng-submit="register.submit()">
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username" ng-model="register.user.username"><br>
+      <label for="firstname">First Name</label>
+      <input type="text" name="firstname" id="firstname" ng-model="register.user.firstname"><br>
+      <label for="surname">Surname</label>
+      <input type="text" name="surname" id="surname" ng-model="register.user.surname"><br>
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" ng-model="register.user.email"><br>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" ng-model="register.user.password"><br>
+      <label for="passwordConfirmation">Password Confirmation</label>
+      <input type="password" name="passwordConfirmation" id="passwordConfirmation" ng-model="register.user.passwordConfirmation"><br>
+      <label for="base64"></label>
+      <input type="file" base64 name="base64" id="base64" ng-model="register.user.base64">
+      <button class="button">Register</button>
+    </form>
+  </div>
+</section>

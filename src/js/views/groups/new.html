@@ -1,18 +1,21 @@
-<h1>Groups New</h1>
-
-<form name="groupsNew.groupsNewForm" ng-submit="groupsNew.create()">
-
-  <label for="groupName">Group Name</label>
-  <input type="text" name="groupName" id="groupName" ng-model="groupsNew.group.groupName">
-
-  <!-- <label for="users">Users</label>
-  <input type="text" name="users" id="users" ng-options=ng-model="groupsNew.group.users"> -->
-
-  <!-- <select class="" name="">
-    <option ng-repeat="user in usersShow">{{ user }}</option>
-  </select> -->
-
-
-
-  <button class="button">Create</button>
-</form>
+<section>
+  <h1>Groups New</h1>
+  <div>
+    <form name="groupsNew.groupsNewForm" ng-submit="groupsNew.create()">
+      <div>
+        <label for="groupName">Group Name</label>
+        <input type="text" name="groupName" id="groupName" ng-model="groupsNew.group.groupName">
+      </div>
+      <!-- <div>
+        <label for="users">Users</label>
+        <input type="text" name="users" id="users" ng-options=ng-model="groupsNew.group.users">
+      </div> -->
+      <!-- <div>
+        <select class="" name="">
+          <option ng-repeat="user in usersShow">{{ user }}</option>
+        </select>
+      </div> -->
+      <button class="button">Create</button>
+    </form>
+  </div>
+</section>

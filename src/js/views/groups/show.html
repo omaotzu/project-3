@@ -1,16 +1,14 @@
-<h1>{{ groupsShow.group.groupName }}</h1>
-
-<div ng-repeat="group in groupsShow.group">
-  {{ group }}
-</div>
-<div ng-repeat="user in groupsShow.group.users">
-  {{ user }}
+<section>
+  <h1>{{ groupsShow.group.groupName }}</h1>
   <div>
-    {{ user.username }}
-    {{ user.email }}
+    <div ng-repeat="group in groupsShow.group">{{ group }}
+    </div>
+    <div ng-repeat="user in groupsShow.group.users">{{ user }}
+      <div>
+        {{ user.username }} {{ user.email }}
+      </div>
+    </div>
+    <button ui-sref="groupsEdit({ id: groupsShow.group.id })">Edit</button>
+    <button ng-click="groupsShow.delete()">Delete</button>
   </div>
-</div>
-
-
-<button ui-sref="groupsEdit({ id: groupsShow.group.id })">Edit</button>
-<button ng-click="groupsShow.delete()">Delete</button>
+</section>
