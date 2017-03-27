@@ -1,6 +1,17 @@
+<<<<<<< HEAD
 <section>
   <div>
     <h1>Props Index</h1>
+
+    <form>
+      <label for="area">Area: </label>
+      <input type="text" ng-model="propsIndex.area">
+
+      <label for="beds">Number of beds: </label>
+      <input type="number" ng-model="propsIndex.beds">
+        <button ng-click="propsIndex.getProps()">Search by area</button>
+    </form>
+    <h4>Found {{propsIndex.results.result_count}} listings</h4>
     <div ng-repeat="props in propsIndex.results.listing">
       <ul>
         <li><img ng-src="{{props.image_645_430_url}}"></li>

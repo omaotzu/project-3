@@ -37,6 +37,7 @@ function LoginCtrl($auth, $state) {
       .catch((err) => {
         console.log(err);
       });
+
   }
 
   vm.authenticate = authenticate;

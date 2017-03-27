@@ -28,7 +28,8 @@ router.route('/groups')
 router.route('/groups/:id')
   .get(groups.show)
   .put(groups.update)
-  .delete(groups.delete);
+  .delete(groups.delete)
+  .post(groups.addUsers);
 
 router.route('/login')
   .post(auth.login);

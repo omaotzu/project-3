@@ -1,4 +1,5 @@
 const Group = require('../models/group');
+const User = require('../models/user');
 
 function indexGroup(req, res, next) {
   Group
@@ -61,6 +62,21 @@ function deleteGroup(req, res, next) {
     .catch(next);
 }
 
+function addUsers(req, res, next) {
+  Group
+    .findById(req.params.id)
+    .populate('users')
+    .exec()
+    .then((group) => {
+      User
+        .findOne({username: req.body.username})
+        .then((user) => {
+          const userId = user.userId;
+          group.users.push(userId);
+        });
+    })
+    .catch(next);
+}
 
 
 module.exports = {
@@ -68,5 +84,6 @@ module.exports = {
   create: createGroup,
   show: showGroup,
   update: updateGroup,
-  delete: deleteGroup
+  delete: deleteGroup,
+  addUsers: addUsers
 };
