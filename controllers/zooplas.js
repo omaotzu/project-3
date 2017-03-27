@@ -2,8 +2,7 @@ const rp = require('request-promise');
 
 function properties(req, res){
   const baseUrl ='http://api.zoopla.co.uk/api/v1/property_listings.json\?';
-  // const apiKey = process.env.ZOOPLA_API_KEY;
-  const apiKey = 'ab4fkjwbgsfy7j2d2tkag6e4';
+  const apiKey = process.env.ZOOPLA_API_KEY;
   const area = 'wapping';
 
   rp({
