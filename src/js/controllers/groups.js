@@ -2,7 +2,8 @@ angular
   .module('pncApp')
   .controller('GroupsIndexCtrl', GroupsIndexCtrl)
   .controller('GroupsNewCtrl', GroupsNewCtrl)
-  .controller('GroupsShowCtrl', GroupsShowCtrl);
+  .controller('GroupsShowCtrl', GroupsShowCtrl)
+  .controller('GroupsEditCtrl', GroupsEditCtrl);
 
 GroupsIndexCtrl.$inject = ['Group'];
 function GroupsIndexCtrl(Group) {
@@ -34,9 +35,24 @@ function GroupsShowCtrl(Group, $stateParams, $state) {
   vm.group = Group.get($stateParams);
 
   function groupsDelete() {
+    console.log($stateParams);
     vm.group
       .$remove()
-      .then(() => $state.go('register'));
+      .then(() => $state.go('groupsIndex'));
   }
   vm.delete = groupsDelete;
+}
+
+GroupsEditCtrl.$inject = ['Group', '$stateParams', '$state'];
+function GroupsEditCtrl(Group, $stateParams, $state) {
+  const vm = this;
+  vm.group = Group.get($stateParams);
+  console.log($stateParams);
+
+  function groupsUpdate() {
+    vm.group
+      .$update()
+      .then(() => $state.go('groupsShow', $stateParams));
+  }
+  vm.update = groupsUpdate;
 }
