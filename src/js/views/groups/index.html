@@ -1,8 +1,12 @@
 <h1>Groups Index</h1>
 
 <div>
-  <div ng-repeat="group in groupsIndex">
-    {{ group }}
+
+  <div ng-repeat="group in groupsIndex.all">
+
+    <a ui-sref="groupsShow({ id: group.id })">{{ group.groupName }}</a>
+    <p>{{ group }}</p>
+
   </div>
-  
+
 </div>

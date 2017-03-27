@@ -5,14 +5,10 @@ const imageUpload = require('../lib/imageUpload');
 const oauth = require('../controllers/oauth');
 const groups = require('../controllers/groups');
 // const secureRoute = require('../lib/secureRoute');
-const zoopla = require('../controllers/zooplas');
+const zooplas = require('../controllers/zooplas');
 
 router.route('/properties')
-  .get(zoopla.properties);
-
-
-
-
+  .get(zooplas.properties);
 
 router.route('/users')
   .get(users.index);
@@ -27,7 +23,9 @@ router.route('/groups')
   .post(groups.create);
 
 router.route('/groups/:id')
-  .get(groups.show);
+  .get(groups.show)
+  .put(groups.update)
+  .delete(groups.delete);
 
 router.route('/login')
   .post(auth.login);
