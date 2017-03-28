@@ -24,8 +24,7 @@
   <div>
    <h2>Notes</h2>
    <ul>
-     <li ng-repeat="note in groupsPropsShow.group.properties[0].notes track by $index">
-
+     <li ng-repeat="note in groupsPropsShow.prop.notes track by $index">
        <strong>{{ note.createdBy.username }}</strong> - {{ note.text }}</li>
    </ul>
 

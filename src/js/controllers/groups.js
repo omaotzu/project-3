@@ -69,16 +69,6 @@ function GroupsHomeCtrl(Group, $stateParams, $state, $http) {
 GroupsPropsShowCtrl.$inject = ['Group', 'GroupProperty','GroupPropertyNote', '$stateParams', '$state', '$http'];
 function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, $stateParams, $state, $http) {
   const vm = this;
-
-  // GroupProperty.get($stateParams)
-  // .$promise
-  // .then((data) => {
-  //   console.log(data);
-  // });
-  // //
-  // // console.log(vm.prop);
-  // //
-  // //
   vm.listingId = $stateParams.listing_id;
 
   Group.get($stateParams)
@@ -86,6 +76,8 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, $statePara
     .then((data) => {
       vm.group = data;
       groupsShowProp();
+      vm.prop = vm.group.properties.find(obj => obj.listingId === vm.listingId);
+      console.log(vm.thisProp);
     });
 
   function groupsShowProp(){
@@ -99,9 +91,9 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, $statePara
     .save({ id: vm.group.id, listing_id: vm.listingId }, vm.newNote)
     .$promise
     .then((note) => {
+      console.log(vm.prop);
 
-      console.log(vm.group.properties);
-      vm.group.properties.notes.push(note);
+      vm.prop.notes.push(note);
       vm.newNote = {};
     });
   }
