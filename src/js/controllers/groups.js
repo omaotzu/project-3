@@ -2,8 +2,9 @@ angular
   .module('pncApp')
   .controller('GroupsIndexCtrl', GroupsIndexCtrl)
   .controller('GroupsNewCtrl', GroupsNewCtrl)
-  .controller('GroupsShowCtrl', GroupsShowCtrl)
-  .controller('GroupsEditCtrl', GroupsEditCtrl);
+  .controller('GroupsHomeCtrl', GroupsHomeCtrl)
+  .controller('GroupsEditCtrl', GroupsEditCtrl)
+  .controller('GroupsPropsShowCtrl', GroupsPropsShowCtrl);
 
 GroupsIndexCtrl.$inject = ['Group'];
 function GroupsIndexCtrl(Group) {
@@ -20,9 +21,6 @@ function GroupsNewCtrl(Group, User, $state, $auth) {
     if(vm.groupsNewForm.$valid) {
       vm.group.users = $auth.getPayload().userId;
       vm.user = $auth.getPayload().userId;
-      console.log(vm.group);
-      console.log(vm.user);
-      console.log(User.get(vm.user));
 
       Group
         .save(vm.group)
@@ -33,8 +31,8 @@ function GroupsNewCtrl(Group, User, $state, $auth) {
   vm.create = groupsCreate;
 }
 
-GroupsShowCtrl.$inject = ['Group', '$stateParams', '$state', '$http'];
-function GroupsShowCtrl(Group, $stateParams, $state, $http) {
+GroupsHomeCtrl.$inject = ['Group', '$stateParams', '$state', '$http'];
+function GroupsHomeCtrl(Group, $stateParams, $state, $http) {
   const vm = this;
   vm.group = {};
   vm.listingIds = [];
@@ -42,7 +40,6 @@ function GroupsShowCtrl(Group, $stateParams, $state, $http) {
   Group.get($stateParams)
     .$promise
     .then((data) => {
-      // console.log(data.properties);
       vm.group = data;
       let ids = [];
 
@@ -52,7 +49,7 @@ function GroupsShowCtrl(Group, $stateParams, $state, $http) {
 
       ids = ids.join(',');
 
-      $http.get('/api/groups/properties', { params: { listing_id: ids } })
+      $http.get('/api/groups/:id/properties', { params: { listing_id: ids } })
         .then((response) => {
           vm.selected = response.data;
           console.log(vm.selected);
@@ -61,7 +58,6 @@ function GroupsShowCtrl(Group, $stateParams, $state, $http) {
     });
 
   function groupsDelete() {
-    console.log($stateParams);
     vm.group
       .$remove()
       .then(() => $state.go('groupsIndex'));
@@ -70,16 +66,36 @@ function GroupsShowCtrl(Group, $stateParams, $state, $http) {
 
 }
 
+GroupsPropsShowCtrl.$inject = ['Group', 'GroupProperty','$stateParams', '$state', '$http'];
+function GroupsPropsShowCtrl(Group, GroupProperty, $stateParams, $state, $http) {
+  const vm = this;
+  vm.listingId = $stateParams.listing_id;
+
+  Group.get($stateParams)
+    .$promise
+    .then((data) => {
+      vm.group = data;
+      groupsShowProp();
+    });
+
+  function groupsShowProp(){
+    $http.get('/api/groups/:id/properties/:listing_id', { params: { listing_id: vm.listingId, id: vm.group.id} })
+      .then((response) => {
+        vm.gps = response.data;
+
+      });
+  }
+}
+
 GroupsEditCtrl.$inject = ['Group', '$stateParams', '$state'];
 function GroupsEditCtrl(Group, $stateParams, $state) {
   const vm = this;
   vm.group = Group.get($stateParams);
-  console.log($stateParams);
 
   function groupsUpdate() {
     vm.group
       .$update()
-      .then(() => $state.go('groupsShow', $stateParams));
+      .then(() => $state.go('groupsHome', $stateParams));
   }
   vm.update = groupsUpdate;
 }

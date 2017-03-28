@@ -2,7 +2,7 @@
   <h1>Groups Index</h1>
   <hr>
   <div ng-repeat="group in groupsIndex.all">
-    <a ui-sref="groupsShow({ id: group.id })" class="group">{{ group.groupName }}</a>
+    <a ui-sref="groupsHome({ id: group.id })" class="group">{{ group.groupName }}</a>
     <p >{{ group }}</p>
     <hr>
   </div>

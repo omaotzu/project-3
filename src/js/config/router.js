@@ -17,15 +17,20 @@ function Router($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: 'js/views/groups/new.html',
       controller: 'GroupsNewCtrl as groupsNew'
     })
-    .state('groupsShow', {
+    .state('groupsHome', {
       url: '/groups/:id',
-      templateUrl: 'js/views/groups/show.html',
-      controller: 'GroupsShowCtrl as groupsShow'
+      templateUrl: 'js/views/groups/home.html',
+      controller: 'GroupsHomeCtrl as groupsHome'
     })
     .state('groupsEdit', {
       url: '/groups/:id/edit',
       templateUrl: 'js/views/groups/edit.html',
       controller: 'GroupsEditCtrl as groupsEdit'
+    })
+    .state('groupsPropsShow', {
+      url: '/groups/:id/properties/:listing_id',
+      templateUrl: 'js/views/groups/show.html',
+      controller: 'GroupsPropsShowCtrl as groupsPropsShow'
     })
     .state('usersShow', {
       url: '/users/:id',
