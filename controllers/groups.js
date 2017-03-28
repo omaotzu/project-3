@@ -11,7 +11,6 @@ function indexGroup(req, res, next) {
 }
 
 function createGroup(req, res, next) {
-  console.log('REQ BODY TO BE CREATED', req.body);
   Group
     .create(req.body)
     .then((group) => res.status(201).json(group))
