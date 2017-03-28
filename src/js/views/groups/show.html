@@ -2,7 +2,7 @@
   <div>
     <h2> Props Show Page</h2>
     <hr>
-    <ul ng-repeat="selected in groupsPropsShow.gps.listing ">
+    <ul ng-repeat="selected in groupsPropsShow.gps.listing">
       <li><img ng-src="{{selected.image_645_430_url}}"></li>
       <hr>
       <h3>Property Info</h3>
@@ -18,6 +18,21 @@
       <li><strong>Company: </strong>{{selected.agent_name}}</li>
       <li><strong>Contact: </strong>{{selected.agent_phone}}</li>
       <hr>
+      <button class="button" ng-click="groupsPropsShow.deleteProperty(selected)" ng-if="main.isAuthenticated()">Delete</button>
     </ul>
   </div>
+  <div>
+   <h2>Notes</h2>
+   <ul>
+     <li ng-repeat="note in groupsPropsShow.group.properties[0].notes track by $index">
+
+       <strong>{{ note.createdBy.username }}</strong> - {{ note.text }}</li>
+   </ul>
+
+   <form ng-submit="groupsPropsShow.addNote()" ng-if="main.isAuthenticated()">
+     <label>Add comment</label>
+     <textarea ng-model="groupsPropsShow.newNote.text"></textarea>
+     <button class="button button--full">Comment</button>
+   </form>
+ </div>
 </section>

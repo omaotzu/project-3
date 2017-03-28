@@ -21,14 +21,14 @@ function GroupProperty($resource) {
 
 GroupPropertyImage.$inject = ['$resource'];
 function GroupPropertyImage($resource) {
-  return new $resource('/api/groups/properties/:propId/images/:id', { id: '@id' }, {
+  return new $resource('/api/groups/:id/properties/:listing_id/images/:id', { id: '@id' }, {
     update: { method: 'PUT' }
   });
 }
 
 GroupPropertyNote.$inject = ['$resource'];
 function GroupPropertyNote($resource) {
-  return new $resource('/ap/groups/properties/:propId/notes/:id', { id: '@id' }, {
+  return new $resource('/api/groups/:id/properties/:listing_id/notes/:noteId', { id: '@id' }, {
     update: { method: 'PUT' }
   });
 }

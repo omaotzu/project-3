@@ -49,7 +49,7 @@ function GroupsHomeCtrl(Group, $stateParams, $state, $http) {
 
       ids = ids.join(',');
 
-      $http.get('/api/groups/:id/properties', { params: { listing_id: ids } })
+      $http.get('/api/groups/:id/properties', { params: { id: vm.group.id, listing_id: ids } })
         .then((response) => {
           vm.selected = response.data;
           console.log(vm.selected);
@@ -66,9 +66,19 @@ function GroupsHomeCtrl(Group, $stateParams, $state, $http) {
 
 }
 
-GroupsPropsShowCtrl.$inject = ['Group', 'GroupProperty','$stateParams', '$state', '$http'];
-function GroupsPropsShowCtrl(Group, GroupProperty, $stateParams, $state, $http) {
+GroupsPropsShowCtrl.$inject = ['Group', 'GroupProperty','GroupPropertyNote', '$stateParams', '$state', '$http'];
+function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, $stateParams, $state, $http) {
   const vm = this;
+
+  // GroupProperty.get($stateParams)
+  // .$promise
+  // .then((data) => {
+  //   console.log(data);
+  // });
+  // //
+  // // console.log(vm.prop);
+  // //
+  // //
   vm.listingId = $stateParams.listing_id;
 
   Group.get($stateParams)
@@ -79,12 +89,35 @@ function GroupsPropsShowCtrl(Group, GroupProperty, $stateParams, $state, $http) 
     });
 
   function groupsShowProp(){
-    $http.get('/api/groups/:id/properties/:listing_id', { params: { listing_id: vm.listingId, id: vm.group.id} })
+    $http.get('/api/groups/:id/properties/:listing_id', { params: { id: vm.group.id, listing_id: vm.listingId} })
       .then((response) => {
         vm.gps = response.data;
-
       });
   }
+  function addNote() {
+    GroupPropertyNote
+    .save({ id: vm.group.id, listing_id: vm.listingId }, vm.newNote)
+    .$promise
+    .then((note) => {
+
+      console.log(vm.group.properties);
+      vm.group.properties.notes.push(note);
+      vm.newNote = {};
+    });
+  }
+  vm.addNote = addNote;
+
+
+  function deleteProperty(property) {
+    console.log(property);
+    GroupProperty
+    .delete({ listing_id: vm.listingId, id: vm.group.id })
+    .$promise
+    .then(() => {
+      $state.go('groupsHome', { id: vm.group.id });
+    });
+  }
+  vm.deleteProperty = deleteProperty;
 }
 
 GroupsEditCtrl.$inject = ['Group', '$stateParams', '$state'];

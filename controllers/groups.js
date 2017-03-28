@@ -11,7 +11,7 @@ function indexGroup(req, res, next) {
 }
 
 function createGroup(req, res, next) {
-  console.log(req.body);
+  // console.log(req.body);
   Group
     .create(req.body)
     .then((group) => res.status(201).json(group))
@@ -62,29 +62,12 @@ function deleteGroup(req, res, next) {
     .catch(next);
 }
 
-function addUsers(req, res, next) {
-  Group
-    .findById(req.params.id)
-    .populate('users')
-    .exec()
-    .then((group) => {
-      User
-        .findOne({username: req.body.username})
-        .then((user) => {
-          const userId = user.userId;
-          group.users.push(userId);
-        });
-    })
-    .catch(next);
-}
-
 function addPropertyRoute(req, res, next) {
   Group
     .findOne({ users: req.user.id })
     .exec()
     .then((group) => {
       if(!group) return res.notFound();
-
       const property = group.properties.create(req.body);
       group.properties.push(property);
       return group.save()
@@ -93,12 +76,82 @@ function addPropertyRoute(req, res, next) {
     .catch(next);
 }
 
+function deletePropertyRoute(req, res, next) {
+  Group
+    .findOne({ users: req.user.id})
+    .exec()
+    .then((group) => {
+      if(!group) return res.notFound();
+
+      const prop = group.properties.find((property) => {
+        return property.listingId === req.params.listing_id;
+      });
+
+      prop.remove();
+
+      return group.save();
+    })
+    .then(() => res.status(204).end())
+    .catch(next);
+
+}
+
+function addPropertyNote(req, res, next) {
+  console.log('USER', req.user);
+  req.body.createdBy = req.user;
+  // console.log(req.params.id);
+  Group
+    .findById(req.params.id)
+    .populate('users')
+    .exec()
+    .then((group) => {
+      if(!group) return res.notFound();
+
+
+      // console.log('PROPS', group.properties);
+      // const prop = group.properties[0].id;
+      const prop = group.properties.find((property) => {
+        return property.listingId === req.params.listing_id;
+      });
+      console.log('PROPID', prop);
+      console.log('PARAMS', req.params.id);
+      console.log('LISTINGID', req.params.listing_id);
+
+      const note = prop.notes.create(req.body);
+
+      prop.notes.push(note);
+
+      console.log('AFTER PROPS', group.properties);
+      // console.log('BODY', req.body);
+
+      // console.log(req.params.listing_id);
+      // const notes = group.properties.notes;
+      // notes.create(req.body);
+      // group.properties.notes.push(req.body);
+
+      // console.log('LISTING', req.params.listing_id);
+      // console.log('EVERYTHING', prop);
+      // prop.notes.push(req.body);
+
+      return group.save()
+        .then(() => res.json(note));
+    })
+    .catch(next);
+}
+
+
+// function addUsers(req, res, next) {
+//
+// }
+
 module.exports = {
   index: indexGroup,
   create: createGroup,
   show: showGroup,
   update: updateGroup,
   delete: deleteGroup,
-  addUsers: addUsers,
-  addProperty: addPropertyRoute
+  addProperty: addPropertyRoute,
+  deleteProperty: deletePropertyRoute,
+  addNote: addPropertyNote //,
+  //addUsers: addUsers
 };

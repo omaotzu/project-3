@@ -13,7 +13,7 @@ const userNoteSchema = new mongoose.Schema({
 const propertySchema = new mongoose.Schema({
   listingId: { type: String },
   userImages: [ userImageSchema ],
-  userNotes: [ userNoteSchema ],
+  notes: [ userNoteSchema ],
   rating: { type: Number }
 });
 

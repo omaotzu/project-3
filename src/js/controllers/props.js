@@ -24,13 +24,14 @@ PropsShowCtrl.$inject = ['User', 'GroupProperty', '$http', '$stateParams'];
 function PropsShowCtrl(User, GroupProperty, $http, $stateParams){
   const vm = this;
   vm.listingId = $stateParams.listing_id;
+  // console.log(vm.listingId);
   showProp();
 
   function showProp(){
     $http.get('/api/properties/:listing_id', { params: { listing_id: vm.listingId } })
       .then((response) => {
         vm.selected = response.data;
-        console.log(vm.selected);
+        // console.log(vm.selected);
       });
   }
 
