@@ -12,10 +12,19 @@ function GroupsIndexCtrl(Group) {
   vm.all = Group.query();
 }
 
-GroupsNewCtrl.$inject = ['Group', 'User', '$state', '$auth'];
-function GroupsNewCtrl(Group, User, $state, $auth) {
+GroupsNewCtrl.$inject = ['Group', 'User', 'filterFilter', '$state', '$auth', '$scope'];
+function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
   const vm = this;
   vm.group = {};
+  vm.allUsers = User.query();
+  console.log(vm.allUsers);
+
+  function filterUsers() {
+    const params = { username: vm.q };
+    vm.filtered = filterFilter(vm.allUsers, params);
+  }
+
+  $scope.$watch(() => vm.q, filterUsers);
 
   function groupsCreate() {
     if(vm.groupsNewForm.$valid) {

@@ -6,15 +6,15 @@
         <label for="groupName">Group Name</label>
         <input type="text" name="groupName" id="groupName" ng-model="groupsNew.group.groupName">
       </div>
-      <!-- <div>
-        <label for="users">Users</label>
-        <input type="text" name="users" id="users" ng-options=ng-model="groupsNew.group.users">
-      </div> -->
-      <!-- <div>
-        <select class="" name="">
-          <option ng-repeat="user in usersShow">{{ user }}</option>
-        </select>
-      </div> -->
+      <div>
+        <input type="text" class="search" name="groupsNew.groupsSearchUsers" ng-model="groupsNew.q" placeholder="Search...">
+      </div>
+      <div ng-repeat="user in groupsNew.filtered">
+        <div ng-click="groupsNew.addUser(user)">
+          {{ user.username }}
+        </div>
+      </div>
+
       <button class="button">Create</button>
     </form>
   </div>
