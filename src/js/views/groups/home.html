@@ -4,30 +4,28 @@
   <hr>
   <div>
     <div ng-repeat="group in groupsHome.group">
-      {{ group }}
+      <!-- {{ group }} -->
     </div>
-    <div ng-repeat="user in groupsHome.group.users">{{ user }}
+    <div ng-repeat="user in groupsHome.group.users">
+      <!-- {{ user }} -->
       <div>
-        {{ user.username }} {{ user.email }}
+        <!-- {{ user.username }} {{ user.email }} -->
       </div>
     </div>
     <div>
       <button ui-sref="groupsEdit({ id: groupsHome.group.id })" class="edit">Edit</button>
-      <button ng-click="groupsHome.delete()">Delete</button>
+      <button ng-click="groupsHome.delete()" class="deletecomment">Delete</button>
     </div>
   </div>
   <hr>
-  <div> Listing Ids:
+  <div> Listing IDs:
     <ul ng-repeat="selected in groupsHome.selected.listing ">
-      <li>{{selected.displayable_address}}</li>
       <li><img ng-src="{{selected.image_645_430_url}}"></li>
-      <li>Bedrooms: {{selected.num_bedrooms}}</li>
-      <li>Bathrooms: {{selected.num_bathrooms}}</li>
-      <li>Price: £{{selected.rental_prices.per_month}} ppm</li>
-      <li>{{selected.property_type}}</li>
-      <li>{{selected.description}}</li>
-      <li>{{selected.agent_name}}</li>
-      <li>{{selected.agent_phone}}</li>
+      <li><strong>Address: </strong>{{selected.displayable_address}}</li>
+      <li><strong>Bedrooms: </strong>{{selected.num_bedrooms}}</li>
+      <li><strong>Bathrooms: </strong>{{selected.num_bathrooms}}</li>
+      <li><strong>Price: </strong>£{{selected.rental_prices.per_month}} ppm</li>
+      <li><strong>Property Type: </strong>{{selected.property_type}}</li>
       <button ui-sref="groupsPropsShow({ id: groupsHome.group.id, listing_id: selected.listing_id})">Show</button>
       <hr>
     </ul>

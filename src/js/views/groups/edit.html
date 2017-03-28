@@ -1,10 +1,15 @@
 <section class="container">
-  <h1>Groups New</h1>
+  <h1>Groups Edit</h1>
   <div>
-    <form name="groupsEdit.groupsEditForm" ng-submit="groupsEdit.update()">
+    <form name="groupsEdit.groupsEditForm" ng-submit="groupsEdit.update()" novalidate>
       <div>
         <label for="groupName">Group Name</label>
-        <input type="text" name="groupName" id="groupName" ng-model="groupsEdit.group.groupName">
+        <input type="text" name="groupName" id="groupName" ng-model="groupsEdit.group.groupName" required>
+      </div>
+      <div class="ng-message-error" ng-messages="groupsEdit.groupsEditForm.groupName.$error" ng-show="(groupsEdit.groupsEditForm.$submitted || groupsEdit.groupsEditForm.groupName.$touched)">
+        <p ng-message="required">Your group name is required.</p>
+      </div>
+      <div>
         <label for="users">Users</label>
         <input type="text" name="users" id="users" ng-model="groupsEdit.group.users">
       </div>

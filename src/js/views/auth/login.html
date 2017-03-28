@@ -1,11 +1,21 @@
 <section class="container">
   <h2>Login</h2>
   <div>
-    <form name="login.loginForm" ng-submit="login.submit()">
-      <label for="email">Email</label>
-      <input type="email" name="email" id="email" ng-model="login.credentials.email">
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" ng-model="login.credentials.password">
+    <form name="login.loginForm" ng-submit="login.submit()" novalidate>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" ng-model="login.credentials.email" required>
+      </div>
+      <div class="ng-message-error" ng-messages="login.loginForm.email.$error" ng-show="(login.loginForm.$submitted || login.loginForm.email.$touched)">
+        <p ng-message="required">Your email is required.</p>
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" ng-model="login.credentials.password" required>
+      </div>
+      <div class="ng-message-error" ng-messages="login.loginForm.password.$error" ng-show="(login.loginForm.$submitted || login.loginForm.password.$touched)">
+        <p ng-message="required">Your password is required.</p>
+      </div>
       <button class="button">Login</button>
     </form>
   </div>

@@ -4,6 +4,7 @@
     <hr>
     <ul ng-repeat="selected in groupsPropsShow.gps.listing">
       <li><img ng-src="{{selected.image_645_430_url}}"></li>
+      <button ng-click="groupsPropsShow.deleteProperty(selected)" ng-if="main.isAuthenticated()" class="deleteproperty">Delete Property</button>
       <hr>
       <h3>Property Info</h3>
       <li class="address"><strong>Address: </strong>{{selected.displayable_address}}</li>
@@ -12,27 +13,31 @@
       <li><strong>Price: </strong>£{{selected.rental_prices.per_month}} ppm</li>
       <li><strong>Property Type: </strong>{{selected.property_type}}</li>
       <hr>
+      <h3>Property Description</h3>
       <li class="description">{{selected.description}}</li>
       <hr>
       <h3>Agency Info</h3>
       <li><strong>Company: </strong>{{selected.agent_name}}</li>
       <li><strong>Contact: </strong>{{selected.agent_phone}}</li>
-      <hr>
-      <button class="button" ng-click="groupsPropsShow.deleteProperty(selected)" ng-if="main.isAuthenticated()">Delete</button>
     </ul>
   </div>
+  <hr>
   <div>
-   <h2>Notes</h2>
-   <ul>
-     <li ng-repeat="note in groupsPropsShow.group.properties[0].notes track by $index">
-
-       <strong>{{ note.createdBy.username }}</strong> - {{ note.text }}</li>
-   </ul>
-
-   <form ng-submit="groupsPropsShow.addNote()" ng-if="main.isAuthenticated()">
-     <label>Add comment</label>
-     <textarea ng-model="groupsPropsShow.newNote.text"></textarea>
-     <button class="button button--full">Comment</button>
-   </form>
+   <h4>Notes</h4>
+   <div>
+     <ul>
+       <li ng-repeat="note in groupsPropsShow.group.properties[0].notes track by $index">
+         <strong>{{ note.createdBy.username }}</strong> - {{ note.text }}
+       <button class="deletecomment">Delete Comment</button></li>
+     </ul>
+   </div>
+   <hr>
+   <div class="container1">
+     <form ng-submit="groupsPropsShow.addNote()" ng-if="main.isAuthenticated()">
+       <label>Add a comment</label><br>
+       <textarea ng-model="groupsPropsShow.newNote.text"></textarea><br>
+       <button class="comment">Leave Comment</button>
+     </form>
+   </div>
  </div>
 </section>
