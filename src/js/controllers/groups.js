@@ -99,7 +99,7 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, $statePara
   vm.addNote = addNote;
 
   function deleteNote(note){
-    console.log('CLICKED');
+    
     GroupPropertyNote
     .delete({ id: vm.group.id, listing_id: vm.listingId, noteId: note.id })
         .$promise
