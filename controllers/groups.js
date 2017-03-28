@@ -108,14 +108,30 @@ function addPropertyNote(req, res, next) {
       const prop = group.properties.find((property) => {
         return property.listingId === req.params.listing_id;
       });
-
       const note = prop.notes.create(req.body);
-
       prop.notes.push(note);
-
       return group.save()
         .then(() => res.json(note));
     })
+    .catch(next);
+}
+function deletePropertyNote(req, res, next) {
+  Group
+    .findById(req.params.id)
+    .exec()
+    .then((group) => {
+      if(!group) return res.notFound();
+      const prop = group.properties.find((property) => {
+        return property.listingId === req.params.listing_id;
+      });
+
+      const note = prop.notes.id(req.params.noteId);
+      console.log(note);
+      note.remove();
+      return group.save()
+        .then(() => res.json(note));
+    })
+    .then(() => res.status(204).end())
     .catch(next);
 }
 
@@ -127,5 +143,6 @@ module.exports = {
   delete: deleteGroup,
   addProperty: addPropertyRoute,
   deleteProperty: deletePropertyRoute,
-  addNote: addPropertyNote
+  addNote: addPropertyNote,
+  deleteNote: deletePropertyNote
 };

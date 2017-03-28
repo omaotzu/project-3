@@ -54,7 +54,6 @@ function GroupsHomeCtrl(Group, $stateParams, $state, $http) {
           vm.selected = response.data;
           console.log(vm.selected);
         });
-
     });
 
   function groupsDelete() {
@@ -77,8 +76,10 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, $statePara
       vm.group = data;
       groupsShowProp();
       vm.prop = vm.group.properties.find(obj => obj.listingId === vm.listingId);
-      console.log(vm.thisProp);
+      // console.log(vm.thisProp);
     });
+
+
 
   function groupsShowProp(){
     $http.get('/api/groups/:id/properties/:listing_id', { params: { id: vm.group.id, listing_id: vm.listingId} })
@@ -91,17 +92,25 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, $statePara
     .save({ id: vm.group.id, listing_id: vm.listingId }, vm.newNote)
     .$promise
     .then((note) => {
-      console.log(vm.prop);
-
       vm.prop.notes.push(note);
       vm.newNote = {};
     });
   }
   vm.addNote = addNote;
 
+  function deleteNote(note){
+    console.log('CLICKED');
+    GroupPropertyNote
+    .delete({ id: vm.group.id, listing_id: vm.listingId, noteId: note.id })
+        .$promise
+        .then(() => {
+          const index = vm.prop.notes.indexOf(note);
+          vm.prop.notes.splice(index, 1);
+        });
+  }
+  vm.deleteNote = deleteNote;
 
-  function deleteProperty(property) {
-    console.log(property);
+  function deleteProperty() {
     GroupProperty
     .delete({ listing_id: vm.listingId, id: vm.group.id })
     .$promise

@@ -44,6 +44,8 @@ router.route('/groups/:id/properties/:listing_id')
 router.route('/groups/:id/properties/:listing_id/notes')
   .post(secureRoute, groups.addNote);
 
+router.route('/groups/:id/properties/:listing_id/notes/:noteId')
+  .delete(secureRoute, groups.deleteNote);
 
 router.route('/login')
   .post(auth.login);
