@@ -23,21 +23,17 @@
   </div>
   <hr>
   <div>
-   <h4>Notes</h4>
-   <div>
-     <ul>
-       <li ng-repeat="note in groupsPropsShow.group.properties[0].notes track by $index">
-         <strong>{{ note.createdBy.username }}</strong> - {{ note.text }}
-       <button class="deletecomment">Delete Comment</button></li>
-     </ul>
-   </div>
-   <hr>
-   <div class="container1">
-     <form ng-submit="groupsPropsShow.addNote()" ng-if="main.isAuthenticated()">
-       <label>Add a comment</label><br>
-       <textarea ng-model="groupsPropsShow.newNote.text"></textarea><br>
-       <button class="comment">Leave Comment</button>
-     </form>
-   </div>
+   <h2>Notes</h2>
+   <ul>
+     <li ng-repeat="note in groupsPropsShow.prop.notes track by $index">
+       <strong>{{ note.createdBy.username }}</strong> - {{ note.text }}
+     <button ng-click="groupsPropsShow.deleteNote(note)">Delete</button></li>
+   </ul>
+
+   <form ng-submit="groupsPropsShow.addNote()" ng-if="main.isAuthenticated()">
+     <label>Add comment</label>
+     <textarea ng-model="groupsPropsShow.newNote.text"></textarea>
+     <button class="button button--full">Comment</button>
+   </form>
  </div>
 </section>

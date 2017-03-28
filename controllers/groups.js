@@ -21,7 +21,7 @@ function createGroup(req, res, next) {
 function showGroup(req, res, next) {
   Group
     .findById(req.params.id)
-    .populate('users')
+    .populate('users properties.notes.createdBy')
     .exec()
     .then((group) => {
       if(!group) return res.notFound();
@@ -97,9 +97,7 @@ function deletePropertyRoute(req, res, next) {
 }
 
 function addPropertyNote(req, res, next) {
-  console.log('USER', req.user);
   req.body.createdBy = req.user;
-  // console.log(req.params.id);
   Group
     .findById(req.params.id)
     .populate('users')
@@ -107,42 +105,35 @@ function addPropertyNote(req, res, next) {
     .then((group) => {
       if(!group) return res.notFound();
 
-
-      // console.log('PROPS', group.properties);
-      // const prop = group.properties[0].id;
       const prop = group.properties.find((property) => {
         return property.listingId === req.params.listing_id;
       });
-      console.log('PROPID', prop);
-      console.log('PARAMS', req.params.id);
-      console.log('LISTINGID', req.params.listing_id);
-
       const note = prop.notes.create(req.body);
-
       prop.notes.push(note);
-
-      console.log('AFTER PROPS', group.properties);
-      // console.log('BODY', req.body);
-
-      // console.log(req.params.listing_id);
-      // const notes = group.properties.notes;
-      // notes.create(req.body);
-      // group.properties.notes.push(req.body);
-
-      // console.log('LISTING', req.params.listing_id);
-      // console.log('EVERYTHING', prop);
-      // prop.notes.push(req.body);
-
       return group.save()
         .then(() => res.json(note));
     })
     .catch(next);
 }
+function deletePropertyNote(req, res, next) {
+  Group
+    .findById(req.params.id)
+    .exec()
+    .then((group) => {
+      if(!group) return res.notFound();
+      const prop = group.properties.find((property) => {
+        return property.listingId === req.params.listing_id;
+      });
 
-
-// function addUsers(req, res, next) {
-//
-// }
+      const note = prop.notes.id(req.params.noteId);
+      console.log(note);
+      note.remove();
+      return group.save()
+        .then(() => res.json(note));
+    })
+    .then(() => res.status(204).end())
+    .catch(next);
+}
 
 module.exports = {
   index: indexGroup,
@@ -152,6 +143,6 @@ module.exports = {
   delete: deleteGroup,
   addProperty: addPropertyRoute,
   deleteProperty: deletePropertyRoute,
-  addNote: addPropertyNote //,
-  //addUsers: addUsers
+  addNote: addPropertyNote,
+  deleteNote: deletePropertyNote
 };
