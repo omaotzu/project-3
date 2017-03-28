@@ -16,9 +16,8 @@ GroupsNewCtrl.$inject = ['Group', 'User', 'filterFilter', '$state', '$auth', '$s
 function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
   const vm = this;
   vm.group = {};
+  vm.group.users = [];
   vm.allUsers = User.query();
-  vm.chosenUsers = [];
-  console.log(vm.allUsers);
 
   function filterUsers() {
     const params = { username: vm.q };
@@ -28,25 +27,37 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
   $scope.$watch(() => vm.q, filterUsers);
 
   function addUsers(user) {
-    console.log(vm.group);
-    console.log(user);
-    if(!vm.chosenUsers.includes(user)) vm.chosenUsers.push(user);
+    console.log('VM GROUP', vm.group);
+    console.log('USER', user);
+    console.log('VM GROUP USERS', vm.group.users);
+    if(!vm.group.users.includes(user)) vm.group.users.push(user.id);
     vm.filtered = {};
-    console.log('CHOSEN USERS ARRAY', vm.chosenUsers);
+    console.log('TO ADD CHOSEN USERS',vm.group.users);
+
   }
   vm.addUsers = addUsers;
 
 
   function groupsCreate() {
-    if(vm.groupsNewForm.$valid) {
-      vm.group.users = $auth.getPayload().userId;
-      vm.user = $auth.getPayload().userId;
+    // if(vm.groupsNewForm.$valid) {
+    console.log('USER ID LOGGED IN', $auth.getPayload().userId);
+      // User
+      //   .get({ id: $auth.getPayload().userId })
+      //   .$promise
+      //   .then((response) => {
+      //     vm.group.user.push(response);
+      //     console.log('RESPONSE', response);
+      //   });
+
+
+      // vm.group.users = $auth.getPayload().userId;
+      // vm.user = $auth.getPayload().userId;
 
       Group
         .save(vm.group)
         .$promise
         .then(() => $state.go('groupsIndex'));
-    }
+    // }
   }
   vm.create = groupsCreate;
 }

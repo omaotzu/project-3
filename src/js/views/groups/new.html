@@ -17,9 +17,14 @@
           </div>
         </div>
       </div>
-      <div>
-        <input type="text" ng-model="groupsNew.chosenUsers" value="{{ groupsNew.chosenUsers }}">
+      <br>
+      <p>Users To Add:</p>
+      <div ng-repeat="user in groupsNew.group.users">
+        {{ user.username }}
       </div>
+      <p>
+        <input type="text" ng-model="groupsNew.group.users">
+      </p>
 
       <button class="button">Create</button>
     </form>
