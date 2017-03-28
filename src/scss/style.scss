@@ -125,6 +125,13 @@ section {
   margin-top: 80px;
   text-align: center;
   div {
+    h4 {
+      font-size: 25px;
+      text-transform: uppercase;
+    }
+    a {
+      text-transform: uppercase;
+    }
     .results {
       margin-top: 15px;
     }
@@ -152,6 +159,10 @@ section {
         padding: 3px 240px;
         text-align: center;
       }
+      textarea {
+        width: 400px;
+        height: 50px;
+      }
     }
     button {
       padding: 10px;
@@ -159,6 +170,8 @@ section {
       text-transform: uppercase;
       margin-top: 15px;
       font-weight: 600;
+      background-color: white;
+      border: 1px solid black;
       outline: none;
       &:hover {
         background-color: lightgreen;
@@ -174,9 +187,33 @@ section {
       &.search {
         padding: 7px 290px;
       }
+      &.comment {
+        padding: 5px 130px;
+      }
+      &.deletecomment {
+        margin: 0;
+        &:hover {
+          background-color: rgb(255, 91, 91);
+          transition: all 1.5s ease;
+          outline: none;
+        }
+      }
+      &.deleteproperty {
+        &:hover {
+          background-color: rgb(255, 234, 91);
+          transition: all 1.5s ease;
+          outline: none;
+        }
+      }
     }
     ul {
       li {
+        button {
+          padding: 5px;
+          font-size: 12px;
+          background-color: white;
+          border: 1px solid black;
+        }
         padding: 10px;
         &.address {
           text-transform: uppercase;
@@ -184,7 +221,7 @@ section {
         &.description {
           text-align: justify;
           margin: 0 100px;
-          font-size: 12px;
+          font-size: 15px;
         }
         strong {
           font-weight: 900;
@@ -201,6 +238,12 @@ section {
     .listings {
       text-transform: uppercase;
     }
+    div {
+      p {
+          color: red;
+          animation: expandOpen 1s;
+        }
+    }
   }
 }
 
@@ -209,4 +252,20 @@ section {
   padding-left: 50px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.container1 {
+  padding-right: 200px;
+  padding-left: 200px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@keyframes expandOpen {
+	0% {
+		transform: scale(0.7);
+	}
+	100% {
+		transform: scale(1);
+	}
 }

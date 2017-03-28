@@ -85,7 +85,6 @@ function GroupsHomeCtrl(Group, $stateParams, $state, $http) {
           vm.selected = response.data;
           console.log(vm.selected);
         });
-
     });
 
   function groupsDelete() {
@@ -100,16 +99,6 @@ function GroupsHomeCtrl(Group, $stateParams, $state, $http) {
 GroupsPropsShowCtrl.$inject = ['Group', 'GroupProperty','GroupPropertyNote', '$stateParams', '$state', '$http'];
 function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, $stateParams, $state, $http) {
   const vm = this;
-
-  // GroupProperty.get($stateParams)
-  // .$promise
-  // .then((data) => {
-  //   console.log(data);
-  // });
-  // //
-  // // console.log(vm.prop);
-  // //
-  // //
   vm.listingId = $stateParams.listing_id;
 
   Group.get($stateParams)
@@ -117,7 +106,11 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, $statePara
     .then((data) => {
       vm.group = data;
       groupsShowProp();
+      vm.prop = vm.group.properties.find(obj => obj.listingId === vm.listingId);
+      // console.log(vm.thisProp);
     });
+
+
 
   function groupsShowProp(){
     $http.get('/api/groups/:id/properties/:listing_id', { params: { id: vm.group.id, listing_id: vm.listingId} })
@@ -130,17 +123,25 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, $statePara
     .save({ id: vm.group.id, listing_id: vm.listingId }, vm.newNote)
     .$promise
     .then((note) => {
-
-      console.log(vm.group.properties);
-      vm.group.properties.notes.push(note);
+      vm.prop.notes.push(note);
       vm.newNote = {};
     });
   }
   vm.addNote = addNote;
 
+  function deleteNote(note){
+    
+    GroupPropertyNote
+    .delete({ id: vm.group.id, listing_id: vm.listingId, noteId: note.id })
+        .$promise
+        .then(() => {
+          const index = vm.prop.notes.indexOf(note);
+          vm.prop.notes.splice(index, 1);
+        });
+  }
+  vm.deleteNote = deleteNote;
 
-  function deleteProperty(property) {
-    console.log(property);
+  function deleteProperty() {
     GroupProperty
     .delete({ listing_id: vm.listingId, id: vm.group.id })
     .$promise

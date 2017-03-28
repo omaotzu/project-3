@@ -1,10 +1,13 @@
 <section class="container">
   <h1>Groups New</h1>
   <div>
-    <form name="groupsNew.groupsNewForm" ng-submit="groupsNew.create()">
+    <form name="groupsNew.groupsNewForm" ng-submit="groupsNew.create()" novalidate>
       <div>
         <label for="groupName">Group Name</label>
-        <input type="text" name="groupName" id="groupName" ng-model="groupsNew.group.groupName">
+        <input type="text" name="groupName" id="groupName" ng-model="groupsNew.group.groupName" required>
+      </div>
+      <div class="ng-message-error" ng-messages="groupsNew.groupsNewForm.username.$error" ng-show="(groupsNew.groupsNewForm.$submitted || groupsNew.groupsNewForm.username.$touched)">
+        <p ng-message="required">Your username is required.</p>
       </div>
       <div>
         <input type="text" class="search" name="groupsNew.groupsSearchUsers" ng-model="groupsNew.q" placeholder="Search for people...">

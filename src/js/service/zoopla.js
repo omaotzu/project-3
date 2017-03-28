@@ -11,7 +11,7 @@
 //   $http.get('/api/properties/:listing_id', {params: vm.listing_id})
 //     .then((response) => {
 //       console.log('SEARCHING');
-//       vm.selected = response.data;
+//       // vm.selected = response.data;x§
 //       console.log(vm.selected);
 //     });
 //
