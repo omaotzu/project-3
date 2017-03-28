@@ -23,17 +23,31 @@
   </div>
   <hr>
   <div>
+   <h2>Images</h2>
+   <ul>
+     <li ng-repeat="image in groupsPropsShow.prop.images track by $index">
+       <strong>{{ image.createdBy.username }}</strong> <img ng-src="{{ image.imageSRC }}">
+     <button ng-click="groupsPropsShow.deleteImage(image)">Delete</button>
+     </li>
+   </ul>
+   <form ng-submit="groupsPropsShow.addImage()" ng-if="main.isAuthenticated()">
+     <label>Add image</label>
+     <input type="file" base64 name="base64" ng-model="groupsPropsShow.newImage.base64">
+     <button class="button button--full">Add Image</button>
+   </form>
+
+
    <h2>Notes</h2>
    <ul>
      <li ng-repeat="note in groupsPropsShow.prop.notes track by $index">
        <strong>{{ note.createdBy.username }}</strong> - {{ note.text }}
-     <button ng-click="groupsPropsShow.deleteNote(note)">Delete</button></li>
+     </li>
    </ul>
-
    <form ng-submit="groupsPropsShow.addNote()" ng-if="main.isAuthenticated()">
      <label>Add comment</label>
      <textarea ng-model="groupsPropsShow.newNote.text"></textarea>
-     <button class="button button--full">Comment</button>
+     <button class="button button--full">Add Comment</button>
    </form>
+
  </div>
 </section>

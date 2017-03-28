@@ -134,6 +134,47 @@ function deletePropertyNote(req, res, next) {
     .catch(next);
 }
 
+function addPropertyImage(req, res, next) {
+  req.body.createdBy = req.user;
+  if(req.file) req.body.file = req.file.filename;
+  Group
+    .findById(req.params.id)
+    .populate('users')
+    .exec()
+    .then((group) => {
+      if(!group) return res.notFound();
+
+      const prop = group.properties.find((property) => {
+        return property.listingId === req.params.listing_id;
+      });
+      const image = prop.images.create(req.body);
+      prop.images.push(image);
+      return group.save()
+        .then(() => res.json(image));
+    })
+    .catch(next);
+}
+
+function deletePropertyImage(req, res, next) {
+  Group
+    .findById(req.params.id)
+    .exec()
+    .then((group) => {
+      if(!group) return res.notFound();
+      const prop = group.properties.find((property) => {
+        return property.listingId === req.params.listing_id;
+      });
+
+      const image = prop.images.id(req.params.imageId);
+      // console.log(note);
+      image.remove();
+      return group.save()
+        .then(() => res.json(image));
+    })
+    .then(() => res.status(204).end())
+    .catch(next);
+}
+
 module.exports = {
   index: indexGroup,
   create: createGroup,
@@ -143,5 +184,7 @@ module.exports = {
   addProperty: addPropertyRoute,
   deleteProperty: deletePropertyRoute,
   addNote: addPropertyNote,
-  deleteNote: deletePropertyNote
+  deleteNote: deletePropertyNote,
+  addImage: addPropertyImage,
+  deleteImage: deletePropertyImage
 };

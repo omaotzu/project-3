@@ -6,6 +6,9 @@ module.exports = {
     // redirect_uri: 'http://localhost:7000/api/oauth/github',
     clientId: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    scope: 'user:email'
+    scope: 'user:email',
+    getLoginUrl(){
+      return `${this.loginURL}?client_id=${this.clientId}&scope=${this.scope}`;
+    }
   }
 };

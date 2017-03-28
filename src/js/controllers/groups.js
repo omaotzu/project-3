@@ -53,10 +53,10 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
       // vm.group.users = $auth.getPayload().userId;
       // vm.user = $auth.getPayload().userId;
 
-      Group
-        .save(vm.group)
-        .$promise
-        .then(() => $state.go('groupsIndex'));
+    Group
+      .save(vm.group)
+      .$promise
+      .then(() => $state.go('groupsIndex'));
     // }
   }
   vm.create = groupsCreate;
@@ -96,8 +96,8 @@ function GroupsHomeCtrl(Group, $stateParams, $state, $http) {
 
 }
 
-GroupsPropsShowCtrl.$inject = ['Group', 'GroupProperty','GroupPropertyNote', '$stateParams', '$state', '$http'];
-function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, $stateParams, $state, $http) {
+GroupsPropsShowCtrl.$inject = ['Group', 'GroupProperty','GroupPropertyNote', 'GroupPropertyImage', '$stateParams', '$state', '$http'];
+function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPropertyImage, $stateParams, $state, $http) {
   const vm = this;
   vm.listingId = $stateParams.listing_id;
 
@@ -130,7 +130,7 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, $statePara
   vm.addNote = addNote;
 
   function deleteNote(note){
-    
+
     GroupPropertyNote
     .delete({ id: vm.group.id, listing_id: vm.listingId, noteId: note.id })
         .$promise
@@ -140,6 +140,29 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, $statePara
         });
   }
   vm.deleteNote = deleteNote;
+
+  function addImage() {
+    GroupPropertyImage
+    .save({ id: vm.group.id, listing_id: vm.listingId }, vm.newImage)
+    .$promise
+    .then((image) => {
+      vm.prop.images.push(image);
+      vm.newImage = {};
+    });
+  }
+  vm.addImage = addImage;
+
+  function deleteImage(image){
+
+    GroupPropertyImage
+    .delete({ id: vm.group.id, listing_id: vm.listingId, imageId: image.id })
+        .$promise
+        .then(() => {
+          const index = vm.prop.images.indexOf(image);
+          vm.prop.images.splice(index, 1);
+        });
+  }
+  vm.deleteImage = deleteImage;
 
   function deleteProperty() {
     GroupProperty

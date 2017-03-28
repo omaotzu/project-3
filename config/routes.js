@@ -47,11 +47,11 @@ router.route('/groups/:id/properties/:listing_id/notes')
 router.route('/groups/:id/properties/:listing_id/notes/:noteId')
   .delete(secureRoute, groups.deleteNote);
 
-// router.route('/groups/:id/properties/:listing_id/images')
-  // .post(secureRoute, imageUpload, groups.addImage);
+router.route('/groups/:id/properties/:listing_id/images')
+  .post(secureRoute, imageUpload, groups.addImage);
 
-// router.route('/groups/:id/properties/:listing_id/images/:imageId')
-//   .delete(secureRoute, groups.deleteImage);
+router.route('/groups/:id/properties/:listing_id/images/:imageId')
+  .delete(secureRoute, groups.deleteImage);
 
 router.route('/login')
   .post(auth.login);
