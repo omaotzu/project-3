@@ -7,12 +7,18 @@
         <input type="text" name="groupName" id="groupName" ng-model="groupsNew.group.groupName">
       </div>
       <div>
-        <input type="text" class="search" name="groupsNew.groupsSearchUsers" ng-model="groupsNew.q" placeholder="Search...">
+        <input type="text" class="search" name="groupsNew.groupsSearchUsers" ng-model="groupsNew.q" placeholder="Search for people...">
       </div>
       <div ng-repeat="user in groupsNew.filtered">
-        <div ng-click="groupsNew.addUser(user)">
-          {{ user.username }}
+        <div ng-click="groupsNew.addUsers(user)" class="userSearchResults">
+          <img ng-src="{{ user.profileImageSRC }}" alt="{{ user.username }}">
+          <div>
+            {{ user.username }}
+          </div>
         </div>
+      </div>
+      <div>
+        <input type="text" ng-model="groupsNew.chosenUsers" value="{{ groupsNew.chosenUsers }}">
       </div>
 
       <button class="button">Create</button>

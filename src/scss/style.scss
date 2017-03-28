@@ -132,6 +132,12 @@ section {
       max-width: 60%;
       margin: 10px;
     }
+    .userSearchResults {
+      display: inline-block;
+      &:hover {
+        border: 1px dashed #000;
+      }
+    }
     form {
       label {
         text-transform: uppercase;

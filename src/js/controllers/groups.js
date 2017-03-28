@@ -17,6 +17,7 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
   const vm = this;
   vm.group = {};
   vm.allUsers = User.query();
+  vm.chosenUsers = [];
   console.log(vm.allUsers);
 
   function filterUsers() {
@@ -25,6 +26,16 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
   }
 
   $scope.$watch(() => vm.q, filterUsers);
+
+  function addUsers(user) {
+    console.log(vm.group);
+    console.log(user);
+    if(!vm.chosenUsers.includes(user)) vm.chosenUsers.push(user);
+    vm.filtered = {};
+    console.log('CHOSEN USERS ARRAY', vm.chosenUsers);
+  }
+  vm.addUsers = addUsers;
+
 
   function groupsCreate() {
     if(vm.groupsNewForm.$valid) {
