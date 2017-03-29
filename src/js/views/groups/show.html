@@ -41,6 +41,7 @@
    <ul>
      <li ng-repeat="note in groupsPropsShow.prop.notes track by $index">
        <strong>{{ note.createdBy.username }}</strong> - {{ note.text }}
+       <button ng-click="groupsPropsShow.deleteNote(note)">Delete</button>
      </li>
    </ul>
    <form ng-submit="groupsPropsShow.addNote()" ng-if="main.isAuthenticated()">

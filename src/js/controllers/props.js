@@ -28,7 +28,7 @@ function PropsShowCtrl(User, GroupProperty, $http, $stateParams){
   showProp();
 
   function showProp(){
-    $http.get('/api/properties/:listing_id', { params: { listing_id: vm.listingId } })
+    $http.get('/api/properties/:listingId', { params: { listingId: vm.listingId } })
       .then((response) => {
         vm.selected = response.data;
         // console.log(vm.selected);

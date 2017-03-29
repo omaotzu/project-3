@@ -29,7 +29,7 @@ function selectedProp(req, res) {
     method: 'GET',
     url: 'http://api.zoopla.co.uk/api/v1/property_listings.json',
     qs: {
-      listing_id: req.query.listing_id.split(','),
+      listing_id: req.query.listingId.split(','),
       api_key: process.env.ZOOPLA_API_KEY
     },
     qsStringifyOptions: { arrayFormat: 'repeat' }, // talk about this in your presentation! :D

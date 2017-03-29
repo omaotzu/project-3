@@ -10,7 +10,7 @@ const zooplas = require('../controllers/zooplas');
 router.route('/properties')
   .get(zooplas.properties);
 
-router.route('/properties/:listing_id')
+router.route('/properties/:listingId')
   .get(zooplas.selectedProp);
 
 router.route('/users/')
@@ -37,20 +37,20 @@ router.route('/groups/:id')
 
 
 
-router.route('/groups/:id/properties/:listing_id')
+router.route('/groups/:id/properties/:listingId')
   .get(zooplas.selectedProp)
   .delete(secureRoute, groups.deleteProperty);
 
-router.route('/groups/:id/properties/:listing_id/notes')
+router.route('/groups/:id/properties/:listingId/notes')
   .post(secureRoute, groups.addNote);
 
-router.route('/groups/:id/properties/:listing_id/notes/:noteId')
+router.route('/groups/:id/properties/:listingId/notes/:noteId')
   .delete(secureRoute, groups.deleteNote);
 
-router.route('/groups/:id/properties/:listing_id/images')
+router.route('/groups/:id/properties/:listingId/images')
   .post(secureRoute, imageUpload, groups.addImage);
 
-router.route('/groups/:id/properties/:listing_id/images/:imageId')
+router.route('/groups/:id/properties/:listingId/images/:imageId')
   .delete(secureRoute, groups.deleteImage);
 
 router.route('/login')

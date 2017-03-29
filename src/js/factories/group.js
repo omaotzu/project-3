@@ -14,21 +14,21 @@ function Group($resource) {
 
 GroupProperty.$inject = ['$resource'];
 function GroupProperty($resource) {
-  return new $resource('/api/groups/:id/properties/:listing_id', { id: '@id' }, {
+  return new $resource('/api/groups/:id/properties/:listingId', { id: '@id' }, {
     update: { method: 'PUT' }
   });
 }
 
 GroupPropertyImage.$inject = ['$resource'];
 function GroupPropertyImage($resource) {
-  return new $resource('/api/groups/:id/properties/:listing_id/images/:imageId', { id: '@id' }, {
+  return new $resource('/api/groups/:id/properties/:listingId/images/:imageId', { id: '@id' }, {
     update: { method: 'PUT' }
   });
 }
 
 GroupPropertyNote.$inject = ['$resource'];
 function GroupPropertyNote($resource) {
-  return new $resource('/api/groups/:id/properties/:listing_id/notes/:noteId', { id: '@id' }, {
+  return new $resource('/api/groups/:id/properties/:listingId/notes/:noteId', { id: '@id' }, {
     update: { method: 'PUT' }
   });
 }
