@@ -1,24 +1,27 @@
-<section class="container">
-  <div>
-    <h2> Props Show Page</h2>
-    <hr>
-    <ul ng-repeat="selected in propsShow.selected.listing ">
-      <li><img ng-src="{{selected.image_645_430_url}}"></li>
+<section class="propTile">
+  <div class="modal-header">
+    <button type="button" ng-click="propsShow.closeModal()" class="close" aria-label="Close"><span aria-hidden="true" >&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <ul>
+      <li><img ng-src="{{propsShow.selected.image_645_430_url}}"></li>
       <hr>
       <h3>Property Info</h3>
-      <li class="address"><strong>Address: </strong>{{selected.displayable_address}}</li>
-      <li><strong>Bedrooms: </strong>{{selected.num_bedrooms}}</li>
-      <li><strong>Bathrooms: </strong>{{selected.num_bathrooms}}</li>
-      <li><strong>Price: </strong>£{{selected.rental_prices.per_month}} ppm</li>
-      <li><strong>Property Type: </strong>{{selected.property_type}}</li>
+      <li class="address"><strong>Address: </strong>{{propsShow.selected.displayable_address}}</li>
+      <li><strong>Bedrooms: </strong>{{propsShow.selected.num_bedrooms}}</li>
+      <li><strong>Bathrooms: </strong>{{propsShow.selected.num_bathrooms}}</li>
+      <li><strong>Price: </strong>£{{propsShow.selected.rental_prices.per_month}} ppm</li>
+      <li><strong>Property Type: </strong>{{propsShow.selected.property_type}}</li>
       <hr>
-      <li class="description">{{selected.description}}</li>
+      <li class="description">{{propsShow.selected.description}}</li>
       <hr>
       <h3>Agency Info</h3>
-      <li><strong>Company: </strong>{{selected.agent_name}}</li>
-      <li><strong>Contact: </strong>{{selected.agent_phone}}</li>
-      <hr>
-      <button ng-click="propsShow.store()">Store Property</button>
+      <li><strong>Company: </strong>{{propsShow.selected.agent_name}}</li>
+      <li><strong>Contact: </strong>{{propsShow.selected.agent_phone}}</li>
     </ul>
+  </div>
+  <div class="modal-footer middle">
+    <button ng-click="propsShow.store(selected); propsShow.closeModal()" class="store">Store Property</button>
   </div>
 </section>
