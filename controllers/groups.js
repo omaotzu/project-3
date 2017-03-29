@@ -1,5 +1,5 @@
 const Group = require('../models/group');
-const User = require('../models/user');
+// const User = require('../models/user');
 
 function indexGroup(req, res, next) {
   Group
