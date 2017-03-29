@@ -9,10 +9,30 @@
       <div class="ng-message-error" ng-messages="groupsEdit.groupsEditForm.groupName.$error" ng-show="(groupsEdit.groupsEditForm.$submitted || groupsEdit.groupsEditForm.groupName.$touched)">
         <p ng-message="required">Your group name is required.</p>
       </div>
-      <div>
-        <label for="users">Users</label>
-        <input type="text" name="users" id="users" ng-model="groupsEdit.group.users">
+
+      <div ng-repeat="user in groupsEdit.groupUsers">
+        <img ng-src="{{ user.profileImageSRC }}">
+        <h1>{{ user.username }}</h1>
       </div>
+      <div>
+        <input type="text" class="search" name="groupsEdit.groupsSearchUsers" ng-model="groupsEdit.q" placeholder="Add more people...">
+      </div>
+      <div ng-repeat="user in groupsEdit.filtered" ng-show="groupsEdit.q.length > 0">
+        <div ng-click="groupsEdit.addUser(user)" class="userSearchResults">
+          <img ng-src="{{ user.profileImageSRC }}" alt="{{ user.username }}">
+          <div>
+            {{ user.username }}
+          </div>
+        </div>
+      </div>
+      <br>
+      <p>Users To Add:</p>
+      <div ng-repeat="user in groupsNew.chosenUsers">
+        {{ user.username }}
+        <img ng-src="{{ user.profileImageSRC }}">
+        <a href="#" ng-click="groupsNew.removeUser(user)">x</a>
+      </div>
+
       <button class="button">Update</button>
     </form>
   </div>

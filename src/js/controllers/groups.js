@@ -174,6 +174,14 @@ function GroupsEditCtrl(Group, $stateParams, $state) {
   const vm = this;
   vm.group = Group.get($stateParams);
 
+  Group
+    .get($stateParams)
+    .$promise
+    .then((response) => {
+      vm.groupUsers = response.users;
+      console.log(vm.groupUsers);
+    });
+
   function groupsUpdate() {
     vm.group
       .$update()
