@@ -17,7 +17,9 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
   const vm = this;
   vm.group = {};
   vm.group.users = [];
+  vm.chosenUsers = [];
   vm.allUsers = User.query();
+  const authUserId = $auth.getPayload().userId;
 
   function filterUsers() {
     const params = { username: vm.q };
@@ -26,38 +28,30 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
 
   $scope.$watch(() => vm.q, filterUsers);
 
-  function addUsers(user) {
-    console.log('VM GROUP', vm.group);
-    console.log('USER', user);
-    console.log('VM GROUP USERS', vm.group.users);
-    if(!vm.group.users.includes(user)) vm.group.users.push(user.id);
+  function addUser(user) {
+    if(!vm.group.users.includes(user.id) && user.id !== authUserId) vm.group.users.push(user.id);
+    if(!vm.chosenUsers.includes(user) && user.id !== authUserId) vm.chosenUsers.push(user);
     vm.filtered = {};
-    console.log('TO ADD CHOSEN USERS',vm.group.users);
-
   }
-  vm.addUsers = addUsers;
+  vm.addUser = addUser;
 
+  function removeUser(user) {
+    const index = vm.chosenUsers.indexOf(user);
+    vm.group.users.splice(index, 1);
+    vm.chosenUsers.splice(index, 1);
+  }
+  vm.removeUser = removeUser;
 
   function groupsCreate() {
-    // if(vm.groupsNewForm.$valid) {
-    console.log('USER ID LOGGED IN', $auth.getPayload().userId);
-      // User
-      //   .get({ id: $auth.getPayload().userId })
-      //   .$promise
-      //   .then((response) => {
-      //     vm.group.user.push(response);
-      //     console.log('RESPONSE', response);
-      //   });
-
-
-      // vm.group.users = $auth.getPayload().userId;
-      // vm.user = $auth.getPayload().userId;
-
-    Group
-      .save(vm.group)
-      .$promise
-      .then(() => $state.go('groupsIndex'));
-    // }
+    if(vm.groupsNewForm.$valid) {
+      vm.chosenUsers = [];
+      console.log('USER ID LOGGED IN', $auth.getPayload().userId);
+      if(!vm.group.users.includes(authUserId)) vm.group.users.push(authUserId);
+      Group
+        .save(vm.group)
+        .$promise
+        .then(() => $state.go('groupsIndex'));
+    }
   }
   vm.create = groupsCreate;
 }
@@ -80,7 +74,7 @@ function GroupsHomeCtrl(Group, $stateParams, $state, $http) {
 
       ids = ids.join(',');
 
-      $http.get('/api/groups/:id/properties', { params: { id: vm.group.id, listingId: ids } })
+      if(ids) $http.get('/api/groups/:id/properties', { params: { id: vm.group.id, listing_id: ids } })
         .then((response) => {
           vm.selected = response.data;
           console.log(vm.selected);
