@@ -19,6 +19,7 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
   vm.group.users = [];
   vm.chosenUsers = [];
   vm.allUsers = User.query();
+  const authUserId = $auth.getPayload().userId;
 
   function filterUsers() {
     const params = { username: vm.q };
@@ -28,32 +29,24 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
   $scope.$watch(() => vm.q, filterUsers);
 
   function addUser(user) {
-    console.log('VM GROUP', vm.group);
-    console.log('USER', user);
-    console.log('VM GROUP USERS', vm.group.users);
-    if(!vm.group.users.includes(user.id)) vm.group.users.push(user.id);
-    if(!vm.chosenUsers.includes(user)) vm.chosenUsers.push(user);
+    if(!vm.group.users.includes(user.id) && user.id !== authUserId) vm.group.users.push(user.id);
+    if(!vm.chosenUsers.includes(user) && user.id !== authUserId) vm.chosenUsers.push(user);
     vm.filtered = {};
-    console.log('TO ADD CHOSEN USERS', vm.group.users);
-
   }
   vm.addUser = addUser;
 
   function removeUser(user) {
-    console.log(user);
-    vm.group.users.splice(user, 1);
-    console.log(vm.group.users);
-    vm.chosenUsers.splice(user, 1);
-    console.log(vm.chosenUsers);
+    const index = vm.chosenUsers.indexOf(user);
+    vm.group.users.splice(index, 1);
+    vm.chosenUsers.splice(index, 1);
   }
   vm.removeUser = removeUser;
 
   function groupsCreate() {
-    if(vm.groupsNewForm.$valid) {
+    if(vm.groupsNewForm.$vlid) {
       vm.chosenUsers = [];
       console.log('USER ID LOGGED IN', $auth.getPayload().userId);
-      const currentUserId = $auth.getPayload().userId;
-      if(!vm.group.users.includes(currentUserId)) vm.group.users.push(currentUserId);
+      if(!vm.group.users.includes(authUserId)) vm.group.users.push(authUserId);
       Group
         .save(vm.group)
         .$promise

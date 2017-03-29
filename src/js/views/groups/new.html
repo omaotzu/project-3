@@ -12,7 +12,7 @@
       <div>
         <input type="text" class="search" name="groupsNew.groupsSearchUsers" ng-model="groupsNew.q" placeholder="Search for people...">
       </div>
-      <div ng-repeat="user in groupsNew.filtered">
+      <div ng-repeat="user in groupsNew.filtered" ng-show="groupsNew.q.length > 0">
         <div ng-click="groupsNew.addUser(user)" class="userSearchResults">
           <img ng-src="{{ user.profileImageSRC }}" alt="{{ user.username }}">
           <div>
@@ -25,7 +25,7 @@
       <div ng-repeat="user in groupsNew.chosenUsers">
         {{ user.username }}
         <img ng-src="{{ user.profileImageSRC }}">
-        <button ng-click="groupsNew.removeUser(user)">X</button>
+        <a href="#" ng-click="groupsNew.removeUser(user)">x</a>
       </div>
 
       <button class="button">Create</button>
