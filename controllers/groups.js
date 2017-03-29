@@ -83,7 +83,7 @@ function deletePropertyRoute(req, res, next) {
       if(!group) return res.notFound();
 
       const prop = group.properties.find((property) => {
-        return property.listingId === req.params.listing_id;
+        return property.listingId === req.params.listingId;
       });
 
       prop.remove();
@@ -105,7 +105,7 @@ function addPropertyNote(req, res, next) {
       if(!group) return res.notFound();
 
       const prop = group.properties.find((property) => {
-        return property.listingId === req.params.listing_id;
+        return property.listingId === req.params.listingId;
       });
       const note = prop.notes.create(req.body);
       prop.notes.push(note);
@@ -121,7 +121,7 @@ function deletePropertyNote(req, res, next) {
     .then((group) => {
       if(!group) return res.notFound();
       const prop = group.properties.find((property) => {
-        return property.listingId === req.params.listing_id;
+        return property.listingId === req.params.listingId;
       });
 
       const note = prop.notes.id(req.params.noteId);
@@ -145,7 +145,7 @@ function addPropertyImage(req, res, next) {
       if(!group) return res.notFound();
 
       const prop = group.properties.find((property) => {
-        return property.listingId === req.params.listing_id;
+        return property.listingId === req.params.listingId;
       });
       const image = prop.images.create(req.body);
       prop.images.push(image);
@@ -162,7 +162,7 @@ function deletePropertyImage(req, res, next) {
     .then((group) => {
       if(!group) return res.notFound();
       const prop = group.properties.find((property) => {
-        return property.listingId === req.params.listing_id;
+        return property.listingId === req.params.listingId;
       });
 
       const image = prop.images.id(req.params.imageId);

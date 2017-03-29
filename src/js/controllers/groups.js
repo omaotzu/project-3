@@ -80,7 +80,7 @@ function GroupsHomeCtrl(Group, $stateParams, $state, $http) {
 
       ids = ids.join(',');
 
-      $http.get('/api/groups/:id/properties', { params: { id: vm.group.id, listing_id: ids } })
+      $http.get('/api/groups/:id/properties', { params: { id: vm.group.id, listingId: ids } })
         .then((response) => {
           vm.selected = response.data;
           console.log(vm.selected);
@@ -100,7 +100,7 @@ GroupsPropsShowCtrl.$inject = ['Group', 'GroupProperty','GroupPropertyNote', 'Gr
 function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPropertyImage, $stateParams, $state, $http) {
   const vm = this;
   vm.listingId = $stateParams.listing_id;
-
+  console.log($stateParams);
   Group.get($stateParams)
     .$promise
     .then((data) => {
@@ -113,14 +113,14 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPrope
 
 
   function groupsShowProp(){
-    $http.get('/api/groups/:id/properties/:listing_id', { params: { id: vm.group.id, listing_id: vm.listingId} })
+    $http.get('/api/groups/:id/properties/:listingId', { params: { id: vm.group.id, listingId: vm.listingId} })
       .then((response) => {
         vm.gps = response.data;
       });
   }
   function addNote() {
     GroupPropertyNote
-    .save({ id: vm.group.id, listing_id: vm.listingId }, vm.newNote)
+    .save({ id: vm.group.id, listingId: vm.listingId }, vm.newNote)
     .$promise
     .then((note) => {
       vm.prop.notes.push(note);
@@ -132,7 +132,7 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPrope
   function deleteNote(note){
 
     GroupPropertyNote
-    .delete({ id: vm.group.id, listing_id: vm.listingId, noteId: note.id })
+    .delete({ id: vm.group.id, listingId: vm.listingId, noteId: note.id })
         .$promise
         .then(() => {
           const index = vm.prop.notes.indexOf(note);
@@ -143,7 +143,7 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPrope
 
   function addImage() {
     GroupPropertyImage
-    .save({ id: vm.group.id, listing_id: vm.listingId }, vm.newImage)
+    .save({ id: vm.group.id, listingId: vm.listingId }, vm.newImage)
     .$promise
     .then((image) => {
       vm.prop.images.push(image);
@@ -155,7 +155,7 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPrope
   function deleteImage(image){
 
     GroupPropertyImage
-    .delete({ id: vm.group.id, listing_id: vm.listingId, imageId: image.id })
+    .delete({ id: vm.group.id, listingId: vm.listingId, imageId: image.id })
         .$promise
         .then(() => {
           const index = vm.prop.images.indexOf(image);
@@ -166,7 +166,7 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPrope
 
   function deleteProperty() {
     GroupProperty
-    .delete({ listing_id: vm.listingId, id: vm.group.id })
+    .delete({ listingId: vm.listingId, id: vm.group.id })
     .$promise
     .then(() => {
       $state.go('groupsHome', { id: vm.group.id });
