@@ -39,25 +39,15 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
 
 
   function groupsCreate() {
-    // if(vm.groupsNewForm.$valid) {
-    console.log('USER ID LOGGED IN', $auth.getPayload().userId);
-      // User
-      //   .get({ id: $auth.getPayload().userId })
-      //   .$promise
-      //   .then((response) => {
-      //     vm.group.user.push(response);
-      //     console.log('RESPONSE', response);
-      //   });
-
-
-      // vm.group.users = $auth.getPayload().userId;
-      // vm.user = $auth.getPayload().userId;
-
-    Group
-      .save(vm.group)
-      .$promise
-      .then(() => $state.go('groupsIndex'));
-    // }
+    if(vm.groupsNewForm.$valid) {
+      console.log('USER ID LOGGED IN', $auth.getPayload().userId);
+      const currentUserId = $auth.getPayload().userId;
+      if(!vm.group.users.includes(currentUserId)) vm.group.users.push(currentUserId);
+      Group
+        .save(vm.group)
+        .$promise
+        .then(() => $state.go('groupsIndex'));
+    }
   }
   vm.create = groupsCreate;
 }
@@ -80,7 +70,7 @@ function GroupsHomeCtrl(Group, $stateParams, $state, $http) {
 
       ids = ids.join(',');
 
-      $http.get('/api/groups/:id/properties', { params: { id: vm.group.id, listing_id: ids } })
+      if(ids) $http.get('/api/groups/:id/properties', { params: { id: vm.group.id, listing_id: ids } })
         .then((response) => {
           vm.selected = response.data;
           console.log(vm.selected);
