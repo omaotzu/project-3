@@ -36,7 +36,7 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
   vm.addUser = addUser;
 
   function removeUser(user) {
-    const index = vm.chosenUsers.indexOf(user);
+    const index = vm.group.users.indexOf(user);
     vm.group.users.splice(index, 1);
     vm.chosenUsers.splice(index, 1);
   }
@@ -45,7 +45,6 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
   function groupsCreate() {
     if(vm.groupsNewForm.$valid) {
       vm.chosenUsers = [];
-      console.log('USER ID LOGGED IN', $auth.getPayload().userId);
       if(!vm.group.users.includes(authUserId)) vm.group.users.push(authUserId);
       Group
         .save(vm.group)
@@ -66,15 +65,15 @@ function GroupsHomeCtrl(Group, $stateParams, $state, $http) {
     .$promise
     .then((data) => {
       vm.group = data;
-      let ids = [];
 
+      let ids = [];
       vm.group.properties.forEach((property) => {
         ids.push(property.listingId);
       });
 
       ids = ids.join(',');
 
-      if(ids) $http.get('/api/groups/:id/properties', { params: { id: vm.group.id, listing_id: ids } })
+      if(ids) $http.get('/api/groups/:id/properties', { params: { id: vm.group.id, listingId: ids } })
         .then((response) => {
           vm.selected = response.data;
           console.log(vm.selected);
@@ -104,8 +103,6 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPrope
       // console.log(vm.thisProp);
     });
 
-
-
   function groupsShowProp(){
     $http.get('/api/groups/:id/properties/:listingId', { params: { id: vm.group.id, listingId: vm.listingId} })
       .then((response) => {
@@ -124,7 +121,6 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPrope
   vm.addNote = addNote;
 
   function deleteNote(note){
-
     GroupPropertyNote
     .delete({ id: vm.group.id, listingId: vm.listingId, noteId: note.id })
         .$promise
@@ -147,7 +143,6 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPrope
   vm.addImage = addImage;
 
   function deleteImage(image){
-
     GroupPropertyImage
     .delete({ id: vm.group.id, listingId: vm.listingId, imageId: image.id })
         .$promise
@@ -169,20 +164,55 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPrope
   vm.deleteProperty = deleteProperty;
 }
 
-GroupsEditCtrl.$inject = ['Group', '$stateParams', '$state'];
-function GroupsEditCtrl(Group, $stateParams, $state) {
+GroupsEditCtrl.$inject = ['Group', 'User', '$stateParams', '$auth', '$state', '$scope', 'filterFilter', 'GroupUser'];
+function GroupsEditCtrl(Group, User, $stateParams, $auth, $state, $scope, filterFilter, GroupUser) {
   const vm = this;
   vm.group = Group.get($stateParams);
+  // vm.chosenUsers = [];
+  vm.allUsers = User.query();
+  const authUserId = $auth.getPayload().userId;
+  vm.group.users = [];
 
   Group
     .get($stateParams)
     .$promise
     .then((response) => {
-      vm.groupUsers = response.users;
-      console.log(vm.groupUsers);
+      // vm.chosenUsers = response.users;
+      vm.group.users = response.users;
+      console.log('vm.chosenUsers', vm.chosenUsers);
+      console.log('vm.group.users', vm.group.users);
     });
 
+  function filterUsers() {
+    const params = { username: vm.q };
+    vm.filtered = filterFilter(vm.allUsers, params);
+  }
+
+  $scope.$watch(() => vm.q, filterUsers);
+
+  function addUser(user) {
+    GroupUser
+      .update({ id: vm.group.id, userId: user.id}, (group) => {
+        console.log(group);
+        vm.group.users.push(user);
+        vm.filtered = {};
+      });
+  }
+  vm.addUser = addUser;
+
+  function removeUser(user) {
+    GroupUser
+    .delete({ id: vm.group.id, userId: user.id })
+        .$promise
+        .then(() => {
+          const indexGroup = vm.group.users.indexOf(user);
+          vm.group.users.splice(indexGroup, 1);
+        });
+  }
+  vm.removeUser = removeUser;
+
   function groupsUpdate() {
+    console.log(vm.group);
     vm.group
       .$update()
       .then(() => $state.go('groupsHome', $stateParams));

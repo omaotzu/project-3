@@ -1,7 +1,7 @@
 <section class="container">
   <h1>Groups Edit</h1>
   <div>
-    <form name="groupsEdit.groupsEditForm" ng-submit="groupsEdit.update()" novalidate>
+    <form name="groupsEdit.groupsEditForm" novalidate>
       <div>
         <label for="groupName">Group Name</label>
         <input type="text" name="groupName" id="groupName" ng-model="groupsEdit.group.groupName" required>
@@ -10,13 +10,10 @@
         <p ng-message="required">Your group name is required.</p>
       </div>
 
-      <div ng-repeat="user in groupsEdit.groupUsers">
-        <img ng-src="{{ user.profileImageSRC }}">
-        <h1>{{ user.username }}</h1>
-      </div>
       <div>
         <input type="text" class="search" name="groupsEdit.groupsSearchUsers" ng-model="groupsEdit.q" placeholder="Add more people...">
       </div>
+
       <div ng-repeat="user in groupsEdit.filtered" ng-show="groupsEdit.q.length > 0">
         <div ng-click="groupsEdit.addUser(user)" class="userSearchResults">
           <img ng-src="{{ user.profileImageSRC }}" alt="{{ user.username }}">
@@ -25,15 +22,16 @@
           </div>
         </div>
       </div>
+
       <br>
-      <p>Users To Add:</p>
-      <div ng-repeat="user in groupsNew.chosenUsers">
+      <p>People in - {{ groupsEdit.group.groupName }}</p>
+      <div ng-repeat="user in groupsEdit.group.users">
         {{ user.username }}
         <img ng-src="{{ user.profileImageSRC }}">
-        <a href="#" ng-click="groupsNew.removeUser(user)">x</a>
+        <a href="#" ng-if="main.currentUserId !== user.id" ng-click="groupsEdit.removeUser(user)">x</a>
       </div>
 
-      <button class="button">Update</button>
+      <button ui-sref="groupsHome({ id: groupsEdit.group.id})">Back to group</button>
     </form>
   </div>
 </section>

@@ -25,15 +25,20 @@ router.route('/groups')
   .get(groups.index)
   .post(groups.create);
 
-router.route('/groups/:id/properties')
-  .get(zooplas.selectedProp);
-
-
 router.route('/groups/:id')
   .get(groups.show)
   .put(groups.update)
   .delete(groups.delete)
   .post(secureRoute, groups.addProperty);
+
+router.route('/groups/:id/users')
+  .put(groups.addUser);
+
+router.route('/groups/:id/users/:userId')
+  .delete(groups.deleteUser);
+
+router.route('/groups/:id/properties')
+  .get(zooplas.selectedProp);
 
 
 

@@ -15,6 +15,7 @@ function MainCtrl($rootScope, $state, $auth){
   $rootScope.$on('$stateChangeSuccess', () => {
     if(vm.stateHasChanged) vm.message = null;
     if(!vm.stateHasChanged) vm.stateHasChanged = true;
+    if($auth.getPayload()) vm.currentUserId = $auth.getPayload().userId;
   });
 
   function logout(){

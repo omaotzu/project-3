@@ -20,7 +20,7 @@ function createGroup(req, res, next) {
 function showGroup(req, res, next) {
   Group
     .findById(req.params.id)
-    .populate('users properties.notes.createdBy')
+    .populate('users')
     .exec()
     .then((group) => {
       if(!group) return res.notFound();
@@ -30,14 +30,15 @@ function showGroup(req, res, next) {
 }
 
 function updateGroup(req, res, next) {
+  console.log('BEFORE', req.body);
   Group
     .findById(req.params.id)
     .populate('users')
     .exec()
     .then((group) => {
       if(!group) return res.notFound();
-
       for(const field in req.body) {
+
         group[field] = req.body[field];
       }
 
@@ -46,6 +47,30 @@ function updateGroup(req, res, next) {
     .then((group) => res.json(group))
     .catch(next);
 }
+
+function addUserToGroup(req, res, next) {
+  Group
+    .findByIdAndUpdate(req.params.id, {$push: {'users': req.body.userId}})
+    .then((group) => {
+      if(!group) return res.notFound();
+      return group.save();
+    })
+    .then((group) => res.json(group))
+    .catch(next);
+}
+
+function deleteUserFromGroup(req, res, next) {
+  // console.log(req.params.userId);
+  Group
+    .findByIdAndUpdate(req.params.id, {$pull: {'users': req.params.userId}})
+    .then((group) => {
+      if(!group) return res.notFound();
+      return group.save();
+    })
+    .then((group) => res.json(group))
+    .catch(next);
+}
+
 
 function deleteGroup(req, res, next) {
   Group
@@ -180,6 +205,8 @@ module.exports = {
   create: createGroup,
   show: showGroup,
   update: updateGroup,
+  addUser: addUserToGroup,
+  deleteUser: deleteUserFromGroup,
   delete: deleteGroup,
   addProperty: addPropertyRoute,
   deleteProperty: deletePropertyRoute,
