@@ -43,7 +43,7 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
   vm.removeUser = removeUser;
 
   function groupsCreate() {
-    if(vm.groupsNewForm.$vlid) {
+    if(vm.groupsNewForm.$valid) {
       vm.chosenUsers = [];
       console.log('USER ID LOGGED IN', $auth.getPayload().userId);
       if(!vm.group.users.includes(authUserId)) vm.group.users.push(authUserId);
