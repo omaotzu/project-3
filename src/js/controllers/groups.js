@@ -9,7 +9,19 @@ angular
 GroupsIndexCtrl.$inject = ['Group'];
 function GroupsIndexCtrl(Group) {
   const vm = this;
-  vm.all = Group.query();
+  Group
+    .query()
+    .$promise
+    .then((response) => {
+      console.log('response', response);
+      vm.all = response;
+      console.log('all', vm.all);
+    });
+  // console.log('ALL', vm.all);
+  // console.log('RESOURCE', vm.all[0].resource);
+
+
+  // vm.myGroups = vm.all..find(obj => obj.listingId === vm.listingId);
 }
 
 GroupsNewCtrl.$inject = ['Group', 'User', 'filterFilter', '$state', '$auth', '$scope'];
@@ -30,6 +42,8 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
 
   function addUser(user) {
     if(!vm.group.users.includes(user.id) && user.id !== authUserId) vm.group.users.push(user.id);
+    // console.log(vm.group);
+    // user.group.push(vm.group.id);
     if(!vm.chosenUsers.includes(user) && user.id !== authUserId) vm.chosenUsers.push(user);
     vm.filtered = {};
   }
@@ -195,6 +209,9 @@ function GroupsEditCtrl(Group, User, $stateParams, $auth, $state, $scope, filter
       .update({ id: vm.group.id, userId: user.id}, (group) => {
         console.log(group);
         vm.group.users.push(user);
+        console.log(user);
+        user.group.push(vm.group.id);
+        // user.group.push(vm.group.id);
         vm.filtered = {};
       });
   }

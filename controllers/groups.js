@@ -50,9 +50,9 @@ function updateGroup(req, res, next) {
 
 function addUserToGroup(req, res, next) {
   Group
-    .findByIdAndUpdate(req.params.id, {$push: {'users': req.body.userId}})
+    .findById(req.params.id)
     .then((group) => {
-      if(!group) return res.notFound();
+      if(!group.users.includes(req.body.userId)) group.users.push(req.body.userId);
       return group.save();
     })
     .then((group) => res.json(group))
@@ -62,7 +62,7 @@ function addUserToGroup(req, res, next) {
 function deleteUserFromGroup(req, res, next) {
   // console.log(req.params.userId);
   Group
-    .findByIdAndUpdate(req.params.id, {$pull: {'users': req.params.userId}})
+    .findByIdAndUpdate(req.params.id, { $pull: { users: req.params.userId } })
     .then((group) => {
       if(!group) return res.notFound();
       return group.save();
