@@ -27,7 +27,7 @@
         <label for="email">Email</label>
         <input type="email" name="email" id="email" ng-model="register.user.email" required>
       </div>
-      <div class="ng-message-error" ng-messages="register.registerForm.email.$error" ng-show="(register.registerForm.$submitted || register.registerForm.email.$touched)" ng-pattern=".+@.+\..+">
+      <div class="ng-message-error" ng-messages="register.registerForm.email.$error" ng-show="(register.registerForm.$submitted || register.registerForm.email.$touched)">
         <p ng-message="required">Your email is required.</p>
         <p ng-message="email">A valid email is required.</p>
       </div>
@@ -47,7 +47,7 @@
       </div>
       <div>
         <label for="base64"></label>
-        <input type="file" base64 name="base64" id="base64" ng-model="register.user.base64" required>
+        <input type="file" base64 name="base64" id="base64" ng-model="register.user.base64" required class="base64">
       </div>
       <button class="button">Register</button>
     </form>

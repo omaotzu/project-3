@@ -158,6 +158,11 @@ section {
         margin-top: 5px;
         padding: 3px 240px;
         text-align: center;
+        border: 0;
+        border-bottom: 2px solid black;
+        &.base64 {
+          border: 0;
+        }
       }
       textarea {
         width: 400px;
@@ -213,6 +218,11 @@ section {
           font-size: 12px;
           background-color: white;
           border: 1px solid black;
+          &.deleteimage {
+            display: inline;
+            margin: 0;
+            position: relative;
+          }
         }
         padding: 10px;
         &.address {
@@ -227,6 +237,12 @@ section {
           font-weight: 900;
           text-transform: uppercase;
         }
+        img {
+          &.userimages {
+            max-width: 15%;
+            // text-align: center;
+          }
+        }
       }
     }
     .image {
@@ -240,9 +256,9 @@ section {
     }
     div {
       p {
-          color: red;
-          animation: expandOpen 1s;
-        }
+        color: red;
+        animation: expandOpen 1s;
+      }
     }
   }
 }
@@ -259,6 +275,24 @@ section {
   padding-left: 200px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.map {
+  height: 300px;
+  width: 850px;
+  padding: 0;
+  // background-color: lightgrey;
+  margin-bottom: 15px;
+}
+
+.addimage {
+  margin: 5px;
+  padding: 5px 6px;
+}
+
+.addcomment {
+  padding: 0 100px;
+  padding: 5px 140px;
 }
 
 @keyframes expandOpen {
