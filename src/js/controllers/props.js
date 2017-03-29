@@ -3,8 +3,8 @@ angular
   .controller('PropsIndexCtrl', PropsIndexCtrl)
   .controller('PropsShowCtrl', PropsShowCtrl);
 
-PropsIndexCtrl.$inject = ['$http'];
-function PropsIndexCtrl($http) {
+PropsIndexCtrl.$inject = ['$http', '$uibModal'];
+function PropsIndexCtrl($http, $uibModal) {
   const vm = this;
   vm.results = [];
   vm.area = null;
@@ -18,26 +18,43 @@ function PropsIndexCtrl($http) {
       });
   }
   vm.getProps = getProps;
+
+  function openModal(thisProp) {
+    $uibModal.open({
+      templateUrl: 'js/views/props/show.html',
+      controller: 'PropsShowCtrl as propsShow',
+      windowClass: 'app-modal-window',
+      resolve: {
+        selectedProp: () => {
+          return thisProp;
+        }
+      }
+    });
+  }
+  vm.openModal = openModal;
 }
 
-PropsShowCtrl.$inject = ['User', 'GroupProperty', '$http', '$stateParams'];
-function PropsShowCtrl(User, GroupProperty, $http, $stateParams){
+PropsShowCtrl.$inject = ['User', 'GroupProperty', '$http', '$stateParams', 'selectedProp', '$uibModalInstance'];
+function PropsShowCtrl(User, GroupProperty, $http, $stateParams, selectedProp, $uibModalInstance){
   const vm = this;
-  vm.listingId = $stateParams.listing_id;
-  // console.log(vm.listingId);
-  showProp();
+  // vm.listingId = $stateParams.listing_id;
+  // console.log('LISTINGID', vm.listingId);
+  // // console.log(vm.listingId);
+  // showProp();
+  //
+  // function showProp(){
+  //   $http.get('/api/properties/:listingId', { params: { listingId: vm.listingId } })
+  //     .then((response) => {
+  //       vm.selected = response.data;
+  //
+  //     });
+  // }
+  vm.selected = selectedProp;
 
-  function showProp(){
-    $http.get('/api/properties/:listingId', { params: { listingId: vm.listingId } })
-      .then((response) => {
-        vm.selected = response.data;
-        // console.log(vm.selected);
-      });
-  }
-
+  console.log('SELECTEDLISTINGID', vm.selected.listing_id);
   function storeProp(){
     const newProperty = {
-      listingId: vm.listingId
+      listingId: vm.selected.listing_id
     };
 
     GroupProperty
@@ -47,24 +64,11 @@ function PropsShowCtrl(User, GroupProperty, $http, $stateParams){
         console.log(property);
         vm.newProperty = {};
       });
-
-    // console.log($stateParams);
-    // vm.user = $auth.getPayload().userId;
-    // vm.group = $auth.getPayload().group;
-    // console.log(vm.group);
-    // User.get(vm.user);
-    // console.log('Logged in User ID', vm.user);
-    // console.log('Logged in User ID group', vm.user.group);
-    // vm.group = User.get($stateParams);
-    // console.log(vm.group);
-    // vm.user.group.push($stateParams);
-    // $http.get(`/api/users/${vm.user}`)
-    //   .then((response) => {
-    //     vm.user = response.data;
-    //     console.log('Response User', vm.user);
-    //     vm.user.group.properties.push($stateParams);
-    //   });
-
   }
   vm.store = storeProp;
+
+  function closeModal(){
+    $uibModalInstance.close();
+  }
+  vm.closeModal = closeModal;
 }

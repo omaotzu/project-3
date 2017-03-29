@@ -25,10 +25,11 @@
     <div ng-repeat="props in propsIndex.results.listing" class="results">
       <ul>
         <li><img ng-src="{{props.image_645_430_url}}" class="image"></li>
-        <li><a ui-sref="propsShow({ listing_id: props.listing_id })">{{props.displayable_address}}</a></li>
+        <li><strong>Address: </strong>{{props.displayable_address}}</li>
         <li><strong>Price Per Month: </strong>£{{props.rental_prices.per_month}}</li>
         <li><strong>Bedrooms: </strong>{{props.num_bedrooms}}</li>
         <li><strong>Property Type: </strong>{{props.property_type}}</li>
+        <button ng-click="propsIndex.openModal(props)" class="btn btn-danger">More Info</button>
         <hr>
       </ul>
     </div>

@@ -16,39 +16,53 @@
       <h3>Property Description</h3>
       <li class="description">{{selected.description}}</li>
       <hr>
+      <div class="map container">
+        <ng-map center="[{{selected.latitude}}, {{selected.longitude}}]" zoom="13" scrollwheel="false">
+          <marker position="[{{selected.latitude}}, {{selected.longitude}}]" animation="DROP" on-click="vm.toggleBounce()"></marker>
+        </ng-map>
+      </div>
+      <hr>
       <h3>Agency Info</h3>
       <li><strong>Company: </strong>{{selected.agent_name}}</li>
-      <li><strong>Contact: </strong>{{selected.agent_phone}}</li>
+      <li><strong>Contact: </strong><a href="tel:{{selected.agent_phone}}">{{selected.agent_phone}}</a></li>
     </ul>
   </div>
   <hr>
   <div>
-   <h2>Images</h2>
-   <ul>
-     <li ng-repeat="image in groupsPropsShow.prop.images track by $index">
-       <strong>{{ image.createdBy.username }}</strong> <img ng-src="{{ image.imageSRC }}">
-     <button ng-click="groupsPropsShow.deleteImage(image)">Delete</button>
-     </li>
-   </ul>
-   <form ng-submit="groupsPropsShow.addImage()" ng-if="main.isAuthenticated()">
-     <label>Add image</label>
-     <input type="file" base64 name="base64" ng-model="groupsPropsShow.newImage.base64">
-     <button class="button button--full">Add Image</button>
-   </form>
-
-
-   <h2>Notes</h2>
-   <ul>
-     <li ng-repeat="note in groupsPropsShow.prop.notes track by $index">
-       <strong>{{ note.createdBy.username }}</strong> - {{ note.text }}
-       <button ng-click="groupsPropsShow.deleteNote(note)">Delete</button>
-     </li>
-   </ul>
-   <form ng-submit="groupsPropsShow.addNote()" ng-if="main.isAuthenticated()">
-     <label>Add comment</label>
-     <textarea ng-model="groupsPropsShow.newNote.text"></textarea>
-     <button class="button button--full">Add Comment</button>
-   </form>
-
+   <div>
+     <h2>Images</h2>
+     <ul>
+       <li ng-repeat="image in groupsPropsShow.prop.images track by $index">
+         <strong>{{ image.createdBy.username }}</strong>
+         <img ng-src="{{ image.imageSRC }}" class="userimages">
+         <button ng-click="groupsPropsShow.deleteImage(image)" class="deleteimage">Delete Image</button>
+       </li>
+     </ul>
+   </div>
+   <div>
+     <form ng-submit="groupsPropsShow.addImage()" ng-if="main.isAuthenticated()">
+       <!-- <label>Add Images</label> -->
+       <input type="file" base64 name="base64" ng-model="groupsPropsShow.newImage.base64" class="base64">
+       <button class="addimage">Add Image</button>
+     </form>
+   </div>
+   <hr>
+   <div>
+     <h2>Notes</h2>
+     <ul>
+       <li ng-repeat="note in groupsPropsShow.prop.notes track by $index">
+         <strong>{{ note.createdBy.username }}</strong> - {{ note.text }}
+         <button ng-click="groupsPropsShow.deleteNote(note)">Delete Note</button>
+       </li>
+     </ul>
+   </div>
+   <hr>
+   <div>
+     <form ng-submit="groupsPropsShow.addNote()" ng-if="main.isAuthenticated()">
+       <label>Add Comments</label><br>
+       <textarea ng-model="groupsPropsShow.newNote.text"></textarea><br>
+       <button class="addcomment">Add Comment</button>
+     </form>
+   </div>
  </div>
 </section>

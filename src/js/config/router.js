@@ -47,11 +47,11 @@ function Router($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: 'js/views/props/index.html',
       controller: 'PropsIndexCtrl as propsIndex'
     })
-    .state('propsShow', {
-      url: '/properties/:listing_id',
-      templateUrl: 'js/views/props/show.html',
-      controller: 'PropsShowCtrl as propsShow'
-    })
+    // .state('propsShow', {
+    //   url: '/properties/:listing_id',
+    //   templateUrl: 'js/views/props/show.html',
+    //   controller: 'PropsShowCtrl as propsShow'
+    // })
     .state('register', {
       url: '/register',
       templateUrl: 'js/views/auth/register.html',
