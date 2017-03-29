@@ -17,6 +17,7 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
   const vm = this;
   vm.group = {};
   vm.group.users = [];
+  vm.chosenUsers = [];
   vm.allUsers = User.query();
 
   function filterUsers() {
@@ -26,20 +27,30 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
 
   $scope.$watch(() => vm.q, filterUsers);
 
-  function addUsers(user) {
+  function addUser(user) {
     console.log('VM GROUP', vm.group);
     console.log('USER', user);
     console.log('VM GROUP USERS', vm.group.users);
-    if(!vm.group.users.includes(user)) vm.group.users.push(user.id);
+    if(!vm.group.users.includes(user.id)) vm.group.users.push(user.id);
+    if(!vm.chosenUsers.includes(user)) vm.chosenUsers.push(user);
     vm.filtered = {};
-    console.log('TO ADD CHOSEN USERS',vm.group.users);
+    console.log('TO ADD CHOSEN USERS', vm.group.users);
 
   }
-  vm.addUsers = addUsers;
+  vm.addUser = addUser;
 
+  function removeUser(user) {
+    console.log(user);
+    vm.group.users.splice(user, 1);
+    console.log(vm.group.users);
+    vm.chosenUsers.splice(user, 1);
+    console.log(vm.chosenUsers);
+  }
+  vm.removeUser = removeUser;
 
   function groupsCreate() {
     if(vm.groupsNewForm.$valid) {
+      vm.chosenUsers = [];
       console.log('USER ID LOGGED IN', $auth.getPayload().userId);
       const currentUserId = $auth.getPayload().userId;
       if(!vm.group.users.includes(currentUserId)) vm.group.users.push(currentUserId);
