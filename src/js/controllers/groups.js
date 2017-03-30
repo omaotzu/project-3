@@ -105,8 +105,8 @@ function GroupsHomeCtrl(Group, $stateParams, $state, $http) {
 
 }
 
-GroupsPropsShowCtrl.$inject = ['Group', 'GroupProperty','GroupPropertyNote', 'GroupPropertyImage', '$stateParams', '$state', '$http'];
-function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPropertyImage, $stateParams, $state, $http) {
+GroupsPropsShowCtrl.$inject = ['Group', 'GroupProperty','GroupPropertyNote', 'GroupPropertyImage', 'GroupPropertyRating', '$stateParams', '$state', '$http'];
+function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPropertyImage, GroupPropertyRating, $stateParams, $state, $http) {
   const vm = this;
   vm.listingId = $stateParams.listing_id;
   console.log($stateParams);
@@ -168,6 +168,17 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPrope
         });
   }
   vm.deleteImage = deleteImage;
+
+  function addRating() {
+    GroupPropertyRating
+    .save({ id: vm.group.id, listingId: vm.listingId }, vm.newRating)
+    .$promise
+    .then((rating) => {
+      vm.prop.ratings.push(rating);
+      vm.newRating = {};
+    });
+  }
+  vm.addRating = addRating;
 
   function deleteProperty() {
     GroupProperty

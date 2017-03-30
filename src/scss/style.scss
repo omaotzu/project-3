@@ -251,12 +251,6 @@ section {
           font-weight: 900;
           text-transform: uppercase;
         }
-        img {
-          &.userimages {
-            max-width: 100%;
-            padding: 0;
-          }
-        }
         a {
           &.number {
             font-size: 17px;
@@ -379,4 +373,9 @@ section {
   100% {
     transform: scale(1);
   }
+}
+.userimages {
+  width: 200px;
+  padding: 0;
+  height: 100px;
 }

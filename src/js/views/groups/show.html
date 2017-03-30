@@ -25,36 +25,31 @@
     </div>
     <hr>
     <div>
-      <div>
-        <div class="col-sm-6 col-md-6 col-lg-6 gallery">
-          <h3>Images</h3>
-          <ul>
-            <li ng-repeat="image in groupsPropsShow.prop.images track by $index" class="col-sm-4 col-md-4 col-lg-4">
+      <div class="col-sm-6 col-md-6 col-lg-6 gallery">
+        <h3>Images</h3>
+        <div class ="row">
+            <div ng-repeat="image in groupsPropsShow.prop.images track by $index" class="col-sm-4 col-md-4 col-lg-4">
               <strong>{{ image.createdBy.username }}</strong>
-              <img ng-src="{{ image.imageSRC }}" class="userimages">
+              <img ng-src="{{ image.imageSRC }}" class="userimages img-fluid img-thumbnail">
               <button ng-click="groupsPropsShow.deleteImage(image)" class="deleteimage">Delete</button>
-            </li>
-          </ul>
+            </div>
         </div>
-        <div>
-          <h3>Notes</h3>
-            <ul>
-              <li ng-repeat="note in groupsPropsShow.prop.notes track by $index" class="col-sm-1 col-md-1 col-lg-1">
-                <strong>{{ note.createdBy.username }}</strong> - {{ note.text }}
-                <button ng-click="groupsPropsShow.deleteNote(note)">Delete</button>
-              </li>
-            </ul>
-        </div>
-        <hr>
-        <div class="addimages">
+        <div class="addimages row">
           <form ng-submit="groupsPropsShow.addImage()" ng-if="main.isAuthenticated()">
-            <label>Add Images</label>
             <input type="file" base64 name="base64" ng-model="groupsPropsShow.newImage.base64" class="base64">
             <button class="addimage">Add Image</button>
           </form>
         </div>
-        <!-- <hr> -->
-        <div>
+      </div>
+      <div class="col-sm-6 col-md-6 col-lg-6 gallery">
+        <div class="row">
+          <h3>Notes</h3>
+          <div ng-repeat="note in groupsPropsShow.prop.notes track by $index" class="col-sm-3 col-md-3 col-lg-3">
+            <strong>{{ note.createdBy.username }}</strong> - {{ note.text }}
+            <button ng-click="groupsPropsShow.deleteNote(note)">Delete</button>
+          </div>
+        </div>
+        <div class="row">
           <form ng-submit="groupsPropsShow.addNote()" ng-if="main.isAuthenticated()">
             <h3>Add Comments</h3>
             <textarea ng-model="groupsPropsShow.newNote.text"></textarea><br>
@@ -70,8 +65,4 @@
      </ng-map>
    </div>
   </div>
-  <!-- <div style="display: block">
-    <canvas class="chart chart-line" chart-data="data" chart-labels="labels"
-	chart-series="series" chart-click="onClick"></canvas>
-</div> -->
 </section>
