@@ -2,8 +2,8 @@ angular
   .module('pncApp')
   .controller('MainCtrl', MainCtrl);
 
-MainCtrl.$inject = ['$rootScope', '$state', '$auth'];
-function MainCtrl($rootScope, $state, $auth){
+MainCtrl.$inject = ['$rootScope', '$state', '$auth', 'User'];
+function MainCtrl($rootScope, $state, $auth, User){
   const vm = this;
   vm.isAuthenticated = $auth.isAuthenticated;
 
@@ -16,6 +16,17 @@ function MainCtrl($rootScope, $state, $auth){
     if(vm.stateHasChanged) vm.message = null;
     if(!vm.stateHasChanged) vm.stateHasChanged = true;
     if($auth.getPayload()) vm.currentUserId = $auth.getPayload().userId;
+
+    User
+      .query()
+      .$promise
+      .then((response) => {
+        console.log(response);
+        vm.user = response.find(obj => obj.id === vm.currentUserId);
+        vm.currentUserGroupId = vm.user.group.id;
+        console.log('user', vm.user.group.id);
+
+      });
   });
 
   function logout(){

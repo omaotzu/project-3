@@ -20,7 +20,7 @@ function createGroup(req, res, next) {
 function showGroup(req, res, next) {
   Group
     .findById(req.params.id)
-    .populate('users')
+    .populate('users properties.images.createdBy properties.notes.createdBy')
     .exec()
     .then((group) => {
       if(!group) return res.notFound();
@@ -29,31 +29,33 @@ function showGroup(req, res, next) {
     .catch(next);
 }
 
-function updateGroup(req, res, next) {
-  console.log('BEFORE', req.body);
-  Group
-    .findById(req.params.id)
-    .populate('users')
-    .exec()
-    .then((group) => {
-      if(!group) return res.notFound();
-      for(const field in req.body) {
-
-        group[field] = req.body[field];
-      }
-
-      return group.save();
-    })
-    .then((group) => res.json(group))
-    .catch(next);
-}
+// function updateGroup(req, res, next) {
+//   console.log('BEFORE', req.body);
+//   Group
+//     .findById(req.params.id)
+//     .populate('users')
+//     .exec()
+//     .then((group) => {
+//       if(!group) return res.notFound();
+//       for(const field in req.body) {
+//
+//         group[field] = req.body[field];
+//       }
+//
+//       return group.save();
+//     })
+//     .then((group) => res.json(group))
+//     .catch(next);
+// }
 
 function addUserToGroup(req, res, next) {
+  console.log('body', req.body.userId);
+  console.log('params', req.params);
   Group
-    .findByIdAndUpdate(req.params.id, {$push: {'users': req.body.userId}})
-    .then((group) => {
-      if(!group) return res.notFound();
-      return group.save();
+    .findById(req.params.id)
+    .then((user) => {
+      if(!user.group.includes(req.params.id)) user.group.push(req.params.id);
+      return user.save();
     })
     .then((group) => res.json(group))
     .catch(next);
@@ -62,7 +64,7 @@ function addUserToGroup(req, res, next) {
 function deleteUserFromGroup(req, res, next) {
   // console.log(req.params.userId);
   Group
-    .findByIdAndUpdate(req.params.id, {$pull: {'users': req.params.userId}})
+    .findByIdAndUpdate(req.user.id, { $pull: { users: req.params.userId } })
     .then((group) => {
       if(!group) return res.notFound();
       return group.save();
@@ -88,7 +90,7 @@ function deleteGroup(req, res, next) {
 
 function addPropertyRoute(req, res, next) {
   Group
-    .findOne({ users: req.user.id })
+    .findById(req.user.group)
     .exec()
     .then((group) => {
       if(!group) return res.notFound();
@@ -102,7 +104,7 @@ function addPropertyRoute(req, res, next) {
 
 function deletePropertyRoute(req, res, next) {
   Group
-    .findOne({ users: req.user.id})
+    .findById(req.user.group)
     .exec()
     .then((group) => {
       if(!group) return res.notFound();
@@ -204,7 +206,7 @@ module.exports = {
   index: indexGroup,
   create: createGroup,
   show: showGroup,
-  update: updateGroup,
+  // update: updateGroup,
   addUser: addUserToGroup,
   deleteUser: deleteUserFromGroup,
   delete: deleteGroup,
