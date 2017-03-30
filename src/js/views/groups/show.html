@@ -5,6 +5,7 @@
     <div class="row">
       <ul ng-repeat="selected in groupsPropsShow.gps.listing">
         <li><img ng-src="{{selected.image_645_430_url}}" class="propertyimage"></li>
+        <hr>
         <li><strong>Bedrooms: </strong>{{selected.num_bedrooms}}</li>
         <li><strong>Property Type: </strong>{{selected.property_type}}</li>
         <li><strong>Price: </strong>£{{selected.rental_prices.per_month}} ppm</li>
@@ -25,15 +26,16 @@
     </div>
     <hr>
     <div>
-      <div class="col-sm-6 col-md-6 col-lg-6 gallery">
+      <div class="col-sm-4 col-md-6 col-lg-6 gallery">
         <h3>Images</h3>
         <div class ="row">
-            <div ng-repeat="image in groupsPropsShow.prop.images track by $index" class="col-sm-4 col-md-4 col-lg-4">
+            <div ng-repeat="image in groupsPropsShow.prop.images track by $index" class="col-sm-1 col-md-4 col-lg-4">
               <strong>{{ image.createdBy.username }}</strong>
               <img ng-src="{{ image.imageSRC }}" class="userimages img-fluid img-thumbnail">
               <button ng-click="groupsPropsShow.deleteImage(image)" class="deleteimage">Delete</button>
             </div>
         </div>
+        <hr>
         <div class="addimages row">
           <form ng-submit="groupsPropsShow.addImage()" ng-if="main.isAuthenticated()">
             <input type="file" base64 name="base64" ng-model="groupsPropsShow.newImage.base64" class="base64">
@@ -41,14 +43,16 @@
           </form>
         </div>
       </div>
-      <div class="col-sm-6 col-md-6 col-lg-6 gallery">
+      <hr>
+      <div class="col-sm-12 col-md-6 col-lg-6">
         <div class="row">
           <h3>Notes</h3>
-          <div ng-repeat="note in groupsPropsShow.prop.notes track by $index" class="col-sm-3 col-md-3 col-lg-3">
+          <div ng-repeat="note in groupsPropsShow.prop.notes track by $index" class="col-sm-12 col-md-3 col-lg-3">
             <strong>{{ note.createdBy.username }}</strong> - {{ note.text }}
-            <button ng-click="groupsPropsShow.deleteNote(note)">Delete</button>
+            <button ng-click="groupsPropsShow.deleteNote(note)" class="deletenote">Delete</button>
           </div>
         </div>
+        <hr>
         <div class="row">
           <form ng-submit="groupsPropsShow.addNote()" ng-if="main.isAuthenticated()">
             <h3>Add Comments</h3>
