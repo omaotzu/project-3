@@ -9,6 +9,10 @@ function PropsIndexCtrl($http, $uibModal) {
   vm.results = [];
   vm.area = null;
   vm.beds = null;
+  vm.limit = 10;
+
+
+
 
   function getProps(){
     $http.get('/api/properties', { params: {area: vm.area, minimum_beds: vm.beds, maximum_beds: vm.beds}})
@@ -18,6 +22,11 @@ function PropsIndexCtrl($http, $uibModal) {
       });
   }
   vm.getProps = getProps;
+
+  function loadMore() {
+    return vm.limit +=12;
+  }
+  vm.loadMore = loadMore;
 
   function openModal(thisProp) {
     $uibModal.open({

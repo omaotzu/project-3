@@ -22,7 +22,7 @@
     </form>
     <h5 class="listings">Found {{propsIndex.results.result_count}} Listings</h5>
 
-    <div ng-repeat="props in propsIndex.results.listing" class="results">
+    <div ng-repeat="props in propsIndex.results.listing | limitTo: propsIndex.limit" class="results">
       <ul>
         <li><img ng-src="{{props.image_645_430_url}}" class="image"></li>
         <li><strong>Address: </strong>{{props.displayable_address}}</li>
@@ -32,6 +32,9 @@
         <button ng-click="propsIndex.openModal(props)" class="btn btn-danger">More Info</button>
         <hr>
       </ul>
+    </div>
+    <div class="row">
+      <button ng-if="propsIndex.getProps" ng-click="propsIndex.loadMore()" class="middle btn btn-success">Load More</button>
     </div>
   </div>
 </section>
