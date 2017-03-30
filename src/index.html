@@ -2,11 +2,13 @@
 <html ng-app="pncApp">
 <head>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Project 3</title>
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyyFhjzC4J7Ss_Eprz1hM7z8sCT10EvRI"></script>
+  <!-- <script src="node_modules/chart.js/Chart.min.js"></script>
+  <script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script> -->
   <!-- inject:js -->
   <!-- endinject -->
   <!-- inject:css -->
@@ -20,7 +22,7 @@
         <li ng-if="(main.isAuthenticated() && main.currentUserGroupId)"><a ui-sref="groupsHome({ id: main.currentUserGroupId })">My Group</a></li>
         <li ng-if="main.isAuthenticated() && !main.currentUserGroupId"><a ui-sref="groupsNew">Add a Group</a></li>
         <li ng-if="main.isAuthenticated()"><a ui-sref="usersShow({ id: main.currentUserId })">Profile</a></li>
-        <li ng-if="main.isAuthenticated()"><a ng-click="main.logout()" href="#">Logout</a></li>
+        <li ng-if="main.isAuthenticated()"><a id="logout-link" ng-click="main.logout()" href="#">Logout</a></li>
         <li ng-if="!main.isAuthenticated()"><a ui-sref="login">Login</a></li>
         <li ng-if="!main.isAuthenticated()"><a ui-sref="register">Register</a></li>
       </ul>

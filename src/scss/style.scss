@@ -11,28 +11,13 @@ a {
 
 body {
   font-family: 'Raleway', serif;
+  // overflow: hidden;
 }
 
-// body {
-//   &.login {
-//     background-color: red;
-//   }
-//   &.register {
-//     background-color: black;
-//   }
-//   &.usersShow {
-//     background-color: green;
-//   }
-//   &.propsIndex {
-//     background-color: yellow;
-//   }
-//   &.groupsIndex {
-//     background-color: pink;
-//   }
-//   &.groupsNew {
-//     background-color: dodgerblue;
-//   }
-// }
+.chart {
+  max-width: 300px;
+  max-height: 300px;
+}
 
 .heading-styles {
   text-transform: uppercase;
@@ -57,8 +42,6 @@ nav {
         display: inline-block;
         margin-left: 20px;
         line-height: 40px;
-        &:last-of-type {
-        }
         &.menu {
           text-decoration: none;
           color: black;
@@ -176,6 +159,9 @@ section {
         &.base64 {
           border: 0;
           // text-align: center;
+        }
+        &.area {
+          text-transform: capitalize;
         }
       }
       textarea {
@@ -312,7 +298,7 @@ section {
 
 .map {
   height: 300px;
-  width: 1000px;
+  width: 600px;
   padding: 0;
   margin-bottom: 15px;
 }
@@ -352,27 +338,147 @@ section {
 	}
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  25% {
-    transform: scale(1.015)
-  }
-  50% {
-    transform: scale(1);
-  }
-  75% {
-    transform: scale(1.015);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
 .userimages {
   width: 200px;
   padding: 0;
   height: 100px;
+}
+
+// IPHONE 5
+@media only screen and (min-width: 320px) and (max-width: 568px) {
+
+  nav {
+    div {
+      margin-left: 5px;
+      ul {
+        padding-top: 10px;
+        margin-top: 30px;
+        li {
+          text-align: center;
+          font-size: 15px;
+          font-weight: bolder;
+          margin-left: 0;
+          a {
+            border-right: 2px solid black;
+            padding-right: 5px;
+            &#logout-link {
+              border-right: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  section {
+    margin-top: 30px;
+    div {
+      form {
+        input {
+          width: 300px;
+        }
+        textarea {
+          border: 1px solid black;
+          width: 300px;
+        }
+      }
+      img {
+        max-width: 90%;
+        &.propertyimage {
+          float: none;
+          max-width: 90%;
+        }
+        &.profileimage {
+          max-width: 70%;
+        }
+        &.groupUsers {
+          margin-bottom: 10px;
+          padding: 0;
+        }
+        &.userimages {
+          width: 370px;
+          height: auto;
+          text-align: center;
+          margin: 0;
+          margin-top: 5px;
+          padding: 0;
+        }
+      }
+      ul {
+        li {
+          &.description {
+            padding: 0 30px;
+            padding-top: 20px;
+          }
+          strong {
+            font-weight: 900;
+          }
+        }
+      }
+      button {
+        &.search {
+          padding: 7px 120px;
+        }
+        &.deleteproperty {
+          margin-left: 20px;
+        }
+        &.addcomment {
+          padding: 5px 128px;
+        }
+      }
+      &.map {
+        width: 350px;
+        height: 350px;
+        margin-bottom: 0;
+      }
+      &.gallery {
+        max-width: none;
+      }
+      &.propo {
+        margin-left: 65px;
+        padding-left: 10px;
+      }
+    }
+    h2 {
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+  }
+
+.container {
+  padding-left: 5px;
+  padding-right: 5px;
+  // margin-left: 5px;
+  // margin-right: 5px;
+}
+
+.app-modal-window .modal-dialog {
+  width: 95%;
+}
+
+.area {
+  text-transform: capitalize;
+}
+
+button {
+  &.deleteimage {
+    margin: 5px 0;
+  }
+    &.deletenote {
+      padding: 5px;
+    }
+  }
+}
+
+// IPHONE 6
+@media only screen and (min-width : 375px) and (max-width : 667px) {
+
+}
+
+// RECENT IPADS
+@media only screen and (min-width : 768px) and (max-width : 1024px)  {
+
 }
 
 .ratings {

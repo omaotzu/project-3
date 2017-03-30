@@ -5,6 +5,7 @@
     <div class="row">
       <ul ng-repeat="selected in groupsPropsShow.gps.listing">
         <li><img ng-src="{{selected.image_645_430_url}}" class="propertyimage"></li>
+        <hr>
         <li><strong>Bedrooms: </strong>{{selected.num_bedrooms}}</li>
         <li><strong>Property Type: </strong>{{selected.property_type}}</li>
         <li><strong>Price: </strong>£{{selected.rental_prices.per_month}} ppm</li>
@@ -15,6 +16,8 @@
         <button ng-click="groupsPropsShow.deleteProperty(selected)" ng-if="main.isAuthenticated()" class="deleteproperty">Delete Property</button>
       </ul>
     </div>
+    <hr>
+
     <hr>
     <div ng-repeat="selected in groupsPropsShow.gps.listing">
       <ul>
@@ -40,14 +43,16 @@
     </div>
     <hr>
     <div>
-      <div class="col-sm-6 col-md-6 col-lg-6 gallery">
+      <div class="col-sm-4 col-md-6 col-lg-6 gallery">
         <h3>Images</h3>
         <div class ="row">
+
             <div ng-repeat="image in groupsPropsShow.prop.images track by $index" class="col-sm-4 col-md-4 col-lg-4">
               <img ng-click="groupsPropsShow.openModal(image)" ng-src="{{ image.imageSRC }}" class="userimages img-fluid img-thumbnail">
               <button ng-click="groupsPropsShow.deleteImage(image)" class="deleteimage">Delete</button>
             </div>
         </div>
+        <hr>
         <div class="addimages row">
           <form ng-submit="groupsPropsShow.addImage()" ng-if="main.isAuthenticated()" class="form-group">
             <input type="file" base64 name="base64" ng-model="groupsPropsShow.newImage.base64" class="base64 form-control">
@@ -55,14 +60,17 @@
           </form>
         </div>
       </div>
-      <div class="col-sm-6 col-md-6 col-lg-6 gallery">
+      <hr>
+      <div class="col-sm-12 col-md-6 col-lg-6">
         <div class="row">
           <h3>Notes</h3>
-          <div ng-repeat="note in groupsPropsShow.prop.notes track by $index" class="col-sm-3 col-md-3 col-lg-3">
+          <div ng-repeat="note in groupsPropsShow.prop.notes track by $index" class="col-sm-12 col-md-3 col-lg-3">
             <strong>{{ note.createdBy.username }}</strong> - {{ note.text }}
             <button ng-click="groupsPropsShow.deleteNote(note)" class="smaller">Delete</button>
+
           </div>
         </div>
+        <hr>
         <div class="row">
           <form ng-submit="groupsPropsShow.addNote()" ng-if="main.isAuthenticated()">
             <h3>Add Comments</h3>
@@ -72,11 +80,19 @@
         </div>
       </div>
     </div>
-   <hr>
-   <div class="map container" ng-repeat="selected in groupsPropsShow.gps.listing">
-     <ng-map center="[{{selected.latitude}}, {{selected.longitude}}]" zoom="13" scrollwheel="false">
-       <marker position="[{{selected.latitude}}, {{selected.longitude}}]" animation="DROP"></marker>
-     </ng-map>
+    <hr>
+   <div class="row">
+     <div class="col-sm-6 col-md-6 col-lg-6">
+       <canvas id="doughnut" class="chart chart-doughnut" chart-data="groupsPropsShow.crimes.pieCrimeData" chart-labels=" groupsPropsShow.labels">
+       </canvas>
+     </div>
+     <div class="col-sm-6 col-md-6 col-lg-6">
+       <div class="map container" ng-repeat="selected in groupsPropsShow.gps.listing">
+         <ng-map center="[{{selected.latitude}}, {{selected.longitude}}]" zoom="13" scrollwheel="false">
+           <marker position="[{{selected.latitude}}, {{selected.longitude}}]" animation="DROP"></marker>
+         </ng-map>
+       </div>
+     </div>
    </div>
   </div>
 </section>

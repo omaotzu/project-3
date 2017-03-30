@@ -94,13 +94,19 @@ function GroupsHomeCtrl(Group, $stateParams, $state, $http) {
   vm.delete = groupsDelete;
 }
 
-GroupsPropsShowCtrl.$inject = ['Group', 'GroupProperty','GroupPropertyNote', 'GroupPropertyImage', 'GroupPropertyRating', '$stateParams', '$state', '$http', '$uibModal'];
-function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPropertyImage, GroupPropertyRating, $stateParams, $state, $http, $uibModal) {
+GroupsPropsShowCtrl.$inject = ['Group', 'GroupProperty','GroupPropertyNote', 'GroupPropertyImage', 'crimes',  'GroupPropertyRating', '$stateParams', '$state', '$http', '$uibModal', '$scope'];
+function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPropertyImage, crimes, GroupPropertyRating, $stateParams, $state, $http, $uibModal, $scope) {
   const vm = this;
   vm.max = 5;
   vm.isReadonly = true;
   vm.isReadonlyfalse = false;
   vm.listingId = $stateParams.listing_id;
+  vm.listingLat = null;
+  vm.listingLon = null;
+  vm.crimes = [];
+
+  vm.labels = ['Anti Social Behaviour', 'Burglary', 'Bike Theft', 'Drugs', 'Robbery', 'Vehicle Crimes', 'Violent Crimes'];
+  vm.crimes.pieCrimeData = [];
 
   Group.get($stateParams)
     .$promise
@@ -114,8 +120,22 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPrope
     $http.get('/api/groups/:id/properties/:listingId', { params: { id: vm.group.id, listingId: vm.listingId} })
       .then((response) => {
         vm.gps = response.data;
+        vm.listingLat = vm.gps.listing[0].latitude;
+        vm.listingLon = vm.gps.listing[0].longitude;
       });
   }
+
+  function getCrimes(){
+    if(!vm.listingLat) return false;
+    crimes.getCrimes(vm.listingLat, vm.listingLon)
+    .then((data) => {
+      vm.crimes = data;
+      console.log(vm.crimes.pieCrimeData);
+      return vm.crimes;
+    });
+  }
+
+  $scope.$watch(() => vm.listingLat, getCrimes);
 
   function addNote() {
     GroupPropertyNote
