@@ -140,7 +140,14 @@ section {
       &.propertyimage {
         float: left;
         max-width: 50%;
-        // margin-top: 80px;
+      }
+      &.groupUsers {
+        background-position: center;
+        background-size: cover;
+        border-radius: 100%;
+        width: 70px;
+        height: 70px;
+        float: left;
       }
     }
     .userSearchResults {
@@ -148,10 +155,6 @@ section {
       &:hover {
         border: 1px dashed #000;
       }
-    }
-    .groupUsers {
-      width: 10%;
-      float: left;
     }
     form {
       label {
@@ -285,6 +288,10 @@ section {
   max-width: 60%;
 }
 
+.propo {
+  text-align: center;
+  margin-left: 400px;
+}
 .container {
   padding-right: 50px;
   padding-left: 50px;
@@ -294,6 +301,11 @@ section {
 
 .propinfo {
   margin: 70px 0;
+}
+
+.groupusersimages {
+  text-align: center;
+  float: center;
 }
 
 .container1 {
