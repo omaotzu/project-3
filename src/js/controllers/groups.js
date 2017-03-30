@@ -113,6 +113,10 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPrope
   vm.listingLon = null;
   vm.crimes = [];
 
+  // vm.colors = ['#a6cfd5', '#dd7596', '#fffd98', '#613f75', '#d4e4bc', '#e8985e', '#fffcf9', '#cf1259'];
+  vm.labels = ['Anti Social Behaviour', 'Burglary', 'Bike Theft', 'Drugs', 'Robbery', 'Vehicle Crimes', 'Violent Crimes'];
+  vm.crimes.pieCrimeData = [];
+
 
   console.log($stateParams);
   Group.get($stateParams)
@@ -137,13 +141,7 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPrope
     crimes.getCrimes(vm.listingLat, vm.listingLon)
     .then((data) => {
       vm.crimes = data;
-      console.log('Anti Social Behaviour', vm.crimes.antiSocial.length);
-      console.log('Burglary', vm.crimes.burglary.length);
-      console.log('Bike Theft', vm.crimes.bikeTheft.length);
-      console.log('Drugs', vm.crimes.drugs.length);
-      console.log('Robbery', vm.crimes.robbery.length);
-      console.log('Vehicle Crimes', vm.crimes.vehicle.length);
-      console.log('Violent Crimes', vm.crimes.violent.length);
+      console.log(vm.crimes.pieCrimeData);
       return vm.crimes;
     });
   }

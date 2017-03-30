@@ -13,6 +13,11 @@ body {
   font-family: 'Raleway', serif;
 }
 
+.chart {
+  max-width: 300px;
+  max-height: 300px;
+}
+
 // body {
 //   &.login {
 //     background-color: red;
@@ -311,7 +316,7 @@ section {
 
 .map {
   height: 300px;
-  width: 1000px;
+  width: 600px;
   padding: 0;
   margin-bottom: 15px;
 }
