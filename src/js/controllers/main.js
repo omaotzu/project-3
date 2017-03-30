@@ -15,22 +15,22 @@ function MainCtrl($rootScope, $state, $auth, User){
   $rootScope.$on('$stateChangeSuccess', () => {
     if(vm.stateHasChanged) vm.message = null;
     if(!vm.stateHasChanged) vm.stateHasChanged = true;
-    if($auth.getPayload()) vm.currentUserId = $auth.getPayload().userId;
-
-    User
-      .query()
-      .$promise
-      .then((response) => {
-        console.log(response);
-        vm.user = response.find(obj => obj.id === vm.currentUserId);
-        vm.currentUserGroupId = vm.user.group.id;
-        console.log('user', vm.user.group.id);
-
-      });
+    if($auth.getPayload()) {
+      vm.currentUserId = $auth.getPayload().userId;
+      User
+        .query()
+        .$promise
+        .then((response) => {
+          console.log(response);
+          vm.user = response.find(obj => obj.id === vm.currentUserId);
+          if (vm.user.group) vm.currentUserGroupId = vm.user.group.id;
+        });
+    }
   });
 
   function logout(){
     $auth.logout();
+    if(vm.user.group) vm.user.group.id = null;
     $state.go('login');
   }
   vm.logout = logout;
