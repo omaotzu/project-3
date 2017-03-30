@@ -218,8 +218,9 @@ section {
       background-color: white;
       border: 1px solid black;
       outline: none;
+      border-radius: 10px;
       &:hover {
-        background-color: lightgreen;
+        background-color: $bright-green;
         transition: all 1.5s ease;
         outline: none;
       }
@@ -409,7 +410,7 @@ section {
   margin: 0;
   position: relative;
   padding: 5px;
-  font-size: 10px;
+  font-size: 12px;
   background-color: white;
   border: 1px solid black;
 }
@@ -464,4 +465,20 @@ footer {
 
 span {
   color: $bright-green;
+}
+
+.noteText {
+  text-align: center;
+  font-size: 12px;
+  display: flex;
+  letter-spacing: 1px;
+  animation: none;
+  color: black;
+  border-top: 1px solid $bright-green;
+  padding: 5px 0;
+}
+
+.ratingBox {
+  margin: 0 auto;
+  width: 35%;
 }

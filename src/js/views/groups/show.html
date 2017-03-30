@@ -32,7 +32,7 @@
     <div class="ratings">
       <form ng-submit="groupsPropsShow.addRating()" ng-if="main.isAuthenticated()">
         <label for="rating"></label>
-        <span uib-rating ng-model="groupsPropsShow.newRating.opinion" max="groupsPropsShow.max" read-only="groupsPropsShow.isReadonlyfalse" on-hover="hoveringOver(value)" on-leave="overStar = null" class="form-control" name="rating" id="rating"></span>
+        <span uib-rating ng-model="groupsPropsShow.newRating.opinion" max="groupsPropsShow.max" read-only="groupsPropsShow.isReadonlyfalse" on-hover="hoveringOver(value)" on-leave="overStar = null" class="form-control ratingBox" name="rating" id="rating"></span>
         <button class="addimage">Add Rating</button>
       </form>
     </div>
@@ -56,7 +56,7 @@
         <div class="row">
           <h3>Notes</h3>
           <div ng-repeat="note in groupsPropsShow.prop.notes track by $index" class="col-sm-3 col-md-3 col-lg-3">
-            <strong>{{ note.createdBy.username }}</strong> - {{ note.text }}
+            <strong>{{ note.createdBy.username }}</strong><br><p class="noteText">{{ note.text }}</p><br>
             <button ng-click="groupsPropsShow.deleteNote(note)" class="smaller">Delete</button>
           </div>
         </div>
