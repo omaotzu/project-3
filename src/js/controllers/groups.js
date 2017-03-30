@@ -4,7 +4,8 @@ angular
   .controller('GroupsNewCtrl', GroupsNewCtrl)
   .controller('GroupsHomeCtrl', GroupsHomeCtrl)
   // .controller('GroupsEditCtrl', GroupsEditCtrl)
-  .controller('GroupsPropsShowCtrl', GroupsPropsShowCtrl);
+  .controller('GroupsPropsShowCtrl', GroupsPropsShowCtrl)
+  .controller('UserImageModalCtrl', UserImageModalCtrl);
 
 GroupsIndexCtrl.$inject = ['Group'];
 function GroupsIndexCtrl(Group) {
@@ -17,11 +18,6 @@ function GroupsIndexCtrl(Group) {
       vm.all = response;
       console.log('all', vm.all);
     });
-  // console.log('ALL', vm.all);
-  // console.log('RESOURCE', vm.all[0].resource);
-
-
-  // vm.myGroups = vm.all..find(obj => obj.listingId === vm.listingId);
 }
 
 GroupsNewCtrl.$inject = ['Group', 'User', 'filterFilter', '$state', '$auth', '$scope'];
@@ -43,8 +39,6 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
 
   function addUser(user) {
     if(!vm.group.users.includes(user.id) && user.id !== authUserId) vm.group.users.push(user.id);
-    // console.log(vm.group);
-    // user.group.push(vm.group.id);
     if(!vm.chosenUsers.includes(user) && user.id !== authUserId) vm.chosenUsers.push(user);
     vm.filtered = {};
   }
@@ -91,34 +85,31 @@ function GroupsHomeCtrl(Group, $stateParams, $state, $http) {
       if(ids) $http.get('/api/groups/:id/properties', { params: { id: vm.group.id, listingId: ids } })
         .then((response) => {
           vm.selected = response.data;
-          console.log(vm.selected);
         });
     });
 
   function groupsDelete() {
-
     vm.group
       .$remove()
       .then(() => $state.go('groupsNew'));
   }
   vm.delete = groupsDelete;
-
 }
 
-GroupsPropsShowCtrl.$inject = ['Group', 'GroupProperty','GroupPropertyNote', 'GroupPropertyImage', 'crimes', '$stateParams', '$state', '$http', '$scope'];
-function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPropertyImage, crimes, $stateParams, $state, $http, $scope) {
+GroupsPropsShowCtrl.$inject = ['Group', 'GroupProperty','GroupPropertyNote', 'GroupPropertyImage', 'crimes',  'GroupPropertyRating', '$stateParams', '$state', '$http', '$uibModal', '$scope'];
+function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPropertyImage, crimes, GroupPropertyRating, $stateParams, $state, $http, $uibModal, $scope) {
   const vm = this;
+  vm.max = 5;
+  vm.isReadonly = true;
+  vm.isReadonlyfalse = false;
   vm.listingId = $stateParams.listing_id;
   vm.listingLat = null;
   vm.listingLon = null;
   vm.crimes = [];
 
-  // vm.colors = ['#a6cfd5', '#dd7596', '#fffd98', '#613f75', '#d4e4bc', '#e8985e', '#fffcf9', '#cf1259'];
   vm.labels = ['Anti Social Behaviour', 'Burglary', 'Bike Theft', 'Drugs', 'Robbery', 'Vehicle Crimes', 'Violent Crimes'];
   vm.crimes.pieCrimeData = [];
 
-
-  console.log($stateParams);
   Group.get($stateParams)
     .$promise
     .then((data) => {
@@ -192,6 +183,28 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPrope
   }
   vm.deleteImage = deleteImage;
 
+  function addRating() {
+    GroupPropertyRating
+    .save({ id: vm.group.id, listingId: vm.listingId }, vm.newRating)
+    .$promise
+    .then((rating) => {
+      vm.prop.rating.push(rating);
+      vm.newRating = {};
+    });
+  }
+  vm.addRating = addRating;
+
+  function deleteRating(rating){
+    GroupPropertyRating
+    .delete({ id: vm.group.id, listingId: vm.listingId, ratingId: rating.id })
+        .$promise
+        .then(() => {
+          const index = vm.prop.rating.indexOf(rating);
+          vm.prop.rating.splice(index, 1);
+        });
+  }
+  vm.deleteRating = deleteRating;
+
   function deleteProperty() {
     GroupProperty
     .delete({ listingId: vm.listingId, id: vm.group.id })
@@ -202,11 +215,35 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPrope
   }
   vm.deleteProperty = deleteProperty;
 
+  function openModal(thisImage) {
+    $uibModal.open({
 
-  // function getCrimes() {
-  //   $http.get('https://data.police.uk/api/crimes-street/all-crime?poly=52.268,0.543:52.794,0.238:52.130,0.478&date=2013-01')
-  // }
+      templateUrl: 'js/views/modals/images.html',
+      controller: 'UserImageModalCtrl as userImage',
+      windowClass: 'app-modal-window',
+      resolve: {
+        selectedImage: () => {
+          return thisImage;
+        }
+      }
+    });
+  }
+  vm.openModal = openModal;
+
 }
+
+
+UserImageModalCtrl.$inject = ['selectedImage', 'GroupPropertyImage', '$uibModalInstance'];
+function UserImageModalCtrl(selectedImage, GroupPropertyImage, $uibModalInstance){
+  const vm = this;
+  vm.selected = selectedImage;
+
+  function closeModal(){
+    $uibModalInstance.close();
+  }
+  vm.closeModal = closeModal;
+}
+
 
 // GroupsEditCtrl.$inject = ['Group', 'User', '$stateParams', '$auth', '$state', '$scope', 'filterFilter', 'GroupUser'];
 // function GroupsEditCtrl(Group, User, $stateParams, $auth, $state, $scope, filterFilter, GroupUser) {

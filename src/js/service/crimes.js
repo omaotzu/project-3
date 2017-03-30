@@ -37,7 +37,7 @@ function Crimes($http) {
               response.data.pieCrimeData.push(response.data.robbery.length);
               response.data.pieCrimeData.push(response.data.vehicle.length);
               response.data.pieCrimeData.push(response.data.violent.length);
-                          
+
               return response.data;
             });
   };

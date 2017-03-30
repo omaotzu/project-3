@@ -20,7 +20,7 @@ function createGroup(req, res, next) {
 function showGroup(req, res, next) {
   Group
     .findById(req.params.id)
-    .populate('users properties.images.createdBy properties.notes.createdBy')
+    .populate('users properties.images.createdBy properties.notes.createdBy properties.rating.createdBy')
     .exec()
     .then((group) => {
       if(!group) return res.notFound();
@@ -202,6 +202,46 @@ function deletePropertyImage(req, res, next) {
     .catch(next);
 }
 
+function addPropertyRating(req, res, next) {
+  req.body.createdBy = req.user;
+  Group
+    .findById(req.params.id)
+    .populate('users')
+    .exec()
+    .then((group) => {
+      if(!group) return res.notFound();
+
+      const prop = group.properties.find((property) => {
+        return property.listingId === req.params.listingId;
+      });
+      const rating = prop.rating.create(req.body);
+      prop.rating.push(rating);
+      return group.save()
+        .then(() => res.json(rating));
+    })
+    .catch(next);
+}
+
+function deletePropertyRating(req, res, next) {
+  Group
+    .findById(req.params.id)
+    .exec()
+    .then((group) => {
+      if(!group) return res.notFound();
+      const prop = group.properties.find((property) => {
+        return property.listingId === req.params.listingId;
+      });
+
+      const rating = prop.rating.id(req.params.ratingId);
+      // console.log(note);
+      rating.remove();
+      return group.save()
+        .then(() => res.json(rating));
+    })
+    .then(() => res.status(204).end())
+    .catch(next);
+}
+
 module.exports = {
   index: indexGroup,
   create: createGroup,
@@ -215,5 +255,7 @@ module.exports = {
   addNote: addPropertyNote,
   deleteNote: deletePropertyNote,
   addImage: addPropertyImage,
-  deleteImage: deletePropertyImage
+  deleteImage: deletePropertyImage,
+  addRating: addPropertyRating,
+  deleteRating: deletePropertyRating
 };

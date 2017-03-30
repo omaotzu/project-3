@@ -12,11 +12,18 @@ const userNoteSchema = new mongoose.Schema({
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
 });
 
+
+const userRatingSchema = new mongoose.Schema({
+  opinion: { type: Number },
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
+});
+
+
 const propertySchema = new mongoose.Schema({
   listingId: { type: String },
   images: [ userImageSchema ],
   notes: [ userNoteSchema ],
-  rating: { type: Number }
+  rating: [ userRatingSchema]
 });
 
 const groupSchema = new mongoose.Schema({
@@ -59,22 +66,22 @@ groupSchema.pre('save', function addGroupToUsers(next) {
     .catch(next);
 });
 
-groupSchema.pre('update', function addGroupToUsers(next) {
-  this.model('User')
-    .find({ _id: this._users })
-    .exec()
-    .then((users) => {
-      const promises = users.map((user) => {
-        user.group = this.id;
-        user.save();
-      });
-
-      return Promise.all(promises);
-    })
-    .then(next)
-    .catch(next);
-});
-
+// groupSchema.pre('update', function addGroupToUsers(next) {
+//   this.model('User')
+//     .find({ _id: this._users })
+//     .exec()
+//     .then((users) => {
+//       const promises = users.map((user) => {
+//         user.group = this.id;
+//         user.save();
+//       });
+//
+//       return Promise.all(promises);
+//     })
+//     .then(next)
+//     .catch(next);
+// });
+//
 
 userImageSchema.pre('remove', function deleteImage(next) {
   if(this.file) return s3.deleteObject({ Key: this.file}, next);

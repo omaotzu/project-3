@@ -145,7 +145,14 @@ section {
       &.propertyimage {
         float: left;
         max-width: 50%;
-        // margin-top: 80px;
+      }
+      &.groupUsers {
+        background-position: center;
+        background-size: cover;
+        border-radius: 100%;
+        width: 70px;
+        height: 70px;
+        float: left;
       }
     }
     .userSearchResults {
@@ -153,10 +160,6 @@ section {
       &:hover {
         border: 1px dashed #000;
       }
-    }
-    .groupUsers {
-      width: 10%;
-      float: left;
     }
     form {
       label {
@@ -234,14 +237,9 @@ section {
       li {
         button {
           padding: 5px;
-          font-size: 12px;
+          font-size: 10px;
           background-color: white;
           border: 1px solid black;
-          &.deleteimage {
-            display: inline;
-            margin: 0;
-            position: relative;
-          }
         }
         padding: 10px;
         &.description {
@@ -252,12 +250,6 @@ section {
         strong {
           font-weight: 900;
           text-transform: uppercase;
-        }
-        img {
-          &.userimages {
-            max-width: 100%;
-            padding: 0;
-          }
         }
         a {
           &.number {
@@ -296,6 +288,10 @@ section {
   max-width: 60%;
 }
 
+.propo {
+  text-align: center;
+  margin-left: 400px;
+}
 .container {
   padding-right: 50px;
   padding-left: 50px;
@@ -305,6 +301,11 @@ section {
 
 .propinfo {
   margin: 70px 0;
+}
+
+.groupusersimages {
+  text-align: center;
+  float: center;
 }
 
 .container1 {
@@ -372,4 +373,29 @@ section {
   100% {
     transform: scale(1);
   }
+}
+.userimages {
+  width: 200px;
+  padding: 0;
+  height: 100px;
+}
+
+.ratings {
+  margin-top: 80px;
+}
+// .smaller {
+//   font-size: 10px;
+// }
+.deleteimage,.smaller {
+  display: inline;
+  margin: 0;
+  position: relative;
+  padding: 5px;
+  font-size: 10px;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.modal-footer{
+  height: 80px;
 }
