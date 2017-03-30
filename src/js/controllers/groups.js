@@ -31,6 +31,7 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
   vm.group.users = [];
   vm.chosenUsers = [];
   vm.allUsers = User.query();
+  console.log('USERS', vm.allUsers);
   const authUserId = $auth.getPayload().userId;
 
   function filterUsers() {

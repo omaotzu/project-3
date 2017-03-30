@@ -21,7 +21,7 @@ const propertySchema = new mongoose.Schema({
 
 const groupSchema = new mongoose.Schema({
   properties: [ propertySchema ],
-  groupName: { type: String, required: true },
+  groupName: { type: String},
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'User' }
 });
 
@@ -58,6 +58,23 @@ groupSchema.pre('save', function addGroupToUsers(next) {
     .then(next)
     .catch(next);
 });
+
+groupSchema.pre('update', function addGroupToUsers(next) {
+  this.model('User')
+    .find({ _id: this._users })
+    .exec()
+    .then((users) => {
+      const promises = users.map((user) => {
+        user.group = this.id;
+        user.save();
+      });
+
+      return Promise.all(promises);
+    })
+    .then(next)
+    .catch(next);
+});
+
 
 userImageSchema.pre('remove', function deleteImage(next) {
   if(this.file) return s3.deleteObject({ Key: this.file}, next);
