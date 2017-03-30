@@ -105,10 +105,15 @@ function GroupsHomeCtrl(Group, $stateParams, $state, $http) {
 
 }
 
-GroupsPropsShowCtrl.$inject = ['Group', 'GroupProperty','GroupPropertyNote', 'GroupPropertyImage', '$stateParams', '$state', '$http'];
-function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPropertyImage, $stateParams, $state, $http) {
+GroupsPropsShowCtrl.$inject = ['Group', 'GroupProperty','GroupPropertyNote', 'GroupPropertyImage', 'crimes', '$stateParams', '$state', '$http', '$scope'];
+function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPropertyImage, crimes, $stateParams, $state, $http, $scope) {
   const vm = this;
   vm.listingId = $stateParams.listing_id;
+  vm.listingLat = null;
+  vm.listingLon = null;
+  vm.crimes = [];
+
+
   console.log($stateParams);
   Group.get($stateParams)
     .$promise
@@ -122,8 +127,28 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPrope
     $http.get('/api/groups/:id/properties/:listingId', { params: { id: vm.group.id, listingId: vm.listingId} })
       .then((response) => {
         vm.gps = response.data;
+        vm.listingLat = vm.gps.listing[0].latitude;
+        vm.listingLon = vm.gps.listing[0].longitude;
       });
   }
+
+  function getCrimes(){
+    if(!vm.listingLat) return false;
+    crimes.getCrimes(vm.listingLat, vm.listingLon)
+    .then((data) => {
+      vm.crimes = data;
+      console.log('Anti Social Behaviour', vm.crimes.antiSocial.length);
+      console.log('Burglary', vm.crimes.burglary.length);
+      console.log('Bike Theft', vm.crimes.bikeTheft.length);
+      console.log('Drugs', vm.crimes.drugs.length);
+      console.log('Robbery', vm.crimes.robbery.length);
+      console.log('Vehicle Crimes', vm.crimes.vehicle.length);
+      console.log('Violent Crimes', vm.crimes.violent.length);
+      return vm.crimes;
+    });
+  }
+
+  $scope.$watch(() => vm.listingLat, getCrimes);
 
   function addNote() {
     GroupPropertyNote
@@ -178,6 +203,11 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPrope
     });
   }
   vm.deleteProperty = deleteProperty;
+
+
+  // function getCrimes() {
+  //   $http.get('https://data.police.uk/api/crimes-street/all-crime?poly=52.268,0.543:52.794,0.238:52.130,0.478&date=2013-01')
+  // }
 }
 
 // GroupsEditCtrl.$inject = ['Group', 'User', '$stateParams', '$auth', '$state', '$scope', 'filterFilter', 'GroupUser'];
