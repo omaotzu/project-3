@@ -202,6 +202,26 @@ function deletePropertyImage(req, res, next) {
     .catch(next);
 }
 
+function addPropertyRating(req, res, next) {
+  req.body.createdBy = req.user;
+  Group
+    .findById(req.params.id)
+    .populate('users')
+    .exec()
+    .then((group) => {
+      if(!group) return res.notFound();
+
+      const prop = group.properties.find((property) => {
+        return property.listingId === req.params.listingId;
+      });
+      const rating = prop.rating.create(req.body);
+      prop.rating.push(rating);
+      return group.save()
+        .then(() => res.json(rating));
+    })
+    .catch(next);
+}
+
 module.exports = {
   index: indexGroup,
   create: createGroup,
@@ -215,5 +235,6 @@ module.exports = {
   addNote: addPropertyNote,
   deleteNote: deletePropertyNote,
   addImage: addPropertyImage,
-  deleteImage: deletePropertyImage
+  deleteImage: deletePropertyImage,
+  addRating: addPropertyRating
 };

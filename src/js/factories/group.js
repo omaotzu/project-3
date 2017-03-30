@@ -4,7 +4,8 @@ angular
   .factory('GroupUser', GroupUser)
   .factory('GroupProperty', GroupProperty)
   .factory('GroupPropertyImage', GroupPropertyImage)
-  .factory('GroupPropertyNote', GroupPropertyNote);
+  .factory('GroupPropertyNote', GroupPropertyNote)
+  .factory('GroupPropertyRating', GroupPropertyRating);
 
 Group.$inject = ['$resource'];
 function Group($resource) {
@@ -37,6 +38,14 @@ function GroupPropertyImage($resource) {
 GroupPropertyNote.$inject = ['$resource'];
 function GroupPropertyNote($resource) {
   return new $resource('/api/groups/:id/properties/:listingId/notes/:noteId', { id: '@id' }, {
+    update: { method: 'PUT' }
+  });
+}
+
+
+GroupPropertyRating.$inject = ['$resource'];
+function GroupPropertyRating($resource) {
+  return new $resource('/api/groups/:id/properties/:listingId/ratings/:ratingId', { id: '@id' }, {
     update: { method: 'PUT' }
   });
 }

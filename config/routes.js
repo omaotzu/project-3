@@ -49,6 +49,7 @@ router.route('/groups/:id/properties/:listingId')
 router.route('/groups/:id/properties/:listingId/notes')
   .post(secureRoute, groups.addNote);
 
+
 router.route('/groups/:id/properties/:listingId/notes/:noteId')
   .delete(secureRoute, groups.deleteNote);
 
@@ -57,6 +58,9 @@ router.route('/groups/:id/properties/:listingId/images')
 
 router.route('/groups/:id/properties/:listingId/images/:imageId')
   .delete(secureRoute, groups.deleteImage);
+
+router.route('/groups/:id/properties/:listingId/ratings')
+  .post(secureRoute, groups.addRating);
 
 router.route('/login')
   .post(auth.login);
