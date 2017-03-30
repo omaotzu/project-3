@@ -24,19 +24,33 @@
       </ul>
     </div>
     <hr>
+    <h3>Ratings</h3>
+    <div ng-repeat="rating in groupsPropsShow.prop.rating track by $index" class="col-sm-4 col-md-4 col-lg-4">
+      <strong>{{ rating.createdBy.username }}</strong>
+        <span uib-rating ng-model="rating.opinion" max="groupsPropsShow.max" read-only="groupsPropsShow.isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></span>
+        <button type="button" ng-click="groupsPropsShow.deleteRating(rating)" class="close" aria-label="Close"><span aria-hidden="true" >&times;</span>
+        </button>
+    </div>
+    <div class="ratings">
+      <form ng-submit="groupsPropsShow.addRating()" ng-if="main.isAuthenticated()">
+        <label for="rating"></label>
+        <span uib-rating ng-model="groupsPropsShow.newRating.opinion" max="groupsPropsShow.max" read-only="groupsPropsShow.isReadonlyfalse" on-hover="hoveringOver(value)" on-leave="overStar = null" class="form-control" name="rating" id="rating"></span>
+        <button class="addimage">Add Rating</button>
+      </form>
+    </div>
+    <hr>
     <div>
       <div class="col-sm-6 col-md-6 col-lg-6 gallery">
         <h3>Images</h3>
         <div class ="row">
             <div ng-repeat="image in groupsPropsShow.prop.images track by $index" class="col-sm-4 col-md-4 col-lg-4">
-              <strong>{{ image.createdBy.username }}</strong>
-              <img ng-src="{{ image.imageSRC }}" class="userimages img-fluid img-thumbnail">
+              <img ng-click="groupsPropsShow.openModal(image)" ng-src="{{ image.imageSRC }}" class="userimages img-fluid img-thumbnail">
               <button ng-click="groupsPropsShow.deleteImage(image)" class="deleteimage">Delete</button>
             </div>
         </div>
         <div class="addimages row">
-          <form ng-submit="groupsPropsShow.addImage()" ng-if="main.isAuthenticated()">
-            <input type="file" base64 name="base64" ng-model="groupsPropsShow.newImage.base64" class="base64">
+          <form ng-submit="groupsPropsShow.addImage()" ng-if="main.isAuthenticated()" class="form-group">
+            <input type="file" base64 name="base64" ng-model="groupsPropsShow.newImage.base64" class="base64 form-control">
             <button class="addimage">Add Image</button>
           </form>
         </div>

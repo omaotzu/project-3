@@ -62,6 +62,9 @@ router.route('/groups/:id/properties/:listingId/images/:imageId')
 router.route('/groups/:id/properties/:listingId/ratings')
   .post(secureRoute, groups.addRating);
 
+router.route('/groups/:id/properties/:listingId/ratings/:ratingId')
+  .delete(secureRoute, groups.deleteRating);
+
 router.route('/login')
   .post(auth.login);
 
