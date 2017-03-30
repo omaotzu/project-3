@@ -1,28 +1,20 @@
 <section class="container">
   <div>
     <h1>Search Properties</h1>
-    <hr>
-    <!-- <form name="search.searchForm" ng-submit="search.submit()" novalidate> -->
-    <form>
+    <form class="border">
       <div>
         <label for="area">Area: </label>
         <input type="text" ng-model="propsIndex.area">
       </div>
-      <!-- <div class="ng-message-error" ng-messages="main.studentForm.password.$error" ng-show="(main.studentForm.$submitted || main.studentForm.password.$touched)">
-        <p ng-message="required">Your password is required.</p>
-      </div> -->
       <div>
         <label for="beds">Number of Beds: </label>
         <input type="number" ng-model="propsIndex.beds">
       </div>
-      <!-- <div class="ng-message-error" ng-messages="main.studentForm.password.$error" ng-show="(main.studentForm.$submitted || main.studentForm.password.$touched)">
-        <p ng-message="required">Your password is required.</p>
-      </div> -->
         <button ng-click="propsIndex.getProps()" class="search">Search</button>
     </form>
     <h5 class="listings">Found {{propsIndex.results.result_count}} Listings</h5>
 
-    <div ng-repeat="props in propsIndex.results.listing" class="results">
+    <div ng-repeat="props in propsIndex.results.listing" class="results border">
       <ul>
         <li><img ng-src="{{props.image_645_430_url}}" class="image"></li>
         <li><strong>Address: </strong>{{props.displayable_address}}</li>
@@ -30,7 +22,6 @@
         <li><strong>Bedrooms: </strong>{{props.num_bedrooms}}</li>
         <li><strong>Property Type: </strong>{{props.property_type}}</li>
         <button ng-click="propsIndex.openModal(props)" class="btn btn-danger">More Info</button>
-        <hr>
       </ul>
     </div>
   </div>

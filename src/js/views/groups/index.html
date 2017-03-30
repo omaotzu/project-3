@@ -1,12 +1,10 @@
 <section class="container">
   <h1>My Group</h1>
-  <hr>
-  <div ng-repeat="group in groupsIndex.all">
+  <div ng-repeat="group in groupsIndex.all" class="border">
     <a ui-sref="groupsHome({ id: group.id })" class="group"><h1>{{ group.groupName }}</h1></a>
     <div ng-repeat="user in group.users">
       <h2>{{ user.username }}</h2>
       <img ng-src="{{ user.profileImageSRC }}" class="userimage">
     </div>
-    <hr>
   </div>
 </section>

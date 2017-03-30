@@ -6,17 +6,16 @@
   <div class="modal-body">
     <ul>
       <li><img ng-src="{{propsShow.selected.image_645_430_url}}"></li>
-      <hr>
-      <h3>Property Info</h3>
+      <h3 class="border">Property Info</h3>
       <li class="address"><strong>Address: </strong>{{propsShow.selected.displayable_address}}</li>
       <li><strong>Bedrooms: </strong>{{propsShow.selected.num_bedrooms}}</li>
       <li><strong>Bathrooms: </strong>{{propsShow.selected.num_bathrooms}}</li>
       <li><strong>Price: </strong>£{{propsShow.selected.rental_prices.per_month}} ppm</li>
       <li><strong>Property Type: </strong>{{propsShow.selected.property_type}}</li>
-      <hr>
-      <li class="description">{{propsShow.selected.description}}</li>
-      <hr>
-      <h3>Agency Info</h3>
+
+      <li class="description border">{{propsShow.selected.description}}</li>
+      
+      <h3 class="border">Agency Info</h3>
       <li><strong>Company: </strong>{{propsShow.selected.agent_name}}</li>
       <li><strong>Contact: </strong>{{propsShow.selected.agent_phone}}</li>
     </ul>

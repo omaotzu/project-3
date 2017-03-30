@@ -14,7 +14,7 @@
   <!-- inject:css -->
   <!-- endinject -->
 </head>
-<body ng-controller="MainCtrl as main">
+<body ng-controller="MainCtrl as main" class="site">
   <nav>
     <div class="links">
       <ul class="link">
@@ -29,6 +29,7 @@
     </div>
   </nav>
   <div class="message" ng-if="main.message">{{ main.message }}</div>
-  <main ui-view></main>
+  <main ui-view class="site-content"></main>
+  <footer>WE DA BEST    - Big <span>&hearts;</span> from The Pretty Mongooses</footer>
 </body>
 </html>

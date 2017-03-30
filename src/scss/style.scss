@@ -1,5 +1,8 @@
 @import 'reset';
 
+$main-green: #8FCF91;
+$bright-green: #AFE859;
+
 * {
   box-sizing: border-box;
 }
@@ -7,15 +10,13 @@
 a {
   color: black;
   text-decoration: none;
+  &:active {
+    text-decoration: none;
+  }
 }
 
 body {
   font-family: 'Raleway', serif;
-}
-
-.chart {
-  max-width: 300px;
-  max-height: 300px;
 }
 
 // body {
@@ -62,6 +63,7 @@ nav {
         display: inline-block;
         margin-left: 20px;
         line-height: 40px;
+        padding: 0 20px;
         &:last-of-type {
         }
         &.menu {
@@ -77,11 +79,12 @@ nav {
           font-weight: 600;
           position: relative;
           text-decoration: none;
+          letter-spacing: 2px;
           &:after {
             content: "";
             height: 2px;
             width: 100%;
-            background-color: black;
+            background-color: $main-green;
             position: absolute;
             bottom: -5px;
             left: 0;
@@ -89,17 +92,19 @@ nav {
             transition: opacity 0.6s ease;
             text-decoration: none;
           }
+          &:active, &:focus {
+            text-decoration: none;
+            color: $main-green;
+          }
           &:hover {
             margin-top: 10px;
             text-decoration: none;
-            color: black;
+            color: $main-green;
             &:after {
               text-decoration: none;
               opacity: 1;
             }
-            &:active {
-              text-decoration: none;
-            }
+
           }
         }
       }
@@ -113,6 +118,7 @@ section {
     font-weight: bold;
     margin-bottom: 30px;
     text-transform: uppercase;
+    letter-spacing: 4px;
   }
   h2 {
     font-size: 30px;
@@ -161,6 +167,16 @@ section {
         border: 1px dashed #000;
       }
     }
+    .chart {
+      &.chart-doughnut {
+        &.ng-isolate-scope {
+          padding: 0;
+          margin-right: 50px;
+          max-width: 100%;
+          max-height: 300px;
+        }
+      }
+    }
     form {
       label {
         text-transform: uppercase;
@@ -179,8 +195,12 @@ section {
         border-bottom: 2px solid black;
         outline: none;
         &.base64 {
-          border: 0;
+          border: none;
           // text-align: center;
+          outline: none;
+          cursor: pointer;
+          width: 45%;
+          margin-top: 10px;
         }
       }
       textarea {
@@ -246,6 +266,7 @@ section {
           text-align: justify;
           font-size: 15px;
           display: flex;
+          letter-spacing: 1px;
         }
         strong {
           font-weight: 900;
@@ -292,12 +313,6 @@ section {
   text-align: center;
   margin-left: 400px;
 }
-.container {
-  padding-right: 50px;
-  padding-left: 50px;
-  margin-right: auto;
-  margin-left: auto;
-}
 
 .propinfo {
   margin: 70px 0;
@@ -317,9 +332,11 @@ section {
 
 .map {
   height: 300px;
-  width: 600px;
+  width: 300px;
   padding: 0;
-  margin-bottom: 15px;
+  margin-left: 200px;
+  text-align: center;
+  margin-bottom: 100px;
 }
 
 .addimage {
@@ -327,8 +344,9 @@ section {
   padding: 5px 6px;
 }
 
-.addimages {
-  // margin-top: 50px;
+.addimages, .addNotes {
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .addcomment {
@@ -398,4 +416,52 @@ section {
 
 .modal-footer{
   height: 80px;
+}
+.crimePie{
+  width: 300px;
+  text-align: center;
+  margin-right: 50px;
+}
+
+.inline{
+  display: inline-block;
+}
+
+footer {
+  text-align: center;
+  letter-spacing: 4px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 2px solid $bright-green;
+}
+
+.description {
+  text-align: justify;
+  font-size: 15px;
+  display: flex;
+  letter-spacing: 1px;
+  animation: none;
+  color: black;
+  border-top: 1px solid $bright-green;
+  padding: 20px 0;
+}
+
+
+.border {
+  border-top: 1px solid $bright-green;
+  padding: 20px 0;
+}
+
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.site-content {
+  flex: 1;
+}
+
+span {
+  color: $bright-green;
 }

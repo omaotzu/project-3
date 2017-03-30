@@ -1,17 +1,14 @@
 <section class="container">
   <h1>{{ groupsHome.group.groupName }}</h1>
-  <hr>
-  <div class="row">
+  <div class="row border">
     <div ng-repeat="user in groupsHome.group.users" class="propo">
       <img class="img-fluid thumbnail groupUsers" ng-src="{{ user.profileImageSRC }}">
     </div>
   </div>
-  <hr>
-  <div>
+  <div class="border">
     <button ng-click="groupsHome.delete()" class="deletecomment">Delete</button>
   </div>
-  <hr>
-  <div>
+  <div class="border">
     <p>Listing IDs:</p>
     <ul ng-repeat="selected in groupsHome.selected.listing ">
       <li><img ng-src="{{selected.image_645_430_url}}"></li>
@@ -21,7 +18,6 @@
       <li><strong>Price: </strong>£{{selected.rental_prices.per_month}} ppm</li>
       <li><strong>Property Type: </strong>{{selected.property_type}}</li>
       <button ui-sref="groupsPropsShow({ id: groupsHome.group.id, listing_id: selected.listing_id})">Show</button>
-      <hr>
     </ul>
   </div>
 </section>

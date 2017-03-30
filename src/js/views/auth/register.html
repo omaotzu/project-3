@@ -45,9 +45,9 @@
       <div class="ng-message-error" ng-messages="register.registerForm.passwordConfirmation.$error" ng-show="(register.registerForm.$submitted || register.registerForm.passwordConfirmation.$touched)">
         <p ng-message="required">Your password confirmation is required.</p>
       </div>
-      <div>
+      <div class="form-group">
         <label for="base64"></label>
-        <input type="file" base64 name="base64" id="base64" ng-model="register.user.base64" required class="base64">
+        <input type="file" base64 name="base64" id="base64" ng-model="register.user.base64" required class="base64 form-control">
       </div>
       <div class="ng-message-error" ng-messages="register.registerForm.base64.$error" ng-show="(register.registerForm.$submitted)">
         <p ng-message="required">An image is required.</p>
