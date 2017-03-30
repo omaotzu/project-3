@@ -44,7 +44,7 @@
                 <button ng-click="groupsPropsShow.deleteNote(note)">Delete</button>
               </li>
             </ul>
-        </div><br>
+        </div>
         <hr>
         <div class="addimages">
           <form ng-submit="groupsPropsShow.addImage()" ng-if="main.isAuthenticated()">
@@ -53,7 +53,7 @@
             <button class="addimage">Add Image</button>
           </form>
         </div>
-        <hr>
+        <!-- <hr> -->
         <div>
           <form ng-submit="groupsPropsShow.addNote()" ng-if="main.isAuthenticated()">
             <h3>Add Comments</h3>
@@ -70,4 +70,8 @@
      </ng-map>
    </div>
   </div>
+  <!-- <div style="display: block">
+    <canvas class="chart chart-line" chart-data="data" chart-labels="labels"
+	chart-series="series" chart-click="onClick"></canvas>
+</div> -->
 </section>
