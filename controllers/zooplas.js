@@ -8,6 +8,7 @@ function properties(req, res){
       area: req.query.area,
       listing_status: 'rent',
       keywords: 'residential',
+      page_size: 100,
       minimum_beds: req.query.minimum_beds,
       maximum_beds: req.query.maximum_beds,
       api_key: process.env.ZOOPLA_API_KEY

@@ -30,7 +30,7 @@ function showGroup(req, res, next) {
 }
 
 // function updateGroup(req, res, next) {
-//   console.log('BEFORE', req.body);
+
 //   Group
 //     .findById(req.params.id)
 //     .populate('users')
@@ -49,8 +49,8 @@ function showGroup(req, res, next) {
 // }
 
 function addUserToGroup(req, res, next) {
-  console.log('body', req.body.userId);
-  console.log('params', req.params);
+
+
   Group
     .findById(req.params.id)
     .then((user) => {
@@ -62,7 +62,7 @@ function addUserToGroup(req, res, next) {
 }
 
 function deleteUserFromGroup(req, res, next) {
-  // console.log(req.params.userId);
+
   Group
     .findByIdAndUpdate(req.user.id, { $pull: { users: req.params.userId } })
     .then((group) => {
@@ -152,7 +152,7 @@ function deletePropertyNote(req, res, next) {
       });
 
       const note = prop.notes.id(req.params.noteId);
-      console.log(note);
+
       note.remove();
       return group.save()
         .then(() => res.json(note));
@@ -193,7 +193,7 @@ function deletePropertyImage(req, res, next) {
       });
 
       const image = prop.images.id(req.params.imageId);
-      // console.log(note);
+
       image.remove();
       return group.save()
         .then(() => res.json(image));
@@ -233,7 +233,7 @@ function deletePropertyRating(req, res, next) {
       });
 
       const rating = prop.rating.id(req.params.ratingId);
-      // console.log(note);
+      
       rating.remove();
       return group.save()
         .then(() => res.json(rating));
