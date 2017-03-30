@@ -23,8 +23,6 @@ function properties(req, res){
 }
 
 function selectedProp(req, res) {
-
-  console.log(req.query);
   rp({
     method: 'GET',
     url: 'http://api.zoopla.co.uk/api/v1/property_listings.json',
@@ -42,7 +40,6 @@ function selectedProp(req, res) {
     res.status(500).json(err);
   });
 }
-
 
 module.exports = {
   properties,

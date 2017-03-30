@@ -17,6 +17,8 @@
       </ul>
     </div>
     <hr>
+
+    <hr>
     <div ng-repeat="selected in groupsPropsShow.gps.listing">
       <ul>
         <h3>Agency Info</h3>
@@ -25,21 +27,36 @@
       </ul>
     </div>
     <hr>
+    <h3>Ratings</h3>
+    <div ng-repeat="rating in groupsPropsShow.prop.rating track by $index" class="col-sm-4 col-md-4 col-lg-4">
+      <strong>{{ rating.createdBy.username }}</strong>
+        <span uib-rating ng-model="rating.opinion" max="groupsPropsShow.max" read-only="groupsPropsShow.isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></span>
+        <button type="button" ng-click="groupsPropsShow.deleteRating(rating)" class="close" aria-label="Close"><span aria-hidden="true" >&times;</span>
+        </button>
+    </div>
+    <div class="ratings">
+      <form ng-submit="groupsPropsShow.addRating()" ng-if="main.isAuthenticated()">
+        <label for="rating"></label>
+        <span uib-rating ng-model="groupsPropsShow.newRating.opinion" max="groupsPropsShow.max" read-only="groupsPropsShow.isReadonlyfalse" on-hover="hoveringOver(value)" on-leave="overStar = null" class="form-control" name="rating" id="rating"></span>
+        <button class="addimage">Add Rating</button>
+      </form>
+    </div>
+    <hr>
     <div>
       <div class="col-sm-4 col-md-6 col-lg-6 gallery">
         <h3>Images</h3>
         <div class ="row">
-            <div ng-repeat="image in groupsPropsShow.prop.images track by $index" class="col-sm-1 col-md-4 col-lg-4">
-              <strong>{{ image.createdBy.username }}</strong>
-              <img ng-src="{{ image.imageSRC }}" class="userimages img-fluid img-thumbnail">
+
+            <div ng-repeat="image in groupsPropsShow.prop.images track by $index" class="col-sm-4 col-md-4 col-lg-4">
+              <img ng-click="groupsPropsShow.openModal(image)" ng-src="{{ image.imageSRC }}" class="userimages img-fluid img-thumbnail">
               <button ng-click="groupsPropsShow.deleteImage(image)" class="deleteimage">Delete</button>
             </div>
         </div>
         <hr>
         <div class="addimages row">
-          <form ng-submit="groupsPropsShow.addImage()" ng-if="main.isAuthenticated()">
-            <input type="file" base64 name="base64" ng-model="groupsPropsShow.newImage.base64" class="base64">
-            <button class="addimage">Add Image</button>
+          <form ng-submit="groupsPropsShow.addImage()" ng-if="main.isAuthenticated()" class="form-group">
+            <input type="file" base64 name="base64" ng-model="groupsPropsShow.newImage.base64" class="base64 form-control">
+            <button class="addimage smaller">Add Image</button>
           </form>
         </div>
       </div>
@@ -49,7 +66,8 @@
           <h3>Notes</h3>
           <div ng-repeat="note in groupsPropsShow.prop.notes track by $index" class="col-sm-12 col-md-3 col-lg-3">
             <strong>{{ note.createdBy.username }}</strong> - {{ note.text }}
-            <button ng-click="groupsPropsShow.deleteNote(note)" class="deletenote">Delete</button>
+            <button ng-click="groupsPropsShow.deleteNote(note)" class="smaller">Delete</button>
+
           </div>
         </div>
         <hr>
@@ -62,11 +80,19 @@
         </div>
       </div>
     </div>
-   <hr>
-   <div class="map container" ng-repeat="selected in groupsPropsShow.gps.listing">
-     <ng-map center="[{{selected.latitude}}, {{selected.longitude}}]" zoom="13" scrollwheel="false">
-       <marker position="[{{selected.latitude}}, {{selected.longitude}}]" animation="DROP"></marker>
-     </ng-map>
+    <hr>
+   <div class="row">
+     <div class="col-sm-6 col-md-6 col-lg-6">
+       <canvas id="doughnut" class="chart chart-doughnut" chart-data="groupsPropsShow.crimes.pieCrimeData" chart-labels=" groupsPropsShow.labels">
+       </canvas>
+     </div>
+     <div class="col-sm-6 col-md-6 col-lg-6">
+       <div class="map container" ng-repeat="selected in groupsPropsShow.gps.listing">
+         <ng-map center="[{{selected.latitude}}, {{selected.longitude}}]" zoom="13" scrollwheel="false">
+           <marker position="[{{selected.latitude}}, {{selected.longitude}}]" animation="DROP"></marker>
+         </ng-map>
+       </div>
+     </div>
    </div>
   </div>
 </section>
