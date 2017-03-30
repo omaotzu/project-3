@@ -35,13 +35,9 @@ function LoginCtrl($auth, $state) {
   vm.submit = submit;
 
   function authenticate(provider) {
-    // console.log('Inside auth', provider);
-    $auth.authenticate(provider)
-      .then(() => $state.go('usersShow', { id: $auth.getPayload().userId }))
-      .catch((err) => {
-        console.log(err);
-      });
 
+    $auth.authenticate(provider)
+      .then(() => $state.go('usersShow', { id: $auth.getPayload().userId }));
   }
 
   vm.authenticate = authenticate;

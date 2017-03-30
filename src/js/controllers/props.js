@@ -18,7 +18,7 @@ function PropsIndexCtrl($http, $uibModal) {
     $http.get('/api/properties', { params: {area: vm.area, minimum_beds: vm.beds, maximum_beds: vm.beds}})
       .then((response) => {
         vm.results = response.data;
-        // console.log(vm.results);
+
       });
   }
   vm.getProps = getProps;
@@ -46,21 +46,8 @@ function PropsIndexCtrl($http, $uibModal) {
 PropsShowCtrl.$inject = ['User', 'GroupProperty', '$http', '$stateParams', 'selectedProp', '$uibModalInstance'];
 function PropsShowCtrl(User, GroupProperty, $http, $stateParams, selectedProp, $uibModalInstance){
   const vm = this;
-  // vm.listingId = $stateParams.listing_id;
-  // console.log('LISTINGID', vm.listingId);
-  // // console.log(vm.listingId);
-  // showProp();
-  //
-  // function showProp(){
-  //   $http.get('/api/properties/:listingId', { params: { listingId: vm.listingId } })
-  //     .then((response) => {
-  //       vm.selected = response.data;
-  //
-  //     });
-  // }
   vm.selected = selectedProp;
 
-  console.log('SELECTEDLISTINGID', vm.selected.listing_id);
   function storeProp(){
     const newProperty = {
       listingId: vm.selected.listing_id
@@ -69,8 +56,7 @@ function PropsShowCtrl(User, GroupProperty, $http, $stateParams, selectedProp, $
     GroupProperty
       .save(newProperty)
       .$promise
-      .then((property) => {
-        console.log(property);
+      .then(() => {
         vm.newProperty = {};
       });
   }

@@ -8,17 +8,11 @@
         <label for="area">Area: </label>
         <input type="text" ng-model="propsIndex.area">
       </div>
-      <!-- <div class="ng-message-error" ng-messages="main.studentForm.password.$error" ng-show="(main.studentForm.$submitted || main.studentForm.password.$touched)">
-        <p ng-message="required">Your password is required.</p>
-      </div> -->
       <div>
         <label for="beds">Number of Beds: </label>
         <input type="number" ng-model="propsIndex.beds">
       </div>
-      <!-- <div class="ng-message-error" ng-messages="main.studentForm.password.$error" ng-show="(main.studentForm.$submitted || main.studentForm.password.$touched)">
-        <p ng-message="required">Your password is required.</p>
-      </div> -->
-        <button ng-click="propsIndex.getProps()" class="search">Search</button>
+      <button ng-click="propsIndex.getProps()" class="search">Search</button>
     </form>
     <h5 class="listings">Found {{propsIndex.results.result_count}} Listings</h5>
 
@@ -34,7 +28,7 @@
       </ul>
     </div>
     <div class="row">
-      <button ng-if="propsIndex.getProps" ng-click="propsIndex.loadMore()" class="middle btn btn-success">Load More</button>
+      <button ng-if="propsIndex.results.listing" ng-click="propsIndex.loadMore()" class="middle btn btn-success">Load More</button>
     </div>
   </div>
 </section>

@@ -21,7 +21,7 @@ function MainCtrl($rootScope, $state, $auth, User){
         .query()
         .$promise
         .then((response) => {
-          console.log(response);
+
           vm.user = response.find(obj => obj.id === vm.currentUserId);
           if (vm.user.group) vm.currentUserGroupId = vm.user.group.id;
         });

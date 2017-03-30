@@ -14,9 +14,7 @@ function GroupsIndexCtrl(Group) {
     .query()
     .$promise
     .then((response) => {
-      console.log('response', response);
       vm.all = response;
-      console.log('all', vm.all);
     });
 }
 
@@ -27,7 +25,7 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
   vm.group.users = [];
   vm.chosenUsers = [];
   vm.allUsers = User.query();
-  console.log('USERS', vm.allUsers);
+
   const authUserId = $auth.getPayload().userId;
 
   function filterUsers() {
