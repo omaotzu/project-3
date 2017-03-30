@@ -27,7 +27,7 @@ router.route('/groups')
 
 router.route('/groups/:id')
   .get(groups.show)
-  .put(groups.update)
+  // .put(groups.update)
   .delete(groups.delete)
   .post(secureRoute, groups.addProperty);
 

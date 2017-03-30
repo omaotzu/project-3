@@ -29,24 +29,24 @@ function showGroup(req, res, next) {
     .catch(next);
 }
 
-function updateGroup(req, res, next) {
-  console.log('BEFORE', req.body);
-  Group
-    .findById(req.params.id)
-    .populate('users')
-    .exec()
-    .then((group) => {
-      if(!group) return res.notFound();
-      for(const field in req.body) {
-
-        group[field] = req.body[field];
-      }
-
-      return group.save();
-    })
-    .then((group) => res.json(group))
-    .catch(next);
-}
+// function updateGroup(req, res, next) {
+//   console.log('BEFORE', req.body);
+//   Group
+//     .findById(req.params.id)
+//     .populate('users')
+//     .exec()
+//     .then((group) => {
+//       if(!group) return res.notFound();
+//       for(const field in req.body) {
+//
+//         group[field] = req.body[field];
+//       }
+//
+//       return group.save();
+//     })
+//     .then((group) => res.json(group))
+//     .catch(next);
+// }
 
 function addUserToGroup(req, res, next) {
   console.log('body', req.body.userId);
@@ -206,7 +206,7 @@ module.exports = {
   index: indexGroup,
   create: createGroup,
   show: showGroup,
-  update: updateGroup,
+  // update: updateGroup,
   addUser: addUserToGroup,
   deleteUser: deleteUserFromGroup,
   delete: deleteGroup,

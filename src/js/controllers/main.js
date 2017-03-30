@@ -16,15 +16,16 @@ function MainCtrl($rootScope, $state, $auth, User){
     if(vm.stateHasChanged) vm.message = null;
     if(!vm.stateHasChanged) vm.stateHasChanged = true;
     if($auth.getPayload()) vm.currentUserId = $auth.getPayload().userId;
-    console.log('current user id', vm.currentUserId);
-    console.log(User.query());
+
     User
       .query()
       .$promise
       .then((response) => {
         console.log(response);
-        console.log(response.find(obj => obj.id === vm.currentUserId));
-        // console.log(response.includes(vm.currentUserId));
+        vm.user = response.find(obj => obj.id === vm.currentUserId);
+        vm.currentUserGroupId = vm.user.group.id;
+        console.log('user', vm.user.group.id);
+
       });
   });
 
