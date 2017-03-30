@@ -2,7 +2,7 @@
   <div>
     <h1>{{ usersShow.user.username }}</h1>
     <hr>
-    <img ng-src="{{ usersShow.user.profileImageSRC }}">
+    <img ng-src="{{ usersShow.user.profileImageSRC }}" class="profileimage">
     <h3>{{usersShow.user.firstname}} {{usersShow.user.surname}}</h3>
     <hr>
     <button ui-sref="usersEdit({ id: usersShow.user.id })" class="edit">Edit</button>

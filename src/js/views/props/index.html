@@ -1,6 +1,6 @@
 <section class="container">
   <div>
-    <h1>Props Index</h1>
+    <h1>Search Properties</h1>
     <hr>
     <!-- <form name="search.searchForm" ng-submit="search.submit()" novalidate> -->
     <form>
@@ -20,7 +20,7 @@
       </div> -->
         <button ng-click="propsIndex.getProps()" class="search">Search</button>
     </form>
-    <h4 class="listings">Found {{propsIndex.results.result_count}} Listings</h4>
+    <h5 class="listings">Found {{propsIndex.results.result_count}} Listings</h5>
 
     <div ng-repeat="props in propsIndex.results.listing" class="results">
       <ul>

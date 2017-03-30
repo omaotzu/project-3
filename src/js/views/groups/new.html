@@ -1,5 +1,5 @@
 <section class="container">
-  <h1>Groups New</h1>
+  <h1>Create a Group</h1>
   <div>
     <form name="groupsNew.groupsNewForm" ng-submit="groupsNew.create()" novalidate>
       <div>
@@ -10,6 +10,7 @@
         <p ng-message="required">Your username is required.</p>
       </div>
       <div>
+        <label>Add Users</label>
         <input type="text" class="search" name="groupsNew.groupsSearchUsers" ng-model="groupsNew.q" placeholder="Search for people...">
       </div>
       <div ng-repeat="user in groupsNew.filtered" ng-show="groupsNew.q.length > 0">
@@ -21,7 +22,7 @@
         </div>
       </div>
       <br>
-      <p>Users To Add:</p>
+      <p>Chosen Users:</p>
       <div ng-repeat="user in groupsNew.chosenUsers">
         {{ user.username }}
         <img ng-src="{{ user.profileImageSRC }}">

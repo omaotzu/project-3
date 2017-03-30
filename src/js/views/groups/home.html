@@ -1,16 +1,15 @@
 <section class="container">
-
   <h1>{{ groupsHome.group.groupName }}</h1>
-  <h2>usersin group {{groupsHome.group.users}}</h2>
+  <hr>
+  <div class="row">
+    <div ng-repeat="user in groupsHome.group.users">
+      <img class="img-fluid thumbnail groupUsers" ng-src="{{ user.profileImageSRC }}">
+    </div>
+  </div>
   <hr>
   <div>
-    <div ng-repeat="user in groupsHome.group.users">
-        <img class="img-fluid thumbnail groupUsers" ng-src="{{ user.profileImageSRC }}">
-    </div>
-    <div>
-      <button ui-sref="groupsEdit({ id: groupsHome.group.id })" class="edit">Edit</button>
-      <button ng-click="groupsHome.delete()" class="deletecomment">Delete</button>
-    </div>
+    <button ui-sref="groupsEdit({ id: groupsHome.group.id })" class="edit">Edit</button>
+    <button ng-click="groupsHome.delete()" class="deletecomment">Delete</button>
   </div>
   <hr>
   <div> Listing IDs:

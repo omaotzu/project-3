@@ -20,9 +20,6 @@ function GroupUser($resource) {
   });
 }
 
-
-
-
 GroupProperty.$inject = ['$resource'];
 function GroupProperty($resource) {
   return new $resource('/api/groups/:id/properties/:listingId', { id: '@id' }, {
