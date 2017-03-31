@@ -324,6 +324,7 @@ section {
 .addimage {
   margin: 5px;
   padding: 5px 6px;
+  border-radius: 10px;
 }
 
 .addimages, .addNotes {
@@ -596,7 +597,7 @@ span {
 
 .ratingBox {
   margin: 0 auto;
-  width: 35%;
+  width: 40%;
 }
 
 .bigger {
@@ -607,4 +608,8 @@ span {
 }
 .noteHeight{
   height: 100px;
+}
+
+.margin-bottom {
+  margin-bottom: 25px;
 }

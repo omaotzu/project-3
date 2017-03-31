@@ -31,7 +31,7 @@
     </div>
     <h3 class= "border">Ratings</h3>
     <div class="ratingList">
-      <div ng-repeat="rating in groupsPropsShow.prop.rating track by $index" class="col-sm-4 col-md-4 col-lg-4">
+      <div ng-repeat="rating in groupsPropsShow.prop.rating track by $index" class="col-sm-4 col-md-4 col-lg-4 margin-bottom">
         <strong>{{ rating.createdBy.username }}</strong>
         <span uib-rating ng-model="rating.opinion" max="groupsPropsShow.max" read-only="groupsPropsShow.isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></span>
         <button type="button" ng-click="groupsPropsShow.deleteRating(rating)" class="close" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -60,7 +60,8 @@
         <div class="addimages row">
           <form ng-submit="groupsPropsShow.addImage()" ng-if="main.isAuthenticated()" class="form-group">
             <input type="file" id="image" base64 name="base64" ng-model="groupsPropsShow.newImage.base64" class="base64 form-control" style="display: none;">
-            <label for="image" class="addimage smaller">Add Image</label>
+            <label for="image" class="addimage smaller">Choose image</label>
+            <button class="addimage smaller">Upload</button>
           </form>
         </div>
       </div>
