@@ -20,6 +20,17 @@ body {
   // overflow: hidden;
 }
 
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
 
 
 .heading-styles {
@@ -43,11 +54,10 @@ nav {
       li {
         font-size: 17px;
         display: inline-block;
-        margin-left: 20px;
+        margin-left: 5px;
         line-height: 40px;
-        padding: 0 20px;
-        &:last-of-type {
-        }
+        padding: 0 10px;
+        border-right: 2px solid black;
         &.menu {
           text-decoration: none;
           color: black;
@@ -133,13 +143,16 @@ section {
       &.propertyimage {
         max-width: 100%;
       }
-      &.groupUsers {
-        background-position: center;
-        background-size: cover;
-        border-radius: 100%;
-        width: 70px;
-        height: 70px;
-        float: left;
+    }
+    .groupUsers {
+      background-position: center;
+      background-size: cover;
+      border-radius: 100%;
+      width: 100%;
+      &:after {
+        content: "";
+        display: block;
+        padding: 50%;
       }
     }
     .userSearchResults {
@@ -379,7 +392,6 @@ section {
           font-weight: bolder;
           margin-left: 0;
           a {
-            border-right: 2px solid black;
             padding-right: 5px;
           }
         }

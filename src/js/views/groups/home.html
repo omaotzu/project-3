@@ -1,8 +1,9 @@
 <section class="container">
   <h1>{{ groupsHome.group.groupName }}</h1>
-  <div class="row border">
-    <div ng-repeat="user in groupsHome.group.users" class="propo">
-      <img class="img-fluid thumbnail groupUsers" ng-src="{{ user.profileImageSRC }}">
+  <div class="row row-centered border">
+    <div ng-repeat="user in groupsHome.group.users" class="col-xs-4 col-md-2 col-centered">
+      <!-- <img class="img-fluid thumbnail groupUsers" ng-src="{{ user.profileImageSRC }}"> -->
+      <div class="groupUsers" style="background-image:url('{{ user.profileImageSRC }}')"></div>
     </div>
   </div>
   <div class="border">
