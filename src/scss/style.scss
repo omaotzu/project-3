@@ -131,8 +131,7 @@ section {
       max-width: 60%;
       margin: 10px;
       &.propertyimage {
-        float: left;
-        max-width: 50%;
+        max-width: 100%;
       }
       &.groupUsers {
         background-position: center;
@@ -153,9 +152,9 @@ section {
       &.chart-doughnut {
         &.ng-isolate-scope {
           padding: 0;
-          margin-right: 50px;
+          // margin-right: 50px;
           max-width: 100%;
-          max-height: 300px;
+          // max-height: 300px;
         }
       }
     }
@@ -291,10 +290,6 @@ section {
   }
 }
 
-.gallery {
-  max-width: 60%;
-}
-
 .propo {
   text-align: center;
   margin-left: 400px;
@@ -317,12 +312,13 @@ section {
 }
 
 .map {
-  height: 300px;
-  width: 300px;
-  padding: 0;
-  margin-left: 200px;
+  // width: 300px;
+  // padding: 0;
+  // margin-left: 200px;
   text-align: center;
-  margin-bottom: 100px;
+  ng-map {
+    height: 360px;
+  }
 }
 
 .addimage {
@@ -384,9 +380,6 @@ section {
           a {
             border-right: 2px solid black;
             padding-right: 5px;
-            &#logout-link {
-              border-right: none;
-            }
           }
         }
       }
@@ -398,11 +391,11 @@ section {
     div {
       form {
         input {
-          width: 300px;
+          width: 100%;
         }
         textarea {
           border: 1px solid black;
-          width: 300px;
+          width: 100%;
         }
       }
       img {
@@ -446,12 +439,13 @@ section {
           margin-left: 20px;
         }
         &.addcomment {
-          padding: 5px 128px;
+          padding: 10px 0;
+          width: 100%;
         }
       }
       &.map {
-        width: 350px;
-        height: 350px;
+        // width: 350px;
+        // height: 350px;
         margin-bottom: 0;
       }
       &.gallery {
@@ -469,25 +463,35 @@ section {
     }
   }
 
-.container {
-  padding-left: 5px;
-  padding-right: 5px;
-  // margin-left: 5px;
-  // margin-right: 5px;
-}
-
-.app-modal-window .modal-dialog {
-  width: 95%;
-}
-
-.area {
-  text-transform: capitalize;
-}
-
-button {
-  &.deleteimage {
-    margin: 5px 0;
+  .container {
+    // padding-left: 5px;
+    // padding-right: 5px;
+    // margin-left: 5px;
+    // margin-right: 5px;
   }
+
+  .app-modal-window .modal-dialog {
+    width: 95%;
+  }
+
+  .area {
+    text-transform: capitalize;
+  }
+  .crimePie {
+    margin: 0;
+    margin-right: 0;
+    float: none;
+    // padding-right: 0;
+    // margin-left: 45px;
+    margin-bottom: 30px;
+    // border-bottom: 2px solid $main-green;
+  }
+
+
+  button {
+    &.deleteimage {
+      margin: 5px 0;
+    }
     &.deletenote {
       padding: 5px;
     }
@@ -527,9 +531,9 @@ button {
   height: 80px;
 }
 .crimePie{
-  width: 300px;
+  // width: 300px;
   text-align: center;
-  margin-right: 50px;
+  // margin-right: 50px;
 }
 
 .inline{
@@ -559,6 +563,10 @@ footer {
 .border {
   border-top: 1px solid $bright-green;
   padding: 20px 0;
+}
+
+.overflow {
+  overflow: hidden;
 }
 
 .site {

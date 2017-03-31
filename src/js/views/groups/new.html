@@ -13,7 +13,7 @@
         <label>Add Users</label>
         <input type="text" class="search" name="groupsNew.groupsSearchUsers" ng-model="groupsNew.q" placeholder="Search for people...">
       </div>
-      <div ng-repeat="user in groupsNew.filtered" ng-show="groupsNew.q.length > 0">
+      <div ng-if="!user.group" ng-repeat="user in groupsNew.filtered" ng-show="groupsNew.q.length > 0">
         <div ng-click="groupsNew.addUser(user)" class="userSearchResults">
           <img ng-src="{{ user.profileImageSRC }}" alt="{{ user.username }}">
           <div>

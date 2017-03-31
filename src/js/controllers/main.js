@@ -21,16 +21,16 @@ function MainCtrl($rootScope, $state, $auth, User){
         .query()
         .$promise
         .then((response) => {
-
           vm.user = response.find(obj => obj.id === vm.currentUserId);
+          if (!vm.user.group) vm.currentUserGroupId = null;
           if (vm.user.group) vm.currentUserGroupId = vm.user.group.id;
+
         });
     }
   });
 
   function logout(){
     $auth.logout();
-    if(vm.user.group) vm.user.group.id = null;
     $state.go('login');
   }
   vm.logout = logout;

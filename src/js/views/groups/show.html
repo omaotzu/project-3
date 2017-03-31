@@ -2,18 +2,25 @@
   <div>
     <h2>Property Details</h2>
 
-    <div class="row houseInfo border">
-      <ul ng-repeat="selected in groupsPropsShow.gps.listing">
-        <li><img ng-src="{{selected.image_645_430_url}}" class="propertyimage"></li>
-        <li><strong>Bedrooms: </strong>{{selected.num_bedrooms}}</li>
-        <li><strong>Property Type: </strong>{{selected.property_type}}</li>
-        <li><strong>Price: </strong>£{{selected.rental_prices.per_month}} ppm</li>
-        <li class="address"><strong>Address: </strong>{{selected.displayable_address}}</li>
-        <button ng-click="groupsPropsShow.deleteProperty(selected)" ng-if="main.isAuthenticated()" class="deleteproperty">Delete Property</button>
-      </ul>
+    <div class="row houseInfo border" ng-repeat="selected in groupsPropsShow.gps.listing">
+      <div class="col-sm-6">
+        <img ng-src="{{selected.image_645_430_url}}" class="propertyimage">
+      </div>
+      <div class="col-sm-6">
+        <ul>
+          <li></li>
+          <li><strong>Bedrooms: </strong>{{selected.num_bedrooms}}</li>
+          <li><strong>Property Type: </strong>{{selected.property_type}}</li>
+          <li><strong>Price: </strong>£{{selected.rental_prices.per_month}} ppm</li>
+          <li class="address"><strong>Address: </strong>{{selected.displayable_address}}</li>
+          <button ng-click="groupsPropsShow.deleteProperty(selected)" ng-if="main.isAuthenticated()" class="deleteproperty">Delete Property</button>
+        </ul>
+      </div>
     </div>
     <div class="row">
-      <p ng-repeat="selected in groupsPropsShow.gps.listing" class="description">{{selected.description}}</p>
+      <div class="col-sm-12">
+        <p ng-repeat="selected in groupsPropsShow.gps.listing" class="description">{{selected.description}}</p>
+      </div>
     </div>
     <div ng-repeat="selected in groupsPropsShow.gps.listing" class="border">
       <ul>
@@ -38,8 +45,8 @@
         <button class="addimage">Add Rating</button>
       </form>
     </div>
-    <div class= "border">
-      <div class="col-sm-6 col-md-6 col-lg-6 gallery">
+    <div class="border overflow">
+      <div class="col-md-6 col-lg-6">
 
         <h3>Images</h3>
         <div class ="row">
@@ -52,12 +59,12 @@
 
         <div class="addimages row">
           <form ng-submit="groupsPropsShow.addImage()" ng-if="main.isAuthenticated()" class="form-group">
-            <input type="file" base64 name="base64" ng-model="groupsPropsShow.newImage.base64" class="base64 form-control">
-            <button class="addimage smaller">Add Image</button>
+            <input type="file" id="image" base64 name="base64" ng-model="groupsPropsShow.newImage.base64" class="base64 form-control" style="display: none;">
+            <label for="image" class="addimage smaller">Add Image</label>
           </form>
         </div>
       </div>
-      <div class="col-sm-12 col-md-6 col-lg-6">
+      <div class="col-md-6 col-lg-6">
         <div class="row">
           <h3>Notes</h3>
 
@@ -76,13 +83,13 @@
         </div>
       </div>
     </div>
-    <div class="row inline border">
-      <div class="col-sm-6 col-md-6 col-lg-6 crimePie"><h3>Recent crime</h3>
+    <div class="row border">
+      <div class="col-sm-offset-1 col-sm-4 crimePie"><h3>Recent crime</h3>
         <canvas id="doughnut" class="chart chart-doughnut" chart-data="groupsPropsShow.crimes.pieCrimeData" chart-labels="groupsPropsShow.labels" chart-legend="false">
         </canvas>
       </div>
-      <div class="col-sm-6 col-md-6 col-lg-6">
-        <div class="map container" ng-repeat="selected in groupsPropsShow.gps.listing">
+      <div class="col-sm-4 col-sm-offset-2">
+        <div class="map" ng-repeat="selected in groupsPropsShow.gps.listing">
           <h3>Location</h3>
           <ng-map center="[{{selected.latitude}}, {{selected.longitude}}]" zoom="13" scrollwheel="false">
             <marker position="[{{selected.latitude}}, {{selected.longitude}}]" animation="DROP"></marker>
