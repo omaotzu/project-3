@@ -7,6 +7,10 @@ function Router($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true);
 
   $stateProvider
+    .state('home', {
+      url: '/',
+      templateUrl: 'js/views/auth/home.html',
+    })
     .state('groupsIndex', {
       url: '/groups',
       templateUrl: 'js/views/groups/index.html',
@@ -63,6 +67,6 @@ function Router($locationProvider, $stateProvider, $urlRouterProvider) {
       controller: 'LoginCtrl as login'
     });
 
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/');
 
 }
