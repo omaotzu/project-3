@@ -13,8 +13,8 @@
   <!-- inject:css -->
   <!-- endinject -->
 </head>
-<body ng-controller="MainCtrl as main" class="site">
-  <nav>
+<body ng-controller="MainCtrl as main" class="site" >
+  <nav ng-hide="main.uiRouterState === 'home'">
     <ul class="link">
       <li ng-if="main.isAuthenticated()"><a ui-sref="propsIndex">Find Properties</a></li>
       <li ng-if="(main.isAuthenticated() && main.currentUserGroupId)"><a ui-sref="groupsHome({ id: main.currentUserGroupId })">My Group</a></li>
@@ -27,6 +27,6 @@
   </nav>
   <div class="message" ng-if="main.message">{{ main.message }}</div>
   <main ui-view class="site-content"></main>
-  <footer>WE DA BEST    - Big <span>&hearts;</span> from The Pretty Mongooses</footer>
+  <footer>Big <span>&hearts;</span> from The Pretty Mongooses</footer>
 </body>
 </html>

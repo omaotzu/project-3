@@ -1,7 +1,7 @@
 @import 'reset';
 
-$main-green: #8FCF91;
-$bright-green: #AFE859;
+$main-green: white;
+$bright-green: #828C51;
 
 * {
   box-sizing: border-box;
@@ -49,7 +49,7 @@ h1 {
 }
 
 nav {
-  // background-color: 
+  background-color: rgba(130, 140, 81, 0.7);
   ul {
     text-align: center;
     list-style: none;
