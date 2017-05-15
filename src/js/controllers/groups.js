@@ -26,7 +26,6 @@ function GroupsNewCtrl(Group, User, filterFilter, $state, $auth, $scope) {
   vm.chosenUsers = [];
   vm.allUsers = User.query();
 
-  console.log(vm.allUsers);
 
   const authUserId = $auth.getPayload().userId;
 
@@ -132,7 +131,6 @@ function GroupsPropsShowCtrl(Group, GroupProperty, GroupPropertyNote, GroupPrope
     crimes.getCrimes(vm.listingLat, vm.listingLon)
     .then((data) => {
       vm.crimes = data;
-      console.log(vm.crimes.pieCrimeData);
       return vm.crimes;
     });
   }
