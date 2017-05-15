@@ -1,6 +1,7 @@
 <section id="homePage">
   <nav>
     <ul class="link">
+      <li><a ui-sref="home">pncApp</a></li>
       <li ng-if="main.isAuthenticated()"><a ui-sref="propsIndex">Find Properties</a></li>
       <li ng-if="(main.isAuthenticated() && main.currentUserGroupId)"><a ui-sref="groupsHome({ id: main.currentUserGroupId })">My Group</a></li>
       <li ng-if="main.isAuthenticated() && !main.currentUserGroupId"><a ui-sref="groupsNew">Add a Group</a></li>
