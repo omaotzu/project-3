@@ -30,6 +30,7 @@ Poperty information was aquired using the Zoopla API and crime statistics provid
 
 I focused a lot on the Zoopla API, authentication and bug fixing throughout the project flipping between back and front end when required. 
 
+##Technologies Used
 
 JavaScript, SCSS, HTML, Express.js, AngularJS, Node.js, MongoDB, Mongoose, Bcrypt, AJAX, JSON, AWS, Zoopla API, Google Maps API, Police Crime API, Bootstrap, Gulp
 
