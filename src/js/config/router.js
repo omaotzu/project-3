@@ -9,7 +9,7 @@ function Router($locationProvider, $stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('home', {
       url: '/',
-      templateUrl: 'js/views/auth/home.html',
+      templateUrl: 'js/views/auth/home.html'
     })
     .state('groupsIndex', {
       url: '/groups',

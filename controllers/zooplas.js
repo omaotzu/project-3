@@ -3,7 +3,7 @@ const rp = require('request-promise');
 function properties(req, res){
   rp({
     method: 'GET',
-    url: 'http://api.zoopla.co.uk/api/v1/property_listings.json',
+    url: 'http://api.kano.me/share',
     qs: {
       area: req.query.area,
       listing_status: 'rent',
