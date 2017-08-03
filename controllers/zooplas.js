@@ -31,7 +31,7 @@ function selectedProp(req, res) {
       listing_id: req.query.listingId.split(','),
       api_key: process.env.ZOOPLA_API_KEY
     },
-    qsStringifyOptions: { arrayFormat: 'repeat' }, // talk about this in your presentation! :D
+    qsStringifyOptions: { arrayFormat: 'repeat' }, // very cool!!! in essence enables the user to pass in a query string with commas seperating each query and make one request with many results!
     json: true
   })
   .then((response) => {

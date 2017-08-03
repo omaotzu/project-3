@@ -50,7 +50,7 @@ groupSchema
     this._users = users;
   });
 
-groupSchema.pre('save', function addGroupToUsers(next) {
+groupSchema.pre('save', function addGroupToUsers(next) { //What this is  in essence doing is finding all the users that have been added to a group and pre saving addes the group id to each of the users. This in turn then virtually populates the group with the users - this was a revelation and massively eased the user to group relationship
   this.model('User')
     .find({ _id: this._users })
     .exec()
@@ -65,6 +65,25 @@ groupSchema.pre('save', function addGroupToUsers(next) {
     .then(next)
     .catch(next);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // groupSchema.pre('update', function addGroupToUsers(next) {
 //   this.model('User')

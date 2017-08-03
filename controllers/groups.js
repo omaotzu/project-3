@@ -141,6 +141,7 @@ function addPropertyNote(req, res, next) {
     })
     .catch(next);
 }
+
 function deletePropertyNote(req, res, next) {
   Group
     .findById(req.params.id)
@@ -233,7 +234,7 @@ function deletePropertyRating(req, res, next) {
       });
 
       const rating = prop.rating.id(req.params.ratingId);
-      
+
       rating.remove();
       return group.save()
         .then(() => res.json(rating));

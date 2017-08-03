@@ -11,9 +11,6 @@ function PropsIndexCtrl($http, $uibModal) {
   vm.beds = null;
   vm.limit = 10;
 
-
-
-
   function getProps(){
     $http.get('/api/properties', { params: {area: vm.area, minimum_beds: vm.beds, maximum_beds: vm.beds}})
       .then((response) => {
