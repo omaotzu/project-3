@@ -81,10 +81,14 @@ function GroupsHomeCtrl(Group, $stateParams, $state, $http) {
 
       ids = ids.join(',');
 
-      if(ids) $http.get('/api/groups/:id/properties', { params: { id: vm.group.id, listingId: ids } })
-        .then((response) => {
-          vm.selected = response.data;
-        });
+      if(ids){
+        $http.get('/api/groups/:id/properties', { params: { id: vm.group.id, listingId: ids } })
+          .then((response) => {
+            vm.selected = response.data;
+          });
+      }
+
+
     });
 
   function groupsDelete() {

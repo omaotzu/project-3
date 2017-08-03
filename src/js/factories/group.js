@@ -42,7 +42,6 @@ function GroupPropertyNote($resource) {
   });
 }
 
-
 GroupPropertyRating.$inject = ['$resource'];
 function GroupPropertyRating($resource) {
   return new $resource('/api/groups/:id/properties/:listingId/ratings/:ratingId', { id: '@id' }, {

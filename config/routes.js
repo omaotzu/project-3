@@ -9,7 +9,7 @@ const secureRoute = require('../lib/secureRoute');
 const zooplas = require('../controllers/zooplas');
 
 router.route('/properties')
-  .all(secureRoute)
+  // .all(secureRoute)
   .get(zooplas.properties);
 
 router.route('/properties/:listingId')
